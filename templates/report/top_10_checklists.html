@@ -1,33 +1,478 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 10 Database Checklists</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
+{% extends 'base.html' %}
+
+{% block title %}Top 10 Database Analysis{% endblock %}
+
+{% block page_title %}🏆 Top 10 Analysis{% endblock %}
+
+{% block breadcrumb %}
+<span>></span>
+<span style="color: #1e3c72; font-weight: 600;">Top 10 Analysis</span>
+{% endblock %}
+
+{% block content %}
+<style>
+    .analysis-score {
+        background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(23, 162, 184, 0.3);
+    }
+    
+    .analysis-score h2 {
+        font-size: 3em;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .analysis-sections {
+        display: grid;
+        gap: 30px;
+    }
+    
+    .analysis-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 5px solid #17a2b8;
+    }
+    
+    .analysis-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .analysis-card h3 {
+        color: #1e3c72;
+        margin-bottom: 20px;
+        font-size: 1.3em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .query-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    .query-table th {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: #1e3c72;
+        padding: 15px 12px;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+        font-size: 0.9em;
+    }
+    
+    .query-table td {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: top;
+    }
+    
+    .query-table tr:hover {
+        background: rgba(23, 162, 184, 0.05);
+    }
+    
+    .sql-text {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 0.85em;
+        border-left: 4px solid #17a2b8;
+        max-width: 400px;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .sql-text:hover {
+        white-space: normal;
+        overflow: visible;
+        max-height: none;
+    }
+    
+    .metric-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 600;
+        min-width: 60px;
+        justify-content: center;
+    }
+    
+    .metric-high {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    
+    .metric-medium {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+    
+    .metric-low {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .dblinks-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .dblinks-table th {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: #1e3c72;
+        padding: 15px 12px;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+    
+    .dblinks-table td {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .dblinks-table tr:hover {
+        background: rgba(23, 162, 184, 0.05);
+    }
+    
+    .status-active {
+        color: #28a745;
+        font-weight: bold;
+    }
+    
+    .status-inactive {
+        color: #dc3545;
+        font-weight: bold;
+    }
+    
+    .charts-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 30px 0;
+    }
+    
+    .chart-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        border-left: 5px solid #6f42c1;
+    }
+    
+    .chart-card h4 {
+        color: #1e3c72;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .no-data {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+        padding: 40px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 2px dashed #dee2e6;
+    }
+    
+    @media (max-width: 768px) {
+        .charts-container {
+            grid-template-columns: 1fr;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        .query-table, .dblinks-table {
+            font-size: 0.85em;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #17a2b8;
-            padding-bottom: 20px;
+        
+        .sql-text {
+            max-width: 200px;
         }
-        .score-section {
-            background-color: #d1ecf1;
-            padding: 20px;
-            border-radius: 8px;
+        
+        .analysis-score h2 {
+            font-size: 2.5em;
+        }
+    }
+</style>
+
+<div class="analysis-score">
+    <h2>{{ score_emoji }} {{ v_score }}%</h2>
+    <p style="font-size: 1.2em; opacity: 0.9;">Database Analysis Score</p>
+    <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px;">Analysis completed: {{ generated_on|date:"M d, Y \a\t H:i" }}</p>
+</div>
+
+<div class="analysis-sections">
+    <!-- Top 10 CPU Consuming Queries -->
+    <div class="analysis-card">
+        <h3>🔥 Top 10 CPU Consuming Queries</h3>
+        {% if cpu_queries %}
+        <div style="overflow-x: auto;">
+            <table class="query-table">
+                <thead>
+                    <tr>
+                        <th>SQL ID</th>
+                        <th>Owner</th>
+                        <th>CPU Time</th>
+                        <th>Elapsed Time</th>
+                        <th>Rows</th>
+                        <th>SQL Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for query in cpu_queries %}
+                    <tr>
+                        <td><strong>{{ query.SQL_ID }}</strong></td>
+                        <td>{{ query.OWNER }}</td>
+                        <td>
+                            <span class="metric-badge {% if query.CPU_TIME > 500 %}metric-high{% elif query.CPU_TIME > 100 %}metric-medium{% else %}metric-low{% endif %}">
+                                {{ query.CPU_TIME }}ms
+                            </span>
+                        </td>
+                        <td>
+                            <span class="metric-badge {% if query.ELAPSED_TIME > 500 %}metric-high{% elif query.ELAPSED_TIME > 100 %}metric-medium{% else %}metric-low{% endif %}">
+                                {{ query.ELAPSED_TIME }}ms
+                            </span>
+                        </td>
+                        <td>{{ query.ROWS_PROCESSED }}</td>
+                        <td>
+                            <div class="sql-text" title="{{ query.SQL_TEXT }}">
+                                {{ query.SQL_TEXT|truncatechars:50 }}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-data">
+            No CPU consuming queries detected - System optimized!
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Top 10 IO Consuming Queries -->
+    <div class="analysis-card">
+        <h3>💾 Top 10 I/O Consuming Queries</h3>
+        {% if io_queries %}
+        <div style="overflow-x: auto;">
+            <table class="query-table">
+                <thead>
+                    <tr>
+                        <th>SQL ID</th>
+                        <th>Owner</th>
+                        <th>Disk Reads</th>
+                        <th>Buffer Gets</th>
+                        <th>Read/Exec</th>
+                        <th>Gets/Exec</th>
+                        <th>SQL Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for query in io_queries %}
+                    <tr>
+                        <td><strong>{{ query.SQL_ID }}</strong></td>
+                        <td>{{ query.OWNER }}</td>
+                        <td>
+                            <span class="metric-badge {% if query.DISK_READS > 10000 %}metric-high{% elif query.DISK_READS > 1000 %}metric-medium{% else %}metric-low{% endif %}">
+                                {{ query.DISK_READS|floatformat:0 }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="metric-badge {% if query.BUFFER_GETS > 50000 %}metric-high{% elif query.BUFFER_GETS > 10000 %}metric-medium{% else %}metric-low{% endif %}">
+                                {{ query.BUFFER_GETS|floatformat:0 }}
+                            </span>
+                        </td>
+                        <td>{{ query.READ_PER_EXEC|floatformat:1 }}</td>
+                        <td>{{ query.GETS_PER_EXEC|floatformat:1 }}</td>
+                        <td>
+                            <div class="sql-text" title="{{ query.SQL_TEXT }}">
+                                {{ query.SQL_TEXT|truncatechars:50 }}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-data">
+            No I/O intensive queries detected
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Database Links -->
+    <div class="analysis-card">
+        <h3>🔗 Database Links</h3>
+        {% if db_links %}
+        <div style="overflow-x: auto;">
+            <table class="dblinks-table">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>DB Link</th>
+                        <th>Username</th>
+                        <th>Host</th>
+                        <th>Created</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for link in db_links %}
+                    <tr>
+                        <td><strong>{{ link.owner }}</strong></td>
+                        <td>{{ link.dblink }}</td>
+                        <td>{{ link.username }}</td>
+                        <td>{{ link.host }}</td>
+                        <td>{{ link.created }}</td>
+                        <td>
+                            <span class="{% if link.valid == 'YES' %}status-active{% else %}status-inactive{% endif %}">
+                                {% if link.valid == 'YES' %}Active{% else %}Inactive{% endif %}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-data">
+            No database links configured
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="charts-container">
+    <div class="chart-card">
+        <h4>📊 Query Performance Distribution</h4>
+        {% if cpu_queries %}
+        <canvas id="performanceChart" width="400" height="300"></canvas>
+        {% else %}
+        <div class="no-data" style="padding: 20px;">
+            No performance data available
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="chart-card">
+        <h4>💽 I/O Usage Analysis</h4>
+        {% if io_queries %}
+        <canvas id="ioChart" width="400" height="300"></canvas>
+        {% else %}
+        <div class="no-data" style="padding: 20px;">
+            No I/O data available
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+{% if cpu_queries %}
+// Performance Chart
+const perfCtx = document.getElementById('performanceChart').getContext('2d');
+const cpuData = {{ cpu_queries|safe }};
+new Chart(perfCtx, {
+    type: 'bar',
+    data: {
+        labels: cpuData.slice(0, 5).map(q => q.SQL_ID.substring(0, 10)),
+        datasets: [{
+            label: 'CPU Time (ms)',
+            data: cpuData.slice(0, 5).map(q => q.CPU_TIME),
+            backgroundColor: 'rgba(23, 162, 184, 0.8)',
+            borderColor: '#17a2b8',
+            borderWidth: 2,
+            borderRadius: 8
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'CPU Time (ms)'
+                }
+            }
+        }
+    }
+});
+{% endif %}
+
+{% if io_queries %}
+// I/O Chart
+const ioCtx = document.getElementById('ioChart').getContext('2d');
+const ioData = {{ io_queries|safe }};
+new Chart(ioCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'I/O Operations',
+            data: ioData.slice(0, 10).map(q => ({
+                x: q.DISK_READS,
+                y: q.BUFFER_GETS
+            })),
+            backgroundColor: 'rgba(111, 66, 193, 0.8)',
+            borderColor: '#6f42c1',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Disk Reads'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Buffer Gets'
+                }
+            }
+        }
+    }
+});
+{% endif %}
+</script>
+{% endblock %}
             margin-bottom: 30px;
             text-align: center;
         }
