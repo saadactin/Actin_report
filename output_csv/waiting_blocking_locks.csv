@@ -1,0 +1,6 @@
+# Waiting and blocking locks data
+enq: TX - row lock contention - SID 101 waiting
+enq: TM - DML enqueue - SID 102 waiting
+latch: cache buffers chains - SID 103 waiting
+db file sequential read - SID 104 waiting
+buffer busy waits - SID 105 waiting

@@ -1,0 +1,66 @@
+SYS                                                                                                                             ,08:38:07 15/09/25,         0
+Table Scan:  SYS.TAB$: 115486 out of 115486 Blocks done
+
+APPS                                                                                                                            ,10:42:40 15/09/25,         0
+Table Scan:  AR.HZ_CUST_ACCOUNTS: 20659 out of 20659 Blocks done
+
+APPS                                                                                                                            ,08:41:54 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183734 out of 183734 Blocks done
+
+APPS                                                                                                                            ,09:34:04 15/09/25,         0
+Table Scan:  SYS.OBJ$: 47792 out of 47792 Blocks done
+
+APPS                                                                                                                            ,08:41:06 15/09/25,         0
+Table Scan:  JA.JAI_REPORTING_ASSOCIATIONS: 172686 out of 172686 Blocks done
+
+APPS                                                                                                                            ,08:41:08 15/09/25,         0
+Index Fast Full Scan:  APPLSYS.WF_NOTIFICATIONS: 110520 out of 110520 Blocks done
+
+APPS                                                                                                                            ,08:41:17 15/09/25,         0
+Table Scan:  JA.JAI_ITEM_TEMPL_HDR: 21871 out of 21871 Blocks done
+
+APPS                                                                                                                            ,08:41:58 15/09/25,         0
+Table Scan:  JA.JAI_REPORTING_ASSOCIATIONS: 172686 out of 172686 Blocks done
+
+APPS                                                                                                                            ,08:42:10 15/09/25,         0
+Table Scan:  JA.JAI_ITEM_TEMPL_HDR: 21871 out of 21871 Blocks done
+
+APPS                                                                                                                            ,08:42:41 15/09/25,         0
+Table Scan:  JA.JAI_ITEM_TEMPL_HDR: 21871 out of 21871 Blocks done
+
+ITC                                                                                                                             ,11:26:06 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183734 out of 183734 Blocks done
+
+ITC                                                                                                                             ,11:28:13 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183734 out of 183734 Blocks done
+
+                                                                                                                                ,11:28:57 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183766 out of 183766 Blocks done
+
+                                                                                                                                ,11:29:06 15/09/25,         0
+Index Fast Full Scan:  AR.HZ_PARTIES: 3867 out of 3867 Blocks done
+
+ITC                                                                                                                             ,11:20:13 15/09/25,         0
+Table Scan:  MYKOEL.KOEL_AP_LIABILITY_BI: 1218660 out of 1218660 Blocks done
+
+APPS                                                                                                                            ,11:21:17 15/09/25,         0
+Table Scan:  AP.AP_CHECKS_ALL: 149713 out of 149713 Blocks done
+
+ITC                                                                                                                             ,11:23:49 15/09/25,         0
+Table Scan:  MYKOEL.KOEL_AP_LIABILITY_BI: 1218660 out of 1218660 Blocks done
+
+APPS                                                                                                                            ,08:41:08 15/09/25,         0
+Table Scan:  INV.MTL_TRANSACTIONS_INTERFACE: 181705 out of 181705 Blocks done
+
+                                                                                                                                ,08:47:15 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183766 out of 183766 Blocks done
+
+                                                                                                                                ,08:47:25 15/09/25,         0
+Index Fast Full Scan:  AR.HZ_PARTIES: 3867 out of 3867 Blocks done
+
+ITC                                                                                                                             ,08:43:13 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183734 out of 183734 Blocks done
+
+ITC                                                                                                                             ,08:46:35 15/09/25,         0
+Table Scan:  ONT.OE_ORDER_HEADERS_ALL: 183734 out of 183734 Blocks done
+

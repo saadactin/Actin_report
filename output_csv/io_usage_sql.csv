@@ -1,0 +1,3183 @@
+begin                                                           ,   6707228,        40,  167680.7
+ wwv_flow.accept(p_reload_on_submit=>:1 ,                       ,          ,          ,
+p_flow_step_id=                                                 ,          ,          ,
+APEX_PUBLIC_USER
+
+>:2 ,                                                           ,   6707228,        40,  167680.7
+p_debug=>:3 ,                                                   ,          ,          ,
+p_request=>:4 ,                                                 ,          ,          ,
+p_json=>:5 ,                                                    ,          ,          ,
+p_page_submissi                                                 ,          ,          ,
+APEX_PUBLIC_USER
+
+on_id=>:6 ,                                                     ,   6707228,        40,  167680.7
+p_instance=>:7 ,                                                ,          ,          ,
+p_flow_id=>:8 ,                                                 ,          ,          ,
+p_context=>:9 );                                                ,          ,          ,
+co                                                              ,          ,          ,
+APEX_PUBLIC_USER
+
+mmit;                                                           ,   6707228,        40,  167680.7
+  end;                                                          ,          ,          ,
+APEX_PUBLIC_USER
+
+SELECT R.XLSX_ROW, C.XLSX_COL#, C.XLSX_COL, C.XLSX_COL_TYPE, C.X,   6660689,         6,1110114.83
+ITC
+
+LSX_COL_STYLE, C.XLSX_VAL, C.XLSX_INL_STR FROM APEX_230200.WWV_F,   6660689,         6,1110114.83
+ITC
+
+LOW_COLLECTIONS C, XMLTABLE( XMLNAMESPACES( DEFAULT 'http://sche,   6660689,         6,1110114.83
+ITC
+
+mas.openxmlformats.org/spreadsheetml/2006/main' ), '/worksheet/s,   6660689,         6,1110114.83
+ITC
+
+heetData/row[exists(c)]' PASSING C.XMLTYPE001 COLUMNS XLSX_ROW N,   6660689,         6,1110114.83
+ITC
+
+UMBER PATH '@r', XLSX_COLS SYS.XMLTYPE PATH 'c' ) R, XMLTABLE ( ,   6660689,         6,1110114.83
+ITC
+
+XMLNAMESPACES( DEFAULT 'http://schemas.openxmlformats.org/spread,   6660689,         6,1110114.83
+ITC
+
+sheetml/2006/main' ), 'c' PASSING R.XLSX_COLS COLUMNS XLSX_COL# ,   6660689,         6,1110114.83
+ITC
+
+FOR ORDINALITY, XLSX_COL VARCHAR2(15) PATH '@r', XLSX_COL_TYPE V,   6660689,         6,1110114.83
+ITC
+
+ARCHAR2(15) PATH '@t', XLSX_COL_STYLE VARCHAR2(15) PATH '@s', XL,   6660689,         6,1110114.83
+ITC
+
+SX_VAL VARCHAR2(4000) PATH 'v/text()', XLSX_INL_STR VARCHAR2(400,   6660689,         6,1110114.83
+ITC
+
+0) PATH 'is' ) C WHERE C.COLLECTION_NAME = :B3 AND C.C001 = :B2 ,   6660689,         6,1110114.83
+ITC
+
+AND :B1 IS NULL OR R.XLSX_ROW <= :B1                            ,   6660689,         6,1110114.83
+ITC
+
+SELECT NULL FROM TABLE( WWV_FLOW_DATA_PARSER.PARSE( P_CONTENT =>,   6138438,         6,   1023073
+APEX_230200
+
+ :B1 , P_FILE_NAME => :B2 , P_DETECT_DATA_TYPES => 'Y', P_XLSX_S,   6138438,         6,   1023073
+APEX_230200
+
+HEET_NAME => :B3 , P_ROW_SELECTOR => :B4 , P_CSV_COL_DELIMITER =,   6138438,         6,   1023073
+APEX_230200
+
+> :B5 , P_CSV_ENCLOSED => :B6 , P_SKIP_ROWS => :B7 , P_DECIMAL_C,   6138438,         6,   1023073
+APEX_230200
+
+HAR => :B8 , P_FILE_CHARSET => :B9 , P_NULLIF => :B10 , P_FORCE_,   6138438,         6,   1023073
+APEX_230200
+
+TRIM_WHITESPACE => :B11 , P_MAX_ROWS => :B12 , P_XML_NAMESPACES ,   6138438,         6,   1023073
+APEX_230200
+
+=> :B13 ) )                                                     ,   6138438,         6,   1023073
+APEX_230200
+
+SELECT COLUMN_POSITION, UPPER( COLUMN_NAME ) AS COLUMN_NAME, DAT,   6138362,         4, 1534590.5
+APEX_230200
+
+A_TYPE, CLOB_CONTENT_COLUMN, UPPER( DATA_SELECTOR ) AS SELECTOR ,   6138362,         4, 1534590.5
+APEX_230200
+
+FROM TABLE( WWV_FLOW_DATA_PARSER.GET_COLUMNS( WWV_FLOW_DATA_PARS,   6138362,         4, 1534590.5
+APEX_230200
+
+ER.DISCOVER( P_CONTENT => :B1 , P_FILE_NAME => 'content.' || CAS,   6138362,         4, 1534590.5
+APEX_230200
+
+E :B2 WHEN :B3 THEN 'csv' WHEN :B4 THEN 'xlsx' END, P_SKIP_ROWS ,   6138362,         4, 1534590.5
+APEX_230200
+
+=> :B5 , P_MAX_ROWS => :B5 + 1, P_XLSX_SHEET_NAME => :B6 , P_CSV,   6138362,         4, 1534590.5
+APEX_230200
+
+_COL_DELIMITER => :B7 , P_CSV_ENCLOSED => :B8 , P_FILE_CHARSET =,   6138362,         4, 1534590.5
+APEX_230200
+
+> :B9 ) ) )                                                     ,   6138362,         4, 1534590.5
+APEX_230200
+
+BEGIN KOEL_RMSP_BILLABLE_INVOICE_REQ(:errbuf,:rc,:A0); END;     ,   1504029,         1,   1504029
+APPS
+
+select * from mykoel.KOEL_AP_LIABILITY_BI                       ,   1242187,         2,  621093.5
+where 1=1                                                       ,          ,          ,
+and period_n                                                    ,          ,          ,
+ITC
+
+ame='DEC-24'                                                    ,   1242187,         2,  621093.5
+and APTB_PAYMENT_STATUS not in ('Fully Paid')                   ,          ,          ,
+and g                                                           ,          ,          ,
+ITC
+
+l_code='110103'                                                 ,   1242187,         2,  621093.5
+ITC
+
+select * from mykoel.KOEL_AP_LIABILITY_BI                       ,   1214817,         1,   1214817
+where 1=1                                                       ,          ,          ,
+and period_n                                                    ,          ,          ,
+ITC
+
+ame='AUG-25'                                                    ,   1214817,         1,   1214817
+and APTB_PAYMENT_STATUS not in ('Fully Paid')                   ,          ,          ,
+and g                                                           ,          ,          ,
+ITC
+
+l_code='110103'                                                 ,   1214817,         1,   1214817
+ITC
+
+select * from mykoel.KOEL_AP_LIABILITY_BI                       ,   1214595,         1,   1214595
+where 1=1                                                       ,          ,          ,
+and period_n                                                    ,          ,          ,
+ITC
+
+ame='DEC-24'                                                    ,   1214595,         1,   1214595
+and APTB_PAYMENT_STATUS not in ('Fully Paid')                   ,          ,          ,
+and g                                                           ,          ,          ,
+ITC
+
+l_code not in ('110103')                                        ,   1214595,         1,   1214595
+and invoice_number='ERS-7125195863-7957                         ,          ,          ,
+ITC
+
+761'                                                            ,   1214595,         1,   1214595
+ITC
+
+select * from mykoel.KOEL_AP_LIABILITY_BI                       ,   1150980,         1,   1150980
+where 1=1                                                       ,          ,          ,
+and period_n                                                    ,          ,          ,
+ITC
+
+ame='DEC-24'                                                    ,   1150980,         1,   1150980
+and APTB_PAYMENT_STATUS not in ('Fully Paid')                   ,          ,          ,
+and g                                                           ,          ,          ,
+ITC
+
+l_code not in ('110103')                                        ,   1150980,         1,   1150980
+ITC
+
+BEGIN ITC.KOEL_FOC_RMA_TRK_PKG.KOEL_FOC_RMA_INSERT_PRG(:errbuf,:,    950026,         2,    475013
+APPS
+
+rc,:A0,:A1); END;                                               ,    950026,         2,    475013
+APPS
+
+BEGIN xla_accounting_pkg.unit_processor_batch(:errbuf,:rc,:A0,:A,    705433,         2,  352716.5
+APPS
+
+1,:A2,:A3,:A4,:A5,:A6,:A7,:A8,:A9,:A10,:A11,:A12,:A13,:A14); END,    705433,         2,  352716.5
+APPS
+
+;                                                               ,    705433,         2,  352716.5
+APPS
+
+select /*+qb_name(apex$1051_3)*/*                               ,    545719,         2,  272859.5
+from(select /*+ qb_name(apex$i                                  ,          ,          ,
+ITC
+
+nner) */* from(select /*+cardinality(apx$cl,1)*/"COL001" as"STAT,    545719,         2,  272859.5
+ITC
+
+E_FROM_WHERE_INVOICE_MADE","COL002" as"CUST_BILL_TO_STATE_AS_PER,    545719,         2,  272859.5
+ITC
+
+_GSTN","COL003" as"CUST_SHIP_TO_STATE_AS_PER_GSTN","COL004" as"G,    545719,         2,  272859.5
+ITC
+
+STN_FROM_WHERE_INVOICE_MADE","COL005" as"CUSTOMER_TRX_ID","COL00,    545719,         2,  272859.5
+ITC
+
+6" as"CUSTOMER_TRX_LINE_ID","COL007" as"INVOICE_SOURCE","COL008",    545719,         2,  272859.5
+ITC
+
+ as"BATCH_SOURCE_NAME","COL009" as"TRANSACTION_TYPE","COL010" as,    545719,         2,  272859.5
+ITC
+
+"CUSTOMER_BILL_TO_GSTN_NO","COL011" as"CUST_BILL_TO_PARTY_SITE_N,    545719,         2,  272859.5
+ITC
+
+UMBER","COL012" as"CUSTOMER_SHIP_TO_GSTN_NO","COL013" as"CUST_SH,    545719,         2,  272859.5
+ITC
+
+IP_TO_PARTY_SITE_NUMBER","COL014" as"TYPE_OF_CUSTOMER","COL015" ,    545719,         2,  272859.5
+ITC
+
+as"SBU","COL016" as"REV_ACCT","COL017" as"ORGANIZATION_CODE","CO,    545719,         2,  272859.5
+ITC
+
+L018" as"LOCATION_CODE","COL019" as"SOURCE","COL020" as"CLASS",",    545719,         2,  272859.5
+ITC
+
+COL021" as"NAME","COL022" as"TRANSACTION_NUMBER","COL023" as"TRA,    545719,         2,  272859.5
+ITC
+
+NSACTION_DATE","COL024" as"GL_DATE","COL025" as"TRASACTION_AMOUN,    545719,         2,  272859.5
+ITC
+
+T_BASIC","COL026" as"ITEM","COL027" as"ITEM_DESCRIPTION","COL028,    545719,         2,  272859.5
+ITC
+
+" as"HSN","COL029" as"HSN_DESCRIPTION","COL030" as"CURRENCY_CODE,    545719,         2,  272859.5
+ITC
+
+","COL031" as"BILL_TO_CUST_NO","COL032" as"BILL_TO_CUST_NAME","C,    545719,         2,  272859.5
+ITC
+
+OL033" as"SHIP_TO_CUST_NO","COL034" as"SHIP_TO_CUST_NAME","COL03,    545719,         2,  272859.5
+ITC
+
+5" as"QUANTITY","COL036" as"UNIT_SELLING_PRICE","COL037" as"TAXA,    545719,         2,  272859.5
+ITC
+
+BLE_VALUE","COL038" as"UNIT_PRICE_WITHOUT_DISCOUNT","COL039" as",    545719,         2,  272859.5
+ITC
+
+DISCOUNT","COL040" as"UOM_CODE","COL041" as"BILL_TO_STATE","COL0,    545719,         2,  272859.5
+ITC
+
+42" as"SHIP_TO_STATE","COL043" as"BILL_TO_SITE_NUMBER","COL044" ,    545719,         2,  272859.5
+ITC
+
+as"BILL_TO_SITE_LOCATION","COL045" as"CGST_RATE","COL046" as"CGS,    545719,         2,  272859.5
+ITC
+
+T_AMOUNT","COL047" as"CGST_LIABILITY","COL048" as"SGST_RATE","CO,    545719,         2,  272859.5
+ITC
+
+L049" as"SGST_AMOUNT","COL050" as"SGST_LIABILITY","COL051" as"IG,    545719,         2,  272859.5
+ITC
+
+ST_RATE","COL052" as"IGST_AMOUNT","COL053" as"IGST_LIABILITY","C,    545719,         2,  272859.5
+ITC
+
+OL054" as"CESS_RATE","COL055" as"CESS_AMOUNT","COL056" as"CESS_L,    545719,         2,  272859.5
+ITC
+
+IABILITY","COL057" as"SAC_CODE","COL058" as"TOTAL_TAX","COL059" ,    545719,         2,  272859.5
+ITC
+
+as"TOTAL_INVOICE_AMOUNT","COL060" as"ORIGINAL_INV_NUMBER","COL06,    545719,         2,  272859.5
+ITC
+
+1" as"ORIGINAL_INV_DATE","COL062" as"ORIGINAL_INV_NO_AUTO_CM","C,    545719,         2,  272859.5
+ITC
+
+OL063" as"ORIGINAL_INV_DATE_AUTO_CM","COL064" as"REASON_CODE","C,    545719,         2,  272859.5
+ITC
+
+OL065" as"COMMENTS","COL066" as"INTERNAL_NOTES","COL067" as"SPEC,    545719,         2,  272859.5
+ITC
+
+IAL_INSTRUCTIONS","COL068" as"DELIVERY_ID","COL069" as"USER_NAME,    545719,         2,  272859.5
+ITC
+
+_DESCRIPTION","COL070" as"EWAY_BILL_NUMBER","COL071" as"EWAY_BIL,    545719,         2,  272859.5
+ITC
+
+L_DATE","COL072" as"IRN_NO_STRING","COL073" as"TCS","COL074" as",    545719,         2,  272859.5
+ITC
+
+FREIGHT","COL075" as"FREIGHT_LIABILITY","COL076" as"PACKING_FORW,    545719,         2,  272859.5
+ITC
+
+ADING","COL077" as"PACKING_FORWADING_LIABILITY","COL078" as"FREI,    545719,         2,  272859.5
+ITC
+
+GHT_TERMS_AS_PER_INV"                                           ,    545719,         2,  272859.5
+ from table(APEX_230200.wwv_flow_data_pars                      ,          ,          ,
+ITC
+
+er.parse(p_content=>:APX$BLOB_VALUE,p_file_profile=>:APX$CLOB_VA,    545719,         2,  272859.5
+ITC
+
+LUE,p_xlsx_sheet_name=>:APX$SHEET_NAME,p_skip_rows=>1))         ,    545719,         2,  272859.5
+)d                                                              ,          ,          ,
+ )i                                                             ,          ,          ,
+ITC
+
+BEGIN APPS.KOEL_ORDER_HOLD_PKG.KOEL_FOC_TCS_HOLD_PROC(:errbuf,:r,    320536,        39,8218.87179
+APPS
+
+c,:A0,:A1,:A2); END;                                            ,    320536,        39,8218.87179
+APPS
+
+SELECT OH.ORDER_NUMBER, OH.HEADER_ID, OL.LINE_ID FROM OE_ORDER_H,    320409,        60,   5340.15
+APPS
+
+EADERS_ALL OH, OE_ORDER_LINES_ALL OL, OE_TRANSACTION_TYPES_ALL O,    320409,        60,   5340.15
+APPS
+
+ET, APPS.JAI_TAX_LINES JTL, APPS.JAI_TAX_TYPES JTT WHERE 1 = 1 A,    320409,        60,   5340.15
+APPS
+
+ND JTT.TAX_TYPE_NAME LIKE '%TCS%' AND JTT.TAX_TYPE_ID = JTL.TAX_,    320409,        60,   5340.15
+APPS
+
+TYPE_ID AND JTL.EVENT_TYPE_CODE = 'CREATE' AND JTL.ORGANIZATION_,    320409,        60,   5340.15
+APPS
+
+ID = OH.SHIP_FROM_ORG_ID AND JTL.TRX_ID = OH.HEADER_ID AND JTL.T,    320409,        60,   5340.15
+APPS
+
+RX_LINE_ID = OL.LINE_ID AND OET.ATTRIBUTE14 = 'Foc' AND OET.ATTR,    320409,        60,   5340.15
+APPS
+
+IBUTE3 = 'Y' AND OET.TRANSACTION_TYPE_ID = OH.ORDER_TYPE_ID AND ,    320409,        60,   5340.15
+APPS
+
+OL.HEADER_ID = OH.HEADER_ID AND OH.ORG_ID = 1142 AND OH.ORG_ID =,    320409,        60,   5340.15
+APPS
+
+ NVL (:B3 , OH.ORG_ID) AND OL.FLOW_STATUS_CODE NOT IN ('CLOSED',,    320409,        60,   5340.15
+APPS
+
+ 'CANCELLED') AND OL.OPEN_FLAG = 'Y' AND OH.FLOW_STATUS_CODE NOT,    320409,        60,   5340.15
+APPS
+
+ IN ('CLOSED', 'CANCELLED') AND OH.ORDER_NUMBER = NVL (:B2 , OH.,    320409,        60,   5340.15
+APPS
+
+ORDER_NUMBER) AND OL.LINE_ID = NVL (:B1 , OL.LINE_ID) AND OH.OPE,    320409,        60,   5340.15
+APPS
+
+N_FLAG = 'Y' AND TRUNC (OH.ORDERED_DATE) >= '01-JAN-2023' AND TR,    320409,        60,   5340.15
+APPS
+
+UNC (OH.ORDERED_DATE) <= TRUNC (SYSDATE) UNION SELECT OH.ORDER_N,    320409,        60,   5340.15
+APPS
+
+UMBER, OH.HEADER_ID, OL.LINE_ID FROM OE_ORDER_HEADERS_ALL OH, OE,    320409,        60,   5340.15
+APPS
+
+_ORDER_LINES_ALL OL, OE_TRANSACTION_TYPES_ALL OET WHERE 1 = 1 AN,    320409,        60,   5340.15
+APPS
+
+D OL.LINE_ID NOT IN (SELECT TRX_LINE_ID FROM APPS.JAI_TAX_LINES ,    320409,        60,   5340.15
+APPS
+
+L1 WHERE 1=1 AND TRX_ID = OH.HEADER_ID ) AND OET.ATTRIBUTE14 = ',    320409,        60,   5340.15
+APPS
+
+Foc' AND OET.ATTRIBUTE3 = 'Y' AND OET.TRANSACTION_TYPE_ID = OH.O,    320409,        60,   5340.15
+APPS
+
+RDER_TYPE_ID AND OL.HEADER_ID = OH.HEADER_ID AND OH.ORG_ID = 114,    320409,        60,   5340.15
+APPS
+
+2 AND OH.ORG_ID = NVL (:B3 , OH.ORG_ID) AND OL.FLOW_STATUS_CODE ,    320409,        60,   5340.15
+APPS
+
+NOT IN ('CLOSED', 'CANCELLED') AND OL.OPEN_FLAG = 'Y' AND OH.FLO,    320409,        60,   5340.15
+APPS
+
+W_STATUS_CODE NOT IN ('CLOSED', 'CANCELLED') AND OH.ORDER_NUMBER,    320409,        60,   5340.15
+APPS
+
+ = NVL (:B2 , OH.ORDER_NUMBER) AND OH.OPEN_FLAG = 'Y' AND TRUNC ,    320409,        60,   5340.15
+APPS
+
+(OH.ORDERED_DATE) >= '01-JAN-2023' AND TRUNC (OH.ORDERED_DATE) <,    320409,        60,   5340.15
+APPS
+
+= TRUNC (SYSDATE)                                               ,    320409,        60,   5340.15
+APPS
+
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_ISO_HOLD_PRC(:errbuf,:rc,:A0,:A1,,    311303,        39,7982.12821
+APPS
+
+:A2); END;                                                      ,    311303,        39,7982.12821
+APPS
+
+INSERT INTO ITC.KOEL_FOC_RMA_TRACKING_DETAILS ( FOC_DEPOT_CODE, ,    248038,         1,    248038
+ITC
+
+FOC_DEPOT_NAME, DEALER_CODE, DEALER_NAME, FOC_ORDER_NUMBER, FOC_,    248038,         1,    248038
+ITC
+
+HEADER_ID, FOC_LINE_ID, ORDER_TYPE, ORDER_TYPE_ID, FOC_DELIVERY_,    248038,         1,    248038
+ITC
+
+NO, FOC_MODEL_CODE, FOC_QUANTITY, FOC_SERIAL_NUMBER, FOC_INVOICE,    248038,         1,    248038
+ITC
+
+_NUMBER, FOC_TYPE, FOC_WARRANTY_TYPE, FOC_REMARK, REFERENCE_RMA,,    248038,         1,    248038
+ITC
+
+ RMA_NUMBER, RMA_MODEL_CODE, RMA_SERIAL_NUMBER, FOC_ORD_DATE, FO,    248038,         1,    248038
+ITC
+
+C_INV_DATE, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPD,    248038,         1,    248038
+ITC
+
+ATE_DATE, LAST_UPDATE_LOGIN ) SELECT R.ORGANIZATION_CODE, R.ORGA,    248038,         1,    248038
+ITC
+
+NIZATION_NAME, R.ACCOUNT_NUMBER, R.PARTY_NAME, R.ORDER_NUMBER, R,    248038,         1,    248038
+ITC
+
+.HEADER_ID, R.LINE_ID, R.ORDER_TYPE, R.ORDER_TYPE_ID, R.FOC_DELI,    248038,         1,    248038
+ITC
+
+VERY, R.ORDERED_ITEM, R.ORDERED_QUANTITY, R.SERIAL_NUMBER, R.FOC,    248038,         1,    248038
+ITC
+
+_INV_NO, R.FOC_TYPE, R.FOC_W_TYPE, R.FOC_REMARK, R.REF_RMA, R.RM,    248038,         1,    248038
+ITC
+
+A_NO, CASE WHEN R.REF_RMA = 'N' THEN R.NON_REF_M_CODE ELSE R.RMA,    248038,         1,    248038
+ITC
+
+_M_CODE END, R.RMA_SERIAL_NO, R.FOC_ORD_DATE, R.FOC_INV_DATE, :B,    248038,         1,    248038
+ITC
+
+3 , SYSDATE, :B3 , SYSDATE, :B3 FROM ( SELECT OOD.ORGANIZATION_C,    248038,         1,    248038
+ITC
+
+ODE ORGANIZATION_CODE, OOD.ORGANIZATION_NAME ORGANIZATION_NAME, ,    248038,         1,    248038
+ITC
+
+HCA.ACCOUNT_NUMBER ACCOUNT_NUMBER, HP.PARTY_NAME PARTY_NAME, OOH,    248038,         1,    248038
+ITC
+
+A.ORDER_NUMBER ORDER_NUMBER, OOHA.HEADER_ID HEADER_ID, OOLA.LINE,    248038,         1,    248038
+ITC
+
+_ID LINE_ID, OTT.NAME ORDER_TYPE, OOHA.ORDER_TYPE_ID ORDER_TYPE_,    248038,         1,    248038
+ITC
+
+ID, WND.NAME FOC_DELIVERY, OOLA.ORDERED_ITEM ORDERED_ITEM, OOLA.,    248038,         1,    248038
+ITC
+
+ORDERED_QUANTITY ORDERED_QUANTITY, MUT.SERIAL_NUMBER SERIAL_NUMB,    248038,         1,    248038
+ITC
+
+ER, WDD.ATTRIBUTE13 FOC_INV_NO, OOHA.ATTRIBUTE10 FOC_TYPE, OOHA.,    248038,         1,    248038
+ITC
+
+ATTRIBUTE12 FOC_W_TYPE, OOHA.ATTRIBUTE15 FOC_REMARK, OOLA.ATTRIB,    248038,         1,    248038
+ITC
+
+UTE11 REF_RMA, OOLA.ATTRIBUTE12 RMA_NO, OOLA.ATTRIBUTE13 RMA_M_C,    248038,         1,    248038
+ITC
+
+ODE, OOLA.ATTRIBUTE17 RMA_SERIAL_NO, OOLA.ATTRIBUTE1 NON_REF_M_C,    248038,         1,    248038
+ITC
+
+ODE, OOHA.CREATION_DATE FOC_ORD_DATE, WND.CONFIRM_DATE FOC_INV_D,    248038,         1,    248038
+ITC
+
+ATE FROM HZ_PARTIES HP, HZ_CUST_ACCOUNTS HCA, WSH_DELIVERY_DETAI,    248038,         1,    248038
+ITC
+
+LS WDD, WSH_NEW_DELIVERIES WND, WSH_DELIVERY_ASSIGNMENTS WDA, WS,    248038,         1,    248038
+ITC
+
+H_SERIAL_NUMBERS WSN, OE_ORDER_HEADERS_ALL OOHA, OE_ORDER_LINES_,    248038,         1,    248038
+ITC
+
+ALL OOLA, MTL_MATERIAL_TRANSACTIONS MMT, MTL_UNIT_TRANSACTIONS M,    248038,         1,    248038
+ITC
+
+UT, ORG_ORGANIZATION_DEFINITIONS OOD, OE_TRANSACTION_TYPES_TL OT,    248038,         1,    248038
+ITC
+
+T WHERE WSN.DELIVERY_DETAIL_ID = WDD.DELIVERY_DETAIL_ID AND WDD.,    248038,         1,    248038
+ITC
+
+SOURCE_HEADER_ID = OOHA.HEADER_ID AND WDD.SOURCE_LINE_ID = OOLA.,    248038,         1,    248038
+ITC
+
+LINE_ID AND WDD.DELIVERY_DETAIL_ID = WDA.DELIVERY_DETAIL_ID AND ,    248038,         1,    248038
+ITC
+
+WND.DELIVERY_ID = WDA.DELIVERY_ID AND OOLA.HEADER_ID = OOHA.HEAD,    248038,         1,    248038
+ITC
+
+ER_ID AND OOHA.SHIP_FROM_ORG_ID = OOD.ORGANIZATION_ID AND HCA.CU,    248038,         1,    248038
+ITC
+
+ST_ACCOUNT_ID(+) = OOHA.SOLD_TO_ORG_ID AND HP.PARTY_ID = HCA.PAR,    248038,         1,    248038
+ITC
+
+TY_ID AND MMT.TRANSACTION_TYPE_ID = '33' AND OOLA.LINE_ID = MMT.,    248038,         1,    248038
+ITC
+
+TRX_SOURCE_LINE_ID AND WDD.ATTRIBUTE13 IS NOT NULL AND MMT.TRANS,    248038,         1,    248038
+ITC
+
+ACTION_ID = MUT.TRANSACTION_ID AND OTT.TRANSACTION_TYPE_ID = OOH,    248038,         1,    248038
+ITC
+
+A.ORDER_TYPE_ID AND OTT.NAME IN (SELECT MEANING FROM FND_LOOKUP_,    248038,         1,    248038
+ITC
+
+VALUES WHERE LOOKUP_TYPE = 'KOEL_RMA_FOC_TRACKING' AND LOOKUP_CO,    248038,         1,    248038
+ITC
+
+DE LIKE 'FOC_ORDER_TYPE%') AND TO_CHAR(OOHA.ORDER_NUMBER) = NVL(,    248038,         1,    248038
+ITC
+
+TO_CHAR(:B2 ), TO_CHAR(OOHA.ORDER_NUMBER)) AND OOHA.CREATION_DAT,    248038,         1,    248038
+ITC
+
+E >= TO_DATE(:B1 , 'YYYY-MM-DD HH24:MI:SS') AND OOD.ORGANIZATION,    248038,         1,    248038
+ITC
+
+_CODE IN ( SELECT FFV.FLEX_VALUE FROM FND_FLEX_VALUE_SETS FFVS, ,    248038,         1,    248038
+ITC
+
+FND_FLEX_VALUES FFV, FND_FLEX_VALUES_TL FFVT WHERE FFVS.FLEX_VAL,    248038,         1,    248038
+ITC
+
+UE_SET_ID = FFV.FLEX_VALUE_SET_ID AND FFV.FLEX_VALUE_ID = FFVT.F,    248038,         1,    248038
+ITC
+
+LEX_VALUE_ID AND FFVT.LANGUAGE = USERENV('LANG') AND FFV.ENABLED,    248038,         1,    248038
+ITC
+
+_FLAG = 'Y' AND FLEX_VALUE_SET_NAME = 'KOEL_AGRI_FOC_RMA_ORG') U,    248038,         1,    248038
+ITC
+
+NION ALL SELECT DISTINCT OOD.ORGANIZATION_CODE ORGANIZATION_CODE,    248038,         1,    248038
+ITC
+
+, OOD.ORGANIZATION_NAME ORGANIZATION_NAME, HCA.ACCOUNT_NUMBER AC,    248038,         1,    248038
+ITC
+
+COUNT_NUMBER, HP.PARTY_NAME PARTY_NAME, OOHA.ORDER_NUMBER ORDER_,    248038,         1,    248038
+ITC
+
+NUMBER, OOHA.HEADER_ID HEADER_ID, OOLA.LINE_ID LINE_ID, OTT.NAME,    248038,         1,    248038
+ITC
+
+ ORDER_TYPE, OOHA.ORDER_TYPE_ID ORDER_TYPE_ID, WND.NAME FOC_DELI,    248038,         1,    248038
+ITC
+
+VERY, OOLA.ORDERED_ITEM ORDERED_ITEM, OOLA.ORDERED_QUANTITY ORDE,    248038,         1,    248038
+ITC
+
+RED_QUANTITY, MUT.SERIAL_NUMBER SERIAL_NUMBER, RCT.TRX_NUMBER FO,    248038,         1,    248038
+ITC
+
+C_INV_NO, OOHA.ATTRIBUTE10 FOC_TYPE, OOHA.ATTRIBUTE12 FOC_W_TYPE,    248038,         1,    248038
+ITC
+
+, OOHA.ATTRIBUTE15 FOC_REMARK, OOLA.ATTRIBUTE11 REF_RMA, OOLA.AT,    248038,         1,    248038
+ITC
+
+TRIBUTE12 RMA_NO, OOLA.ATTRIBUTE13 RMA_M_CODE, OOLA.ATTRIBUTE17 ,    248038,         1,    248038
+ITC
+
+RMA_SERIAL_NO, OOLA.ATTRIBUTE1 NON_REF_M_CODE, OOHA.CREATION_DAT,    248038,         1,    248038
+ITC
+
+E FOC_ORD_DATE, RCT.CREATION_DATE FOC_INV_DATE FROM HZ_PARTIES H,    248038,         1,    248038
+ITC
+
+P, HZ_CUST_ACCOUNTS HCA, WSH_DELIVERY_DETAILS WDD, WSH_NEW_DELIV,    248038,         1,    248038
+ITC
+
+ERIES WND, WSH_DELIVERY_ASSIGNMENTS WDA, WSH_SERIAL_NUMBERS WSN,,    248038,         1,    248038
+ITC
+
+ OE_ORDER_HEADERS_ALL OOHA, OE_ORDER_LINES_ALL OOLA, MTL_MATERIA,    248038,         1,    248038
+ITC
+
+L_TRANSACTIONS MMT, MTL_UNIT_TRANSACTIONS MUT, ORG_ORGANIZATION_,    248038,         1,    248038
+ITC
+
+DEFINITIONS OOD, OE_TRANSACTION_TYPES_TL OTT, RA_CUSTOMER_TRX_AL,    248038,         1,    248038
+ITC
+
+L RCT, RA_CUSTOMER_TRX_LINES_ALL RCTL WHERE WSN.DELIVERY_DETAIL_,    248038,         1,    248038
+ITC
+
+ID = WDD.DELIVERY_DETAIL_ID AND WDD.SOURCE_HEADER_ID = OOHA.HEAD,    248038,         1,    248038
+ITC
+
+ER_ID AND WDD.SOURCE_LINE_ID = OOLA.LINE_ID AND WDD.DELIVERY_DET,    248038,         1,    248038
+ITC
+
+AIL_ID = WDA.DELIVERY_DETAIL_ID AND WND.DELIVERY_ID = WDA.DELIVE,    248038,         1,    248038
+ITC
+
+RY_ID AND OOLA.HEADER_ID = OOHA.HEADER_ID AND OOHA.SHIP_FROM_ORG,    248038,         1,    248038
+ITC
+
+_ID = OOD.ORGANIZATION_ID AND HCA.CUST_ACCOUNT_ID(+) = OOHA.SOLD,    248038,         1,    248038
+ITC
+
+_TO_ORG_ID AND HP.PARTY_ID = HCA.PARTY_ID AND MMT.TRANSACTION_TY,    248038,         1,    248038
+ITC
+
+PE_ID = '33' AND OOLA.LINE_ID = MMT.TRX_SOURCE_LINE_ID AND RCT.T,    248038,         1,    248038
+ITC
+
+RX_NUMBER IS NOT NULL AND MMT.TRANSACTION_ID = MUT.TRANSACTION_I,    248038,         1,    248038
+ITC
+
+D AND OTT.TRANSACTION_TYPE_ID = OOHA.ORDER_TYPE_ID AND RCTL.INTE,    248038,         1,    248038
+ITC
+
+RFACE_LINE_ATTRIBUTE1 = TO_CHAR(OOHA.ORDER_NUMBER) AND RCTL.INTE,    248038,         1,    248038
+ITC
+
+RFACE_LINE_ATTRIBUTE6 = TO_CHAR(OOLA.LINE_ID) AND RCTL.INTERFACE,    248038,         1,    248038
+ITC
+
+_LINE_ATTRIBUTE3 = TO_CHAR(WND.DELIVERY_ID) AND RCTL.CUSTOMER_TR,    248038,         1,    248038
+ITC
+
+X_ID = RCT.CUSTOMER_TRX_ID AND RCT.INTERFACE_HEADER_CONTEXT = 'O,    248038,         1,    248038
+ITC
+
+RDER ENTRY' AND OTT.NAME IN (SELECT MEANING FROM FND_LOOKUP_VALU,    248038,         1,    248038
+ITC
+
+ES WHERE LOOKUP_TYPE = 'KOEL_RMA_FOC_TRACKING' AND LOOKUP_CODE L,    248038,         1,    248038
+ITC
+
+IKE 'FOC_ORDER_TYPE%') AND TO_CHAR(OOHA.ORDER_NUMBER) = NVL(TO_C,    248038,         1,    248038
+ITC
+
+HAR(:B2 ), TO_CHAR(OOHA.ORDER_NUMBER)) AND OOHA.CREATION_DATE >=,    248038,         1,    248038
+ITC
+
+ TO_DATE(:B1 , 'YYYY-MM-DD HH24:MI:SS') AND OOD.ORGANIZATION_COD,    248038,         1,    248038
+ITC
+
+E IN ( SELECT FFV.FLEX_VALUE FROM FND_FLEX_VALUE_SETS FFVS, FND_,    248038,         1,    248038
+ITC
+
+FLEX_VALUES FFV, FND_FLEX_VALUES_TL FFVT WHERE FFVS.FLEX_VALUE_S,    248038,         1,    248038
+ITC
+
+ET_ID = FFV.FLEX_VALUE_SET_ID AND FFV.FLEX_VALUE_ID = FFVT.FLEX_,    248038,         1,    248038
+ITC
+
+VALUE_ID AND FFVT.LANGUAGE = USERENV('LANG') AND FFV.ENABLED_FLA,    248038,         1,    248038
+ITC
+
+G = 'Y' AND FLEX_VALUE_SET_NAME = 'KOEL_AGRI_FOC_RMA_ORG') ) R W,    248038,         1,    248038
+ITC
+
+HERE NOT EXISTS ( SELECT 1 FROM ITC.KOEL_FOC_RMA_TRACKING_DETAIL,    248038,         1,    248038
+ITC
+
+S D_EXIST WHERE D_EXIST.FOC_LINE_ID = R.LINE_ID AND D_EXIST.FOC_,    248038,         1,    248038
+ITC
+
+SERIAL_NUMBER = R.SERIAL_NUMBER )                               ,    248038,         1,    248038
+ITC
+
+select df.tablespace_name "Tablespace",                         ,    223764,         2,    111882
+totalusedspace "Used MB"                                        ,          ,          ,
+ITC
+
+,                                                               ,    223764,         2,    111882
+(df.totalspace - tu.totalusedspace) "Free MB",                  ,          ,          ,
+df.totalspace "                                                 ,          ,          ,
+ITC
+
+Total MB",                                                      ,    223764,         2,    111882
+round(100 * ( (df.totalspace - tu.totalusedspace)/ df           ,          ,          ,
+ITC
+
+.totalspace))                                                   ,    223764,         2,    111882
+"Pct. Free"                                                     ,          ,          ,
+from                                                            ,          ,          ,
+(select tablespace_name,                                        ,          ,          ,
+round(su                                                        ,          ,          ,
+ITC
+
+m(bytes) / 1048576) TotalSpace                                  ,    223764,         2,    111882
+from dba_data_files                                             ,          ,          ,
+group by tabl                                                   ,          ,          ,
+ITC
+
+espace_name) df,                                                ,    223764,         2,    111882
+(select round(sum(bytes)/(1024*1024)) totalused                 ,          ,          ,
+ITC
+
+space, tablespace_name                                          ,    223764,         2,    111882
+from dba_segments                                               ,          ,          ,
+group by tablespace_nam                                         ,          ,          ,
+ITC
+
+e) tu                                                           ,    223764,         2,    111882
+where df.tablespace_name = tu.tablespace_name                   ,          ,          ,
+ITC
+
+SELECT JRA.REPORTING_CODE FROM APPS.JAI_TAX_DET_FACTORS JTF, APP,    221799,   3883225,.057117216
+APPS
+
+S.JAI_PARTY_REGS JRH, APPS.JAI_REPORTING_ASSOCIATIONS JRA WHERE ,    221799,   3883225,.057117216
+APPS
+
+JRA.ENTITY_CODE = 'FIRST_PARTY' AND JRA.REPORTING_TYPE_NAME = 'I,    221799,   3883225,.057117216
+APPS
+
+nventory Location State' AND JRA.ENTITY_SOURCE_TABLE = 'JAI_PART,    221799,   3883225,.057117216
+APPS
+
+Y_REGS' AND TRUNC (SYSDATE) BETWEEN TRUNC ( NVL (JRA.EFFECTIVE_F,    221799,   3883225,.057117216
+APPS
+
+ROM, SYSDATE - 1)) AND TRUNC ( NVL (JRA.EFFECTIVE_TO, SYSDATE + ,    221799,   3883225,.057117216
+APPS
+
+1)) AND JRA.REGIME_ID = 10002 AND JRA.ENTITY_ID = JRH.PARTY_REG_,    221799,   3883225,.057117216
+APPS
+
+ID AND JRH.PARTY_TYPE_CODE = 'IO' AND JRH.PARTY_ID = :B2 AND JRH,    221799,   3883225,.057117216
+APPS
+
+.PARTY_SITE_ID = JTF.SHIP_FROM_LOCATION_ID AND JRH.PARTY_ID = JT,    221799,   3883225,.057117216
+APPS
+
+F.ORGANIZATION_ID AND JTF.TRX_ID = :B4 AND JTF.TRX_LINE_ID = :B3,    221799,   3883225,.057117216
+APPS
+
+ AND JTF.ORGANIZATION_ID = :B2 AND JTF.ORG_ID = :B1             ,    221799,   3883225,.057117216
+APPS
+
+begin fnd_oam_collection.refresh_activity; end;                 ,    221188,        19,11641.4737
+APPS
+
+SELECT COUNT(*) FROM WF_NOTIFICATIONS WHERE MAIL_STATUS = 'MAIL',    221158,        19,11639.8947
+APPS
+
+BEGIN ITC.KOEL_FOC_RMA_TRK_PKG.KOEL_RMA_INSERT_PRG(:errbuf,:rc,:,    177755,         2,   88877.5
+APPS
+
+A0,:A1); END;                                                   ,    177755,         2,   88877.5
+APPS
+
+BEGIN COSTING.KOEL_INSERT_COGS_RECO_DAILY_PKG.PROC_GET_PARAMETER,    173134,         1,    173134
+APPS
+
+S(:errbuf,:rc); END;                                            ,    173134,         1,    173134
+APPS
+
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_ISO_HOLD_REL_PRC(:errbuf,:rc,:A0,,    169472,        40,    4236.8
+APPS
+
+:A1); END;                                                      ,    169472,        40,    4236.8
+APPS
+
+SELECT /*+index(ooh oe_order_headers_n8) index(ool oe_order_line,    168094,        40,   4202.35
+APPS
+
+s_n1)  use_nl(ooh ool msik ottc hcs_bill hca_bill hps_bill hp_bi,    168094,        40,   4202.35
+APPS
+
+ll hl_bill hca_bill_to)*/ OOL.ORG_ID, OOL.SHIP_FROM_ORG_ID, OOH.,    168094,        40,   4202.35
+APPS
+
+ORDER_NUMBER, OOL.HEADER_ID, OOL.LINE_ID, OOL.INVENTORY_ITEM_ID,,    168094,        40,   4202.35
+APPS
+
+ MSIK.CONCATENATED_SEGMENTS ITEM, OOL.ORDER_SOURCE_ID, OOL.LINE_,    168094,        40,   4202.35
+APPS
+
+CATEGORY_CODE, HCA_BILL_TO.ACCOUNT_NUMBER, HCA_BILL.CUST_ACCOUNT,    168094,        40,   4202.35
+APPS
+
+_ID, HCA_BILL.CUST_ACCT_SITE_ID, OTTC.ATTRIBUTE3 TAX_APPLICABLE_,    168094,        40,   4202.35
+APPS
+
+FLAG, KOEL_ORDER_HOLD_PKG.GET_THIRD_PARTY_CUSTST_FUN ( HCA_BILL.,    168094,        40,   4202.35
+APPS
+
+CUST_ACCOUNT_ID, HCA_BILL.CUST_ACCT_SITE_ID) V_ITCUST_STATE_CODE,    168094,        40,   4202.35
+APPS
+
+, KOEL_ORDER_HOLD_PKG.GET_FIRST_PARTY_FUN ( OOL.HEADER_ID, OOL.L,    168094,        40,   4202.35
+APPS
+
+INE_ID, OOL.ORG_ID, OOL.SHIP_FROM_ORG_ID) V_IFREPORTING_CODE, KO,    168094,        40,   4202.35
+APPS
+
+EL_ORDER_HOLD_PKG.CHECK_TAX_APPLIED_FUN ( OOL.HEADER_ID, OOL.LIN,    168094,        40,   4202.35
+APPS
+
+E_ID, OOL.ORG_ID, OOL.SHIP_FROM_ORG_ID) V_ITAX_COUNT, KOEL_ORDER,    168094,        40,   4202.35
+APPS
+
+_HOLD_PKG.GET_HOLD_PRESENT_FUN ( OOL.HEADER_ID, OOL.LINE_ID, KOE,    168094,        40,   4202.35
+APPS
+
+L_ORDER_HOLD_PKG.GET_HOLD_DETAILS_FUN ( 'ISO_TAX_SAME_HOLD')) L_,    168094,        40,   4202.35
+APPS
+
+ISO_STAX_HOLD, KOEL_ORDER_HOLD_PKG.GET_HOLD_PRESENT_FUN ( OOL.HE,    168094,        40,   4202.35
+APPS
+
+ADER_ID, OOL.LINE_ID, KOEL_ORDER_HOLD_PKG.GET_HOLD_DETAILS_FUN (,    168094,        40,   4202.35
+APPS
+
+ 'ISO_TAX_DIFF_HOLD')) L_ISO_DTAX_HOLD, KOEL_ORDER_HOLD_PKG.CHEC,    168094,        40,   4202.35
+APPS
+
+K_ACC_PRICE_LIST_FUN (OOL.HEADER_ID, OOL.LINE_ID, OOL.ORG_ID) V_,    168094,        40,   4202.35
+APPS
+
+IACC_PRICE_COUNT, KOEL_ORDER_HOLD_PKG.GET_HOLD_PRESENT_FUN ( OOL,    168094,        40,   4202.35
+APPS
+
+.HEADER_ID, OOL.LINE_ID, KOEL_ORDER_HOLD_PKG.GET_HOLD_DETAILS_FU,    168094,        40,   4202.35
+APPS
+
+N ( 'ISO_ACC_PRICE_HOLD')) L_ISO_ACC_PRICE_HOLD, KOEL_ORDER_HOLD,    168094,        40,   4202.35
+APPS
+
+_PKG.GET_HOLD_PRESENT_FUN ( OOL.HEADER_ID, OOL.LINE_ID, KOEL_ORD,    168094,        40,   4202.35
+APPS
+
+ER_HOLD_PKG.GET_HOLD_DETAILS_FUN ( 'ISO_MULTI_TAX_HOLD')) L_ISO_,    168094,        40,   4202.35
+APPS
+
+MULTI_TAX_HOLD, KOEL_ORDER_HOLD_PKG.GET_HOLD_PRESENT_FUN ( OOL.H,    168094,        40,   4202.35
+APPS
+
+EADER_ID, OOL.LINE_ID, KOEL_ORDER_HOLD_PKG.GET_HOLD_DETAILS_FUN ,    168094,        40,   4202.35
+APPS
+
+( 'ISO_IGST_TAX_HOLD')) L_ISO_IGST_TAX_HOLD, KOEL_ORDER_HOLD_PKG,    168094,        40,   4202.35
+APPS
+
+.GET_HOLD_PRESENT_FUN ( OOL.HEADER_ID, OOL.LINE_ID, KOEL_ORDER_H,    168094,        40,   4202.35
+APPS
+
+OLD_PKG.GET_HOLD_DETAILS_FUN ( 'ISO_TAX_PER_HOLD')) L_ISO_TAX_PE,    168094,        40,   4202.35
+APPS
+
+R_HOLD FROM OE_ORDER_HEADERS_ALL OOH, OE_ORDER_LINES_ALL OOL, MT,    168094,        40,   4202.35
+APPS
+
+L_SYSTEM_ITEMS_KFV MSIK, OE_TRANSACTION_TYPES_ALL OTTC, HZ_CUST_,    168094,        40,   4202.35
+APPS
+
+SITE_USES_ALL HCS_BILL, HZ_CUST_ACCT_SITES_ALL HCA_BILL, HZ_PART,    168094,        40,   4202.35
+APPS
+
+Y_SITES HPS_BILL, HZ_PARTIES HP_BILL, HZ_LOCATIONS HL_BILL, HZ_C,    168094,        40,   4202.35
+APPS
+
+UST_ACCOUNTS HCA_BILL_TO WHERE HCA_BILL_TO.PARTY_ID = HP_BILL.PA,    168094,        40,   4202.35
+APPS
+
+RTY_ID AND HCA_BILL_TO.CUST_ACCOUNT_ID = HCA_BILL.CUST_ACCOUNT_I,    168094,        40,   4202.35
+APPS
+
+D AND HPS_BILL.LOCATION_ID = HL_BILL.LOCATION_ID AND HP_BILL.PAR,    168094,        40,   4202.35
+APPS
+
+TY_ID = HPS_BILL.PARTY_ID AND HPS_BILL.PARTY_SITE_ID = HCA_BILL.,    168094,        40,   4202.35
+APPS
+
+PARTY_SITE_ID AND HCA_BILL.CUST_ACCT_SITE_ID = HCS_BILL.CUST_ACC,    168094,        40,   4202.35
+APPS
+
+T_SITE_ID AND HCS_BILL.SITE_USE_ID = OOL.INVOICE_TO_ORG_ID AND O,    168094,        40,   4202.35
+APPS
+
+TTC.ORG_ID = OOH.ORG_ID AND OTTC.TRANSACTION_TYPE_ID = OOH.ORDER,    168094,        40,   4202.35
+APPS
+
+_TYPE_ID AND MSIK.ORGANIZATION_ID = OOL.SHIP_FROM_ORG_ID AND MSI,    168094,        40,   4202.35
+APPS
+
+K.INVENTORY_ITEM_ID = OOL.INVENTORY_ITEM_ID AND OOL.FLOW_STATUS_,    168094,        40,   4202.35
+APPS
+
+CODE NOT IN ('CLOSED', 'CANCELLED') AND OOL.OPEN_FLAG = 'Y' AND ,    168094,        40,   4202.35
+APPS
+
+OOL.HEADER_ID = OOH.HEADER_ID AND OOL.ORDER_SOURCE_ID = 10 AND O,    168094,        40,   4202.35
+APPS
+
+OH.FLOW_STATUS_CODE NOT IN ('CLOSED', 'CANCELLED') AND OOH.ORDER,    168094,        40,   4202.35
+APPS
+
+_NUMBER = NVL (:B2 , OOH.ORDER_NUMBER) AND OOH.OPEN_FLAG = 'Y' A,    168094,        40,   4202.35
+APPS
+
+ND TRUNC (OOH.ORDERED_DATE) >= '01-JUL-2017' AND TRUNC (OOH.ORDE,    168094,        40,   4202.35
+APPS
+
+RED_DATE) <= TRUNC (SYSDATE) AND OOH.ORG_ID = :B1 AND EXISTS (SE,    168094,        40,   4202.35
+APPS
+
+LECT 1 FROM OE_ORDER_HOLDS_ALL OHA, OE_HOLD_SOURCES_ALL OHS, OE_,    168094,        40,   4202.35
+APPS
+
+HOLD_DEFINITIONS OHD WHERE OHA.LINE_ID = OOL.LINE_ID AND OHA.HEA,    168094,        40,   4202.35
+APPS
+
+DER_ID = OOL.HEADER_ID AND OHA.RELEASED_FLAG = 'N' AND OHA.HOLD_,    168094,        40,   4202.35
+APPS
+
+SOURCE_ID = OHS.HOLD_SOURCE_ID AND OHS.HOLD_ID = OHD.HOLD_ID AND,    168094,        40,   4202.35
+APPS
+
+ EXISTS (SELECT 1 FROM FND_LOOKUP_VALUES WHERE 1 = 1 AND LOOKUP_,    168094,        40,   4202.35
+APPS
+
+TYPE = 'KOEL_HOLD_DEFINITIONS' AND OHD.NAME = DESCRIPTION AND LO,    168094,        40,   4202.35
+APPS
+
+OKUP_CODE IN ('ISO_TAX_SAME_HOLD', 'ISO_TAX_DIFF_HOLD', 'ISO_ACC,    168094,        40,   4202.35
+APPS
+
+_PRICE_HOLD', 'ISO_MULTI_TAX_HOLD', 'ISO_IGST_TAX_HOLD', 'ISO_TA,    168094,        40,   4202.35
+APPS
+
+X_PER_HOLD')))                                                  ,    168094,        40,   4202.35
+APPS
+
+ SELECT * FROM ( SELECT V . vendor_id , VS . vendor_site_id , V ,    153339,         1,    153339
+APPS
+
+. vendor_name C_VENDOR_NAME , upper ( V . vendor_name ) C_SORT_V,    153339,         1,    153339
+APPS
+
+ENDOR_NAME , V . segment1 C_VENDOR_NUMBER , VS . vendor_site_cod,    153339,         1,    153339
+APPS
+
+e C_VENDOR_SITE_CODE , V . vendor_type_lookup_code VENDOR_TYPE ,,    153339,         1,    153339
+APPS
+
+ decode ( VS . address_line1 , null , '' , VS . address_line1 ||,    153339,         1,    153339
+APPS
+
+ ',' ) C_ADDRESS_LINE1 , decode ( VS . city , null , '' , VS . c,    153339,         1,    153339
+APPS
+
+ity || ',' ) C_CITY , decode ( VS . state , null , VS . province,    153339,         1,    153339
+APPS
+
+ || ',' , VS . state || ',' ) C_STATE , VS . state STATE , VS . ,    153339,         1,    153339
+APPS
+
+zip C_ZIP , ( select jprl . registration_number from apps . jai_,    153339,         1,    153339
+APPS
+
+party_regs jpr , apps . jai_party_reg_lines jprl where jpr . par,    153339,         1,    153339
+APPS
+
+ty_reg_id = jprl . party_reg_id and jpr . party_id = v . vendor_,    153339,         1,    153339
+APPS
+
+id and jprl . registration_type_code = 'PAN' and jpr . party_sit,    153339,         1,    153339
+APPS
+
+e_id = vs . vendor_site_id and jprl . effective_to is null and r,    153339,         1,    153339
+APPS
+
+ownum = 1 ) PAN_NUMBER , ( select jprl . registration_number fro,    153339,         1,    153339
+APPS
+
+m apps . jai_party_regs jpr , apps . jai_party_reg_lines jprl wh,    153339,         1,    153339
+APPS
+
+ere jpr . party_reg_id = jprl . party_reg_id and jpr . party_id ,    153339,         1,    153339
+APPS
+
+= v . vendor_id and jprl . registration_type_code = 'GST' and jp,    153339,         1,    153339
+APPS
+
+r . party_site_id = vs . vendor_site_id and jprl . effective_to ,    153339,         1,    153339
+APPS
+
+is null and rownum = 1 ) GST_NUMBER , C . bank_account_name C_BA,    153339,         1,    153339
+APPS
+
+NK_ACCOUNT_NAME , C . check_number C_CHECK_NUMBER , C . check_da,    153339,         1,    153339
+APPS
+
+te C_CHECK_DATE , NVL ( C . amount , 0 ) C_CHECK_AMOUNT , C . cu,    153339,         1,    153339
+APPS
+
+rrency_code C_CURRENCY_CODE , SUM ( DECODE ( I . payment_currenc,    153339,         1,    153339
+APPS
+
+y_code , : C_BASE_CURRENCY_CODE , IP . amount , IP . payment_bas,    153339,         1,    153339
+APPS
+
+e_amount ) ) C_BASE_AMOUNT , C . void_date C_VOID_DATE , C . che,    153339,         1,    153339
+APPS
+
+ck_id C_CHECK_ID FROM ap_checks C , ap_invoice_payments IP , ap_,    153339,         1,    153339
+APPS
+
+invoices I , po_vendor_sites VS , po_vendors V  WHERE V.vendor_i,    153339,         1,    153339
+APPS
+
+d = V.VENDOR_ID                                                 ,    153339,         1,    153339
+               AND NVL(V.vendor_type_lookup_code                ,          ,          ,
+APPS
+
+, 'x') = NVL(V.vendor_type_lookup_code, 'x')                    ,    153339,         1,    153339
+               AND                                              ,          ,          ,
+APPS
+
+ VS.vendor_id = V.vendor_id                                     ,    153339,         1,    153339
+               AND C.vendor_site_id                             ,          ,          ,
+APPS
+
+= VS.vendor_site_id                                             ,    153339,         1,    153339
+               AND IP.invoice_id = I.invoi                      ,          ,          ,
+APPS
+
+ce_id                                                           ,    153339,         1,    153339
+               AND C.check_id = IP.check_id                     ,          ,          ,
+                                                                ,          ,          ,
+APPS
+
+ AND TRUNC(C.check_date)                                        ,    153339,         1,    153339
+               BETWEEN TO_DATE(                                 ,          ,          ,
+APPS
+
+'01-APR-25', 'DD-MON-RR') AND TO_DATE('30-APR-25', 'DD-MON-RR') ,    153339,         1,    153339
+APPS
+
+GROUP BY C . check_id , V . vendor_name , V . vendor_id , VS . v,    153339,         1,    153339
+APPS
+
+endor_site_id , V . segment1 , VS . vendor_site_code , V . vendo,    153339,         1,    153339
+APPS
+
+r_type_lookup_code , VS . address_line1 , VS . city , VS . state,    153339,         1,    153339
+APPS
+
+ , VS . province , VS . zip , C . bank_account_name , C . check_,    153339,         1,    153339
+APPS
+
+number , C . check_date , C . amount , C . currency_code , C . v,    153339,         1,    153339
+APPS
+
+oid_date ORDER BY DECODE ( : P_VENDOR_ID , null , UPPER ( V . ve,    153339,         1,    153339
+APPS
+
+ndor_name ) , V . vendor_name ) , VS . vendor_site_code ,  C.CHE,    153339,         1,    153339
+APPS
+
+CK_DATE ) ABC WHERE ( CASE WHEN : P_PAYMENT_CURRENCY = 'OTHERS' ,    153339,         1,    153339
+APPS
+
+THEN CASE WHEN C_currency_code <> 'INR' THEN 1 ELSE 0 END ELSE 1,    153339,         1,    153339
+APPS
+
+ END = 1 )                                                      ,    153339,         1,    153339
+APPS
+
+ SELECT * FROM ( SELECT V . vendor_id , VS . vendor_site_id , V ,    149412,         1,    149412
+APPS
+
+. vendor_name C_VENDOR_NAME , upper ( V . vendor_name ) C_SORT_V,    149412,         1,    149412
+APPS
+
+ENDOR_NAME , V . segment1 C_VENDOR_NUMBER , VS . vendor_site_cod,    149412,         1,    149412
+APPS
+
+e C_VENDOR_SITE_CODE , V . vendor_type_lookup_code VENDOR_TYPE ,,    149412,         1,    149412
+APPS
+
+ decode ( VS . address_line1 , null , '' , VS . address_line1 ||,    149412,         1,    149412
+APPS
+
+ ',' ) C_ADDRESS_LINE1 , decode ( VS . city , null , '' , VS . c,    149412,         1,    149412
+APPS
+
+ity || ',' ) C_CITY , decode ( VS . state , null , VS . province,    149412,         1,    149412
+APPS
+
+ || ',' , VS . state || ',' ) C_STATE , VS . state STATE , VS . ,    149412,         1,    149412
+APPS
+
+zip C_ZIP , ( select jprl . registration_number from apps . jai_,    149412,         1,    149412
+APPS
+
+party_regs jpr , apps . jai_party_reg_lines jprl where jpr . par,    149412,         1,    149412
+APPS
+
+ty_reg_id = jprl . party_reg_id and jpr . party_id = v . vendor_,    149412,         1,    149412
+APPS
+
+id and jprl . registration_type_code = 'PAN' and jpr . party_sit,    149412,         1,    149412
+APPS
+
+e_id = vs . vendor_site_id and jprl . effective_to is null and r,    149412,         1,    149412
+APPS
+
+ownum = 1 ) PAN_NUMBER , ( select jprl . registration_number fro,    149412,         1,    149412
+APPS
+
+m apps . jai_party_regs jpr , apps . jai_party_reg_lines jprl wh,    149412,         1,    149412
+APPS
+
+ere jpr . party_reg_id = jprl . party_reg_id and jpr . party_id ,    149412,         1,    149412
+APPS
+
+= v . vendor_id and jprl . registration_type_code = 'GST' and jp,    149412,         1,    149412
+APPS
+
+r . party_site_id = vs . vendor_site_id and jprl . effective_to ,    149412,         1,    149412
+APPS
+
+is null and rownum = 1 ) GST_NUMBER , C . bank_account_name C_BA,    149412,         1,    149412
+APPS
+
+NK_ACCOUNT_NAME , C . check_number C_CHECK_NUMBER , C . check_da,    149412,         1,    149412
+APPS
+
+te C_CHECK_DATE , NVL ( C . amount , 0 ) C_CHECK_AMOUNT , C . cu,    149412,         1,    149412
+APPS
+
+rrency_code C_CURRENCY_CODE , SUM ( DECODE ( I . payment_currenc,    149412,         1,    149412
+APPS
+
+y_code , : C_BASE_CURRENCY_CODE , IP . amount , IP . payment_bas,    149412,         1,    149412
+APPS
+
+e_amount ) ) C_BASE_AMOUNT , C . void_date C_VOID_DATE , C . che,    149412,         1,    149412
+APPS
+
+ck_id C_CHECK_ID , C . ANTICIPATED_VALUE_DATE INVOICE_DUE_DATE ,,    149412,         1,    149412
+APPS
+
+ ( SELECT APT . DESCRIPTION FROM AP_TERMS APT WHERE APT . TERM_I,    149412,         1,    149412
+APPS
+
+D = I . TERMS_ID AND ROWNUM = 1 ) PAYMENT_TERM FROM ap_checks C ,    149412,         1,    149412
+APPS
+
+, ap_invoice_payments IP , ap_invoices I , po_vendor_sites VS , ,    149412,         1,    149412
+APPS
+
+po_vendors V  WHERE V.vendor_id = V.VENDOR_ID                   ,    149412,         1,    149412
+               AND                                              ,          ,          ,
+APPS
+
+ NVL(V.vendor_type_lookup_code, 'x') = NVL(V.vendor_type_lookup_,    149412,         1,    149412
+APPS
+
+code, 'x')                                                      ,    149412,         1,    149412
+               AND VS.vendor_id = V.vendor_id                   ,          ,          ,
+                                                                ,          ,          ,
+APPS
+
+         AND C.vendor_site_id = VS.vendor_site_id               ,    149412,         1,    149412
+                                                                ,          ,          ,
+APPS
+
+   AND IP.invoice_id = I.invoice_id                             ,    149412,         1,    149412
+               AND C.check_i                                    ,          ,          ,
+APPS
+
+d = IP.check_id                                                 ,    149412,         1,    149412
+               AND TRUNC(C.check_date)                          ,          ,          ,
+                                                                ,          ,          ,
+APPS
+
+              BETWEEN TO_DATE('01-APR-25', 'DD-MON-RR') AND TO_D,    149412,         1,    149412
+APPS
+
+ATE('30-APR-25', 'DD-MON-RR') GROUP BY C . check_id , V . vendor,    149412,         1,    149412
+APPS
+
+_name , V . vendor_id , VS . vendor_site_id , V . segment1 , VS ,    149412,         1,    149412
+APPS
+
+. vendor_site_code , V . vendor_type_lookup_code , VS . address_,    149412,         1,    149412
+APPS
+
+line1 , VS . city , VS . state , VS . province , VS . zip , C . ,    149412,         1,    149412
+APPS
+
+bank_account_name , C . check_number , C . check_date , C . amou,    149412,         1,    149412
+APPS
+
+nt , C . currency_code , C . void_date , C . ANTICIPATED_VALUE_D,    149412,         1,    149412
+APPS
+
+ATE , I . TERMS_ID ORDER BY DECODE ( : P_VENDOR_ID , null , UPPE,    149412,         1,    149412
+APPS
+
+R ( V . vendor_name ) , V . vendor_name ) , VS . vendor_site_cod,    149412,         1,    149412
+APPS
+
+e ,  C.CHECK_DATE ) ABC WHERE ( CASE WHEN : P_PAYMENT_CURRENCY =,    149412,         1,    149412
+APPS
+
+ 'OTHERS' THEN CASE WHEN C_currency_code <> 'INR' THEN 1 ELSE 0 ,    149412,         1,    149412
+APPS
+
+END ELSE 1 END = 1 )                                            ,    149412,         1,    149412
+APPS
+
+SELECT STATE_FROM_WHERE_INVOICE_MADE,                           ,    133683,         2,   66841.5
+CUST_BILL_TO_STATE_AS_PER_                                      ,          ,          ,
+ITC
+
+GSTN,                                                           ,    133683,         2,   66841.5
+CUST_SHIP_TO_STATE_AS_PER_GSTN,                                 ,          ,          ,
+GSTN_FROM_WHERE_INVOICE_MA                                      ,          ,          ,
+ITC
+
+DE,                                                             ,    133683,         2,   66841.5
+CUSTOMER_TRX_ID,                                                ,          ,          ,
+CUSTOMER_TRX_LINE_ID,                                           ,          ,          ,
+INVOICE_SOURCE,                                                 ,          ,          ,
+BATCH                                                           ,          ,          ,
+ITC
+
+_SOURCE_NAME,                                                   ,    133683,         2,   66841.5
+TRANSACTION_TYPE,                                               ,          ,          ,
+CUSTOMER_BILL_TO_GSTN_NO,                                       ,          ,          ,
+CUST_B                                                          ,          ,          ,
+ITC
+
+ILL_TO_PARTY_SITE_NUMBER,                                       ,    133683,         2,   66841.5
+CUSTOMER_SHIP_TO_GSTN_NO,                                       ,          ,          ,
+CUST_SHIP_TO                                                    ,          ,          ,
+ITC
+
+_PARTY_SITE_NUMBER,                                             ,    133683,         2,   66841.5
+TYPE_OF_CUSTOMER,                                               ,          ,          ,
+SBU,                                                            ,          ,          ,
+REV_ACCT,                                                       ,          ,          ,
+ORGANIZATIO                                                     ,          ,          ,
+ITC
+
+N_CODE,                                                         ,    133683,         2,   66841.5
+LOCATION_CODE,                                                  ,          ,          ,
+SOURCE,                                                         ,          ,          ,
+CLASS,                                                          ,          ,          ,
+NAME,                                                           ,          ,          ,
+TRANSACTION_NUMBER,                                             ,          ,          ,
+ITC
+
+TO_CHAR (TRANSACTION_DATE, 'DD-MON-YY') AS TRANSACTION_DATE,    ,    133683,         2,   66841.5
+TO_                                                             ,          ,          ,
+ITC
+
+CHAR (GL_DATE, 'DD-MON-YY') AS GL_DATE,                         ,    133683,         2,   66841.5
+SUM (TRASACTION_AMOUNT_B                                        ,          ,          ,
+ITC
+
+ASIC) AS TRASACTION_AMOUNT_BASIC,                               ,    133683,         2,   66841.5
+ITEM,                                                           ,          ,          ,
+ITEM_DESCRIPTION,                                               ,          ,          ,
+HSN,                                                            ,          ,          ,
+H                                                               ,          ,          ,
+ITC
+
+SN_DESCRIPTION,                                                 ,    133683,         2,   66841.5
+CURRENCY_CODE,                                                  ,          ,          ,
+BILL_TO_CUST_NO,                                                ,          ,          ,
+BILL_TO_CUST_NAM                                                ,          ,          ,
+ITC
+
+E,                                                              ,    133683,         2,   66841.5
+SHIP_TO_CUST_NO,                                                ,          ,          ,
+SHIP_TO_CUST_NAME,                                              ,          ,          ,
+SUM (QTY) AS Quantity,                                          ,          ,          ,
+SU                                                              ,          ,          ,
+ITC
+
+M (UNIT_SELLING_PRICE) AS UNIT_SELLING_PRICE,                   ,    133683,         2,   66841.5
+SUM (TAXABLE_VALUE                                              ,          ,          ,
+ITC
+
+) AS TAXABLE_VALUE,                                             ,    133683,         2,   66841.5
+SUM (UNIT_PRICE_WITHOUT_DISCOUNT) AS UNIT_PR                    ,          ,          ,
+ITC
+
+ICE_WITHOUT_DISCOUNT,                                           ,    133683,         2,   66841.5
+SUM (DISCOUNT) AS DISCOUNT,                                     ,          ,          ,
+UOM_CODE,                                                       ,          ,          ,
+BILL                                                            ,          ,          ,
+ITC
+
+_TO_STATE,                                                      ,    133683,         2,   66841.5
+SHIP_TO_STATE,                                                  ,          ,          ,
+BILL_TO_SITE_NUMBER,                                            ,          ,          ,
+BILL_TO_SITE_LOCA                                               ,          ,          ,
+ITC
+
+TION,                                                           ,    133683,         2,   66841.5
+CGST_RATE,                                                      ,          ,          ,
+SUM (CGST_AMOUNT) AS CGST_AMOUNT,                               ,          ,          ,
+CGST_LIABILIT                                                   ,          ,          ,
+ITC
+
+Y,                                                              ,    133683,         2,   66841.5
+SGST_RATE,                                                      ,          ,          ,
+SUM (SGST_AMOUNT) AS SGST_AMOUNT,                               ,          ,          ,
+SGST_LIABILITY,                                                 ,          ,          ,
+ITC
+
+IGST_RATE,                                                      ,    133683,         2,   66841.5
+SUM (IGST_AMOUNT) AS IGST_AMOUNT,                               ,          ,          ,
+IGST_LIABILITY,                                                 ,          ,          ,
+CES                                                             ,          ,          ,
+ITC
+
+S_RATE,                                                         ,    133683,         2,   66841.5
+SUM (CESS_AMOUNT) AS CESS_AMOUNT,                               ,          ,          ,
+CESS_LIABILITY,                                                 ,          ,          ,
+SAC_CO                                                          ,          ,          ,
+ITC
+
+DE,                                                             ,    133683,         2,   66841.5
+SUM (TOTAL_TAX) AS TOTAL_TAX,                                   ,          ,          ,
+SUM (TOTAL_INVOICE_AMOUNT) AS                                   ,          ,          ,
+ITC
+
+TOTAL_INVOICE_AMOUNT,                                           ,    133683,         2,   66841.5
+ORIGINAL_INV_NUMBER,                                            ,          ,          ,
+TO_CHAR (ORIGINAL_INV                                           ,          ,          ,
+ITC
+
+_DATE, 'DD-MON-YY') AS ORIGINAL_INV_DATE,                       ,    133683,         2,   66841.5
+ORIGINAL_INV_NO_AUTO_C                                          ,          ,          ,
+ITC
+
+M,                                                              ,    133683,         2,   66841.5
+ORIGINAL_INV_DATE_AUTO_CM,                                      ,          ,          ,
+REASON_CODE,                                                    ,          ,          ,
+COMMENTS,                                                       ,          ,          ,
+INTERNAL_NO                                                     ,          ,          ,
+ITC
+
+TES,                                                            ,    133683,         2,   66841.5
+SPECIAL_INSTRUCTIONS,                                           ,          ,          ,
+DELIVERY_ID,                                                    ,          ,          ,
+USER_NAME_DESCRIPTION,                                          ,          ,          ,
+E                                                               ,          ,          ,
+ITC
+
+WAY_BILL_NUMBER,                                                ,    133683,         2,   66841.5
+EWAY_BILL_DATE,                                                 ,          ,          ,
+IRN_NO_STRING,                                                  ,          ,          ,
+SUM (TCS) AS TCS                                                ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+SUM (FREIGHT) AS FREIGHT,                                       ,          ,          ,
+FREIGHT_LIABILITY,                                              ,          ,          ,
+SUM (PACKING_FORW                                               ,          ,          ,
+ITC
+
+ADING) AS PACKING_FORWADING,                                    ,    133683,         2,   66841.5
+PACKING_FORWADING_LIABILITY,                                    ,          ,          ,
+FREIGH                                                          ,          ,          ,
+ITC
+
+T_TERMS_AS_PER_INV                                              ,    133683,         2,   66841.5
+FROM (SELECT itc.KOEL_GST_INFO ('Y',                            ,          ,          ,
+GSTN.org                                                        ,          ,          ,
+ITC
+
+anization_code,                                                 ,    133683,         2,   66841.5
+GSTN.location_code,                                             ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL                                                            ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+GSTN.location_id)                                               ,          ,          ,
+State_from_where_invoice_made,                                  ,          ,          ,
+(                                                               ,          ,          ,
+ITC
+
+SELECT state_name                                               ,    133683,         2,   66841.5
+FROM itc.KOEL_GST_STATE_CODES state                             ,          ,          ,
+WHERE stat                                                      ,          ,          ,
+ITC
+
+e_code =                                                        ,    133683,         2,   66841.5
+SUBSTR (GSTN.Customer_Bill_TO_GSTN_No, 1, 2))                   ,          ,          ,
+Cust_Bill                                                       ,          ,          ,
+ITC
+
+_to_State_as_per_GSTN,                                          ,    133683,         2,   66841.5
+(SELECT state_name                                              ,          ,          ,
+FROM itc.KOEL_GST_STAT                                          ,          ,          ,
+ITC
+
+E_CODES state                                                   ,    133683,         2,   66841.5
+WHERE state_code =                                              ,          ,          ,
+SUBSTR (GSTN.Customer_ship_TO_G                                 ,          ,          ,
+ITC
+
+STN_No, 1, 2))                                                  ,    133683,         2,   66841.5
+Cust_ship_to_State_as_per_GSTN,                                 ,          ,          ,
+itc.KOEL_GST_INFO                                               ,          ,          ,
+ITC
+
+ ('N',                                                          ,    133683,         2,   66841.5
+GSTN.organization_code,                                         ,          ,          ,
+GSTN.location_code,                                             ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+N                                                               ,          ,          ,
+ITC
+
+ULL,                                                            ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+GSTN.location_id)                                               ,          ,          ,
+GSTN_From_Where_i                                               ,          ,          ,
+ITC
+
+nvoice_Made,                                                    ,    133683,         2,   66841.5
+GSTN.*,                                                         ,          ,          ,
+itc.KOEL_GST_INFO ('RC',                                        ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+ITC
+
+NULL,                                                           ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+gstn.customer_trx_id,                                           ,          ,          ,
+gstn.customer_trx_line_i                                        ,          ,          ,
+ITC
+
+d,                                                              ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL)                                                           ,          ,          ,
+SAC_Code,                                                       ,          ,          ,
+NVL (CGST_AMOUNT, 0)                                            ,          ,          ,
++ NVL (SGST_AMOUNT                                              ,          ,          ,
+ITC
+
+, 0)                                                            ,    133683,         2,   66841.5
++ NVL (IGST_AMOUNT, 0)                                          ,          ,          ,
+Total_Tax,                                                      ,          ,          ,
+(TAXABLE_VALUE)                                                 ,          ,          ,
++ NVL (CG                                                       ,          ,          ,
+ITC
+
+ST_AMOUNT, 0)                                                   ,    133683,         2,   66841.5
++ NVL (SGST_AMOUNT, 0)                                          ,          ,          ,
++ NVL (IGST_AMOUNT, 0)                                          ,          ,          ,
+Tota                                                            ,          ,          ,
+ITC
+
+l_Invoice_Amount                                                ,    133683,         2,   66841.5
+FROM (SELECT rline.customer_Trx_id,                             ,          ,          ,
+rline.custo                                                     ,          ,          ,
+ITC
+
+mer_Trx_line_id,                                                ,    133683,         2,   66841.5
+DECODE (rbatch.BATCH_SOURCE_TYPE,                               ,          ,          ,
+'INV', 'Manul                                                   ,          ,          ,
+ITC
+
+/Stand Alone',                                                  ,    133683,         2,   66841.5
+'FOREIGN', 'Order Manangment')                                  ,          ,          ,
+Invoice_Source,                                                 ,          ,          ,
+rb                                                              ,          ,          ,
+ITC
+
+atch.name batch_source_name,                                    ,    133683,         2,   66841.5
+rtype.name Transaction_Type,                                    ,          ,          ,
+itc.KO                                                          ,          ,          ,
+ITC
+
+EL_GST_INFO ('B',                                               ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rhead.BILL_TO_SITE_USE_ID,                                      ,          ,          ,
+rhead.b                                                         ,          ,          ,
+ITC
+
+ill_to_customer_id,                                             ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL)                                                           ,          ,          ,
+Customer                                                        ,          ,          ,
+ITC
+
+_Bill_TO_GSTN_No,                                               ,    133683,         2,   66841.5
+(SELECT hs.party_site_number                                    ,          ,          ,
+FROM hz_cust_site                                               ,          ,          ,
+ITC
+
+_uses_all hcs,                                                  ,    133683,         2,   66841.5
+HZ_CUST_ACCT_SITES_ALL HCASA,                                   ,          ,          ,
+apps.HZ_PARTY_SITES                                             ,          ,          ,
+ITC
+
+ HS                                                             ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND HS.PARTY_SITE_ID = HCASA.PARTY_SITE_ID                      ,          ,          ,
+A                                                               ,          ,          ,
+ITC
+
+ND HCASA.CUST_ACCT_SITE_ID =                                    ,    133683,         2,   66841.5
+HCS.CUST_ACCT_SITE_ID                                           ,          ,          ,
+AND hcasa.org                                                   ,          ,          ,
+ITC
+
+_id = 1142                                                      ,    133683,         2,   66841.5
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.BILL_TO_SITE_USE_ID                                       ,          ,          ,
+AND h                                                           ,          ,          ,
+ITC
+
+cs.org_id = 1142                                                ,    133683,         2,   66841.5
+AND ROWNUM = 1)                                                 ,          ,          ,
+Cust_Bill_TO_Party_site_number,                                 ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+itc.KOEL_GST_INFO ('S',                                         ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rhead.ship_TO_S                                                 ,          ,          ,
+ITC
+
+ITE_USE_ID,                                                     ,    133683,         2,   66841.5
+rhead.ship_to_customer_id,                                      ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL)                                                           ,          ,          ,
+C                                                               ,          ,          ,
+ITC
+
+ustomer_Ship_TO_GSTN_No,                                        ,    133683,         2,   66841.5
+(SELECT hs.party_site_number                                    ,          ,          ,
+FROM hz_cu                                                      ,          ,          ,
+ITC
+
+st_site_uses_all hcs,                                           ,    133683,         2,   66841.5
+HZ_CUST_ACCT_SITES_ALL HCASA,                                   ,          ,          ,
+apps.HZ_PART                                                    ,          ,          ,
+ITC
+
+Y_SITES HS                                                      ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND HS.PARTY_SITE_ID = HCASA.PARTY_SI                           ,          ,          ,
+ITC
+
+TE_ID                                                           ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCT_SITE_ID =                                   ,          ,          ,
+HCS.CUST_ACCT_SITE_ID                                           ,          ,          ,
+AND hc                                                          ,          ,          ,
+ITC
+
+asa.org_id = 1142                                               ,    133683,         2,   66841.5
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.ship_TO_SITE_USE_I                                        ,          ,          ,
+ITC
+
+D                                                               ,    133683,         2,   66841.5
+AND hcs.org_id = 1142                                           ,          ,          ,
+AND ROWNUM = 1)                                                 ,          ,          ,
+Cust_ship_TO_Party_site_                                        ,          ,          ,
+ITC
+
+number,                                                         ,    133683,         2,   66841.5
+itc.KOEL_GST_INFO ('R',                                         ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rhead.bill_TO_SITE_U                                            ,          ,          ,
+ITC
+
+SE_ID,                                                          ,    133683,         2,   66841.5
+rhead.bill_to_customer_id,                                      ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+ITC
+
+NULL)                                                           ,    133683,         2,   66841.5
+Type_of_Customer,                                               ,          ,          ,
+(SELECT NVL (                                                   ,          ,          ,
+(SELECT DESCRIPTION                                             ,          ,          ,
+FROM f                                                          ,          ,          ,
+ITC
+
+nd_flex_values_vl                                               ,    133683,         2,   66841.5
+WHERE     FLEX_VALUE = glcc.segment3                            ,          ,          ,
+AND FLEX_                                                       ,          ,          ,
+ITC
+
+VALUE_SET_ID = 1017828),                                        ,    133683,         2,   66841.5
+glcc.segment3)                                                  ,          ,          ,
+FROM RA_CUST_TRX_LINE_GL                                        ,          ,          ,
+ITC
+
+_DIST_ALL radist,                                               ,    133683,         2,   66841.5
+gl_code_combinations glcc                                       ,          ,          ,
+WHERE     radist.COD                                            ,          ,          ,
+ITC
+
+E_COMBINATION_ID =                                              ,    133683,         2,   66841.5
+glcc.CODE_COMBINATION_ID                                        ,          ,          ,
+AND LATEST_REC_FLAG                                             ,          ,          ,
+ITC
+
+= 'Y'                                                           ,    133683,         2,   66841.5
+AND radist.customer_trx_id =                                    ,          ,          ,
+rhead.customer_trx_id                                           ,          ,          ,
+AND ACC                                                         ,          ,          ,
+ITC
+
+OUNT_CLASS = 'REC')                                             ,    133683,         2,   66841.5
+SBU,                                                            ,          ,          ,
+(SELECT glcc.concatenated_segments                              ,          ,          ,
+FROM                                                            ,          ,          ,
+ITC
+
+ RA_CUST_TRX_LINE_GL_DIST_ALL radist,                           ,    133683,         2,   66841.5
+gl_code_combinations_kfv g                                      ,          ,          ,
+ITC
+
+lcc                                                             ,    133683,         2,   66841.5
+WHERE     radist.CODE_COMBINATION_ID =                          ,          ,          ,
+glcc.CODE_COMBINATION                                           ,          ,          ,
+ITC
+
+_ID                                                             ,    133683,         2,   66841.5
+AND POSTING_CONTROL_ID <> -3                                    ,          ,          ,
+AND ROWNUM = 1                                                  ,          ,          ,
+AND radist.custo                                                ,          ,          ,
+ITC
+
+mer_trx_id =                                                    ,    133683,         2,   66841.5
+rline.customer_trx_id                                           ,          ,          ,
+AND radist.CUSTOMER_TRX_LINE_                                   ,          ,          ,
+ITC
+
+ID =                                                            ,    133683,         2,   66841.5
+rline.CUSTOMER_TRX_LINE_ID                                      ,          ,          ,
+AND ACCOUNT_CLASS IN ('REV'))                                   ,          ,          ,
+RE                                                              ,          ,          ,
+ITC
+
+V_ACCT,                                                         ,    133683,         2,   66841.5
+NVL (itc.KOEL_GST_INFO ('O',                                    ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ rline.customer_trx_id,                                         ,          ,          ,
+ rline.customer_trx_line_                                       ,          ,          ,
+ITC
+
+id,                                                             ,    133683,         2,   66841.5
+ NULL,                                                          ,          ,          ,
+ NULL),                                                         ,          ,          ,
+'Manual')                                                       ,          ,          ,
+organization_code,                                              ,          ,          ,
+NVL (itc.KOEL_GS                                                ,          ,          ,
+ITC
+
+T_INFO ('L',                                                    ,    133683,         2,   66841.5
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ rline.cu                                                       ,          ,          ,
+ITC
+
+stomer_trx_id,                                                  ,    133683,         2,   66841.5
+ rline.customer_trx_line_id,                                    ,          ,          ,
+ NULL,                                                          ,          ,          ,
+ NULL),                                                         ,          ,          ,
+'Manu                                                           ,          ,          ,
+ITC
+
+al')                                                            ,    133683,         2,   66841.5
+location_code,                                                  ,          ,          ,
+TO_NUMBER (NVL (itc.KOEL_GST_INFO (                             ,          ,          ,
+'LID',                                                          ,          ,          ,
+N                                                               ,          ,          ,
+ITC
+
+ULL,                                                            ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rline.customer_trx_id,                                          ,          ,          ,
+rline.                                                          ,          ,          ,
+ITC
+
+customer_trx_line_id,                                           ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL),                                                          ,          ,          ,
+1))                                                             ,          ,          ,
+location_id,                                                    ,          ,          ,
+rbatch.name                                                     ,          ,          ,
+ITC
+
+Source,                                                         ,    133683,         2,   66841.5
+rtype.TYPE Class,                                               ,          ,          ,
+rtype.name,                                                     ,          ,          ,
+trx_number Transaction_num                                      ,          ,          ,
+ITC
+
+ber,                                                            ,    133683,         2,   66841.5
+trx_date transaction_Date,                                      ,          ,          ,
+(SELECT MAX (gl_date)                                           ,          ,          ,
+FROM RA_CU                                                      ,          ,          ,
+ITC
+
+ST_TRX_LINE_GL_DIST_ALL rdist                                   ,    133683,         2,   66841.5
+WHERE     rdist.customer_Trx_id =                               ,          ,          ,
+ITC
+
+rhead.customer_trx_id                                           ,    133683,         2,   66841.5
+AND rdist.account_class = 'REC')                                ,          ,          ,
+GL_DATE,                                                        ,          ,          ,
+ITC
+
+(rline.extended_amount * NVL (rhead.EXCHANGE_RATE, 1))          ,    133683,         2,   66841.5
+trasactio                                                       ,          ,          ,
+ITC
+
+n_amount_basic,                                                 ,    133683,         2,   66841.5
+(SELECT concatenated_segments                                   ,          ,          ,
+FROM mtl_system_it                                              ,          ,          ,
+ITC
+
+ems_kfv msi                                                     ,    133683,         2,   66841.5
+WHERE     msi.inventory_item_id =                               ,          ,          ,
+rline.inventory_it                                              ,          ,          ,
+ITC
+
+em_id                                                           ,    133683,         2,   66841.5
+AND msi.organization_id =                                       ,          ,          ,
+rline.interface_line_attribute10                                ,          ,          ,
+ITC
+
+)                                                               ,    133683,         2,   66841.5
+Item,                                                           ,          ,          ,
+rline.DESCRIPTION item_description,                             ,          ,          ,
+itc.KOEL_GST_INFO ('                                            ,          ,          ,
+ITC
+
+HSN',                                                           ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rline.inve                                                      ,          ,          ,
+ITC
+
+ntory_item_id,                                                  ,    133683,         2,   66841.5
+NULL)                                                           ,          ,          ,
+HSN,                                                            ,          ,          ,
+itc.KOEL_GST_INFO ('HSND',                                      ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+NULL,                                                           ,          ,          ,
+rline.inventory_item_id,                                        ,          ,          ,
+NU                                                              ,          ,          ,
+ITC
+
+LL)                                                             ,    133683,         2,   66841.5
+HSN_Description,                                                ,          ,          ,
+rhead.INVOICE_CURRENCY_CODE CURRENCY_CODE,                      ,          ,          ,
+ITC
+
+(SELECT SUBSTR (hcac.account_number, 1, 9)                      ,    133683,         2,   66841.5
+FROM hz_cust_accounts                                           ,          ,          ,
+ITC
+
+ hcac                                                           ,    133683,         2,   66841.5
+WHERE hcac.cust_account_id =                                    ,          ,          ,
+rhead.BILL_TO_CUSTOMER_ID)                                      ,          ,          ,
+Bi                                                              ,          ,          ,
+ITC
+
+ll_to_cust_no,                                                  ,    133683,         2,   66841.5
+(SELECT SUBSTR (hp.party_name, 1, 38)                           ,          ,          ,
+FROM hz_cus                                                     ,          ,          ,
+ITC
+
+t_accounts hcac, hz_parties hp                                  ,    133683,         2,   66841.5
+WHERE     hcac.cust_account_id =                                ,          ,          ,
+ITC
+
+rhead.BILL_TO_CUSTOMER_ID                                       ,    133683,         2,   66841.5
+AND hcac.party_id = hp.party_id)                                ,          ,          ,
+Bill_                                                           ,          ,          ,
+ITC
+
+to_cust_Name,                                                   ,    133683,         2,   66841.5
+(SELECT SUBSTR (hcac.account_number, 1, 9)                      ,          ,          ,
+FROM hz                                                         ,          ,          ,
+ITC
+
+_cust_accounts hcac                                             ,    133683,         2,   66841.5
+WHERE hcac.cust_account_id =                                    ,          ,          ,
+rhead.SHIP_TO_C                                                 ,          ,          ,
+ITC
+
+USTOMER_ID)                                                     ,    133683,         2,   66841.5
+Ship_to_cust_no,                                                ,          ,          ,
+(SELECT SUBSTR (hp.party_name, 1, 3                             ,          ,          ,
+ITC
+
+8)                                                              ,    133683,         2,   66841.5
+FROM hz_cust_accounts hcac, hz_parties hp                       ,          ,          ,
+WHERE     hcac.cust                                             ,          ,          ,
+ITC
+
+_account_id =                                                   ,    133683,         2,   66841.5
+rhead.SHIP_TO_CUSTOMER_ID                                       ,          ,          ,
+AND hcac.party_id = hp.p                                        ,          ,          ,
+ITC
+
+arty_id)                                                        ,    133683,         2,   66841.5
+Ship_to_cust_Name,                                              ,          ,          ,
+NVL (rline.QUANTITY_INVOICED, QUANTI                            ,          ,          ,
+ITC
+
+TY_CREDITED) QTY,                                               ,    133683,         2,   66841.5
+rline.UNIT_SELLING_PRICE,                                       ,          ,          ,
+rline.UNIT_SELLING_P                                            ,          ,          ,
+ITC
+
+RICE                                                            ,    133683,         2,   66841.5
+* NVL (rline.QUANTITY_INVOICED, QUANTITY_CREDITED)              ,          ,          ,
+Taxable_                                                        ,          ,          ,
+ITC
+
+Value,                                                          ,    133683,         2,   66841.5
+rline.UNIT_STANDARD_PRICE Unit_Price_without_Discount,          ,          ,          ,
+(                                                               ,          ,          ,
+ITC
+
+ rline.UNIT_STANDARD_PRICE                                      ,    133683,         2,   66841.5
+* NVL (rline.QUANTITY_INVOICED, QUANT                           ,          ,          ,
+ITC
+
+ITY_CREDITED))                                                  ,    133683,         2,   66841.5
+- (  rline.UNIT_SELLING_PRICE                                   ,          ,          ,
+* NVL (rline.QUANTI                                             ,          ,          ,
+ITC
+
+TY_INVOICED, QUANTITY_CREDITED))                                ,    133683,         2,   66841.5
+Discount,                                                       ,          ,          ,
+rline.UOM_CODE,                                                 ,          ,          ,
+(SELE                                                           ,          ,          ,
+ITC
+
+CT HL.STATE                                                     ,    133683,         2,   66841.5
+FROM hz_cust_accounts hcac,                                     ,          ,          ,
+hz_cust_site_uses_all hc                                        ,          ,          ,
+ITC
+
+s,                                                              ,    133683,         2,   66841.5
+HZ_CUST_ACCT_SITES_ALL HCASA,                                   ,          ,          ,
+HZ_LOCATIONS HL,                                                ,          ,          ,
+HZ_PARTY_SITES                                                  ,          ,          ,
+ITC
+
+ HS                                                             ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND HS.LOCATION_ID = HL.LOCATION_ID                             ,          ,          ,
+AND HS.P                                                        ,          ,          ,
+ITC
+
+ARTY_SITE_ID = HCASA.PARTY_SITE_ID                              ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCT_SITE_ID =                                   ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+HCS.CUST_ACCT_SITE_ID                                           ,          ,          ,
+AND HCASA.CUST_ACCOUNT_ID =                                     ,          ,          ,
+hcac.CUST_ACC                                                   ,          ,          ,
+ITC
+
+OUNT_ID                                                         ,    133683,         2,   66841.5
+AND hcasa.org_id = 1142                                         ,          ,          ,
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.BILL                                                      ,          ,          ,
+ITC
+
+_TO_SITE_USE_ID                                                 ,    133683,         2,   66841.5
+AND hcs.org_id = 1142                                           ,          ,          ,
+AND hcac.cust_account_id =                                      ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+rhead.BILL_TO_CUSTOMER_ID)                                      ,          ,          ,
+Bill_to_state,                                                  ,          ,          ,
+(SELECT HL.STATE                                                ,          ,          ,
+FROM                                                            ,          ,          ,
+ITC
+
+ hz_cust_accounts hcac,                                         ,    133683,         2,   66841.5
+hz_cust_site_uses_all hcs,                                      ,          ,          ,
+HZ_CUST_ACCT_                                                   ,          ,          ,
+ITC
+
+SITES_ALL HCASA,                                                ,    133683,         2,   66841.5
+HZ_LOCATIONS HL,                                                ,          ,          ,
+HZ_PARTY_SITES HS                                               ,          ,          ,
+WHERE     1                                                     ,          ,          ,
+ITC
+
+= 1                                                             ,    133683,         2,   66841.5
+AND HS.LOCATION_ID = HL.LOCATION_ID                             ,          ,          ,
+AND HS.PARTY_SITE_ID = H                                        ,          ,          ,
+ITC
+
+CASA.PARTY_SITE_ID                                              ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCT_SITE_ID =                                   ,          ,          ,
+HCS.CUST_ACCT_S                                                 ,          ,          ,
+ITC
+
+ITE_ID                                                          ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCOUNT_ID =                                     ,          ,          ,
+hcac.CUST_ACCOUNT_ID                                            ,          ,          ,
+AND hcas                                                        ,          ,          ,
+ITC
+
+a.org_id = 1142                                                 ,    133683,         2,   66841.5
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.SHIP_TO_SITE_USE_ID                                       ,          ,          ,
+ITC
+
+AND hcs.org_id = 1142                                           ,    133683,         2,   66841.5
+AND hcac.cust_account_id =                                      ,          ,          ,
+rhead.SHIP_TO_C                                                 ,          ,          ,
+ITC
+
+USTOMER_ID)                                                     ,    133683,         2,   66841.5
+SHIP_TO_STATE,                                                  ,          ,          ,
+(SELECT hs.party_site_number                                    ,          ,          ,
+FROM hz_                                                        ,          ,          ,
+ITC
+
+cust_accounts hcac,                                             ,    133683,         2,   66841.5
+hz_cust_site_uses_all hcs,                                      ,          ,          ,
+HZ_CUST_ACCT_SITE                                               ,          ,          ,
+ITC
+
+S_ALL HCASA,                                                    ,    133683,         2,   66841.5
+HZ_PARTY_SITES HS                                               ,          ,          ,
+WHERE     1 = 1                                                 ,          ,          ,
+AND HS.PARTY_SITE                                               ,          ,          ,
+ITC
+
+_ID = HCASA.PARTY_SITE_ID                                       ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCT_SITE_ID =                                   ,          ,          ,
+HCS.CUST                                                        ,          ,          ,
+ITC
+
+_ACCT_SITE_ID                                                   ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCOUNT_ID =                                     ,          ,          ,
+hcac.CUST_ACCOUNT_ID                                            ,          ,          ,
+A                                                               ,          ,          ,
+ITC
+
+ND hcasa.org_id = 1142                                          ,    133683,         2,   66841.5
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.BILL_TO_SITE_                                             ,          ,          ,
+ITC
+
+USE_ID                                                          ,    133683,         2,   66841.5
+AND hcs.org_id = 1142                                           ,          ,          ,
+AND hcac.cust_account_id =                                      ,          ,          ,
+rhead.BI                                                        ,          ,          ,
+ITC
+
+LL_TO_CUSTOMER_ID)                                              ,    133683,         2,   66841.5
+BILL_TO_SITE_NUMBER,                                            ,          ,          ,
+(SELECT hcs.location                                            ,          ,          ,
+FRO                                                             ,          ,          ,
+ITC
+
+M hz_cust_accounts hcac,                                        ,    133683,         2,   66841.5
+hz_cust_site_uses_all hcs,                                      ,          ,          ,
+HZ_CUST_ACCT                                                    ,          ,          ,
+ITC
+
+_SITES_ALL HCASA                                                ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND HCASA.CUST_ACCT_SITE_ID =                                   ,          ,          ,
+H                                                               ,          ,          ,
+ITC
+
+CS.CUST_ACCT_SITE_ID                                            ,    133683,         2,   66841.5
+AND HCASA.CUST_ACCOUNT_ID =                                     ,          ,          ,
+hcac.CUST_ACCOU                                                 ,          ,          ,
+ITC
+
+NT_ID                                                           ,    133683,         2,   66841.5
+AND hcasa.org_id = 1142                                         ,          ,          ,
+AND hcs.site_use_id =                                           ,          ,          ,
+rhead.BILL_T                                                    ,          ,          ,
+ITC
+
+O_SITE_USE_ID                                                   ,    133683,         2,   66841.5
+AND hcs.org_id = 1142                                           ,          ,          ,
+AND hcac.cust_account_id =                                      ,          ,          ,
+r                                                               ,          ,          ,
+ITC
+
+head.BILL_TO_CUSTOMER_ID)                                       ,    133683,         2,   66841.5
+BILL_TO_SITE_LOCATION,                                          ,          ,          ,
+(SELECT jtr.TAX                                                 ,          ,          ,
+ITC
+
+_RATE_CODE                                                      ,    133683,         2,   66841.5
+FROM apps.jai_tax_lines ktl,                                    ,          ,          ,
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+ITC
+
+apps.jai_tax_types jtt                                          ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TR                                       ,          ,          ,
+ITC
+
+ANSACTIONS'                                                     ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%CGST%'                             ,          ,          ,
+AND jtt.tax_type                                                ,          ,          ,
+ITC
+
+_id = jtr.tax_type_id                                           ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND                                                             ,          ,          ,
+ITC
+
+ktl.trx_line_id =                                               ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rh                                             ,          ,          ,
+ITC
+
+ead.customer_trx_id                                             ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id                                                  ,          ,          ,
+ITC
+
+= 1142)                                                         ,    133683,         2,   66841.5
+CGST_Rate,                                                      ,          ,          ,
+(SELECT ktl.rounded_tax_amt_fun_curr                            ,          ,          ,
+FROM app                                                        ,          ,          ,
+ITC
+
+s.jai_tax_lines ktl,                                            ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_types                                              ,          ,          ,
+ITC
+
+jtt                                                             ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AND jtt                                                         ,          ,          ,
+ITC
+
+.tax_type_code LIKE '%CGST%'                                    ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_                             ,          ,          ,
+ITC
+
+id                                                              ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx_line_id =                                           ,          ,          ,
+r                                                               ,          ,          ,
+ITC
+
+line.customer_trx_line_id                                       ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142)                                          ,          ,          ,
+CGST_AMOUNT                                                     ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+(SELECT glcc.concatenated_segments                              ,          ,          ,
+FROM apps.jai_tax_accounts                                      ,          ,          ,
+ITC
+
+ja,                                                             ,    133683,         2,   66841.5
+gl_code_combinations_kfv glcc,                                  ,          ,          ,
+apps.jai_tax_lines ktl,                                         ,          ,          ,
+apps.                                                           ,          ,          ,
+ITC
+
+jai_tax_rates jtr,                                              ,    133683,         2,   66841.5
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     1 = 1                                                 ,          ,          ,
+AND kt                                                          ,          ,          ,
+ITC
+
+l.ENTITY_CODE = 'TRANSACTIONS'                                  ,    133683,         2,   66841.5
+AND ja.location_id = ktl.location                               ,          ,          ,
+ITC
+
+_id                                                             ,    133683,         2,   66841.5
+AND ja.organization_id = ktl.organization_id                    ,          ,          ,
+AND glcc.code_c                                                 ,          ,          ,
+ITC
+
+ombination_id =                                                 ,    133683,         2,   66841.5
+ja.LIABILITY_CCID                                               ,          ,          ,
+AND ja.tax_account_entity_id =                                  ,          ,          ,
+ITC
+
+ jtt.tax_type_id                                                ,    133683,         2,   66841.5
+AND ja.TAX_ACCOUNT_ENTITY_CODE = 'TAX_TYPE'                     ,          ,          ,
+AND                                                             ,          ,          ,
+ITC
+
+ ja.ledger_id = 61                                              ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%CGST%'                             ,          ,          ,
+AND jtt.t                                                       ,          ,          ,
+ITC
+
+ax_type_id = jtr.tax_type_id                                    ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_                             ,          ,          ,
+ITC
+
+id                                                              ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_                                                    ,          ,          ,
+ITC
+
+id = rhead.customer_trx_id                                      ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.                                                        ,          ,          ,
+ITC
+
+org_id = 1142                                                   ,    133683,         2,   66841.5
+AND ROWNUM = 1)                                                 ,          ,          ,
+CGST_LIABILITY,                                                 ,          ,          ,
+(SELECT jtr.TAX_RA                                              ,          ,          ,
+ITC
+
+TE_CODE                                                         ,    133683,         2,   66841.5
+FROM apps.jai_tax_lines ktl,                                    ,          ,          ,
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+app                                                             ,          ,          ,
+ITC
+
+s.jai_tax_types jtt                                             ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANS                                    ,          ,          ,
+ITC
+
+ACTIONS'                                                        ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%SGST%'                             ,          ,          ,
+AND jtt.tax_type_co                                             ,          ,          ,
+ITC
+
+de NOT LIKE '%Cess%'                                            ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+AND j                                                           ,          ,          ,
+ITC
+
+tr.tax_rate_id = ktl.tax_rate_id                                ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.cus                                                       ,          ,          ,
+ITC
+
+tomer_trx_line_id                                               ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+AND ktl                                                         ,          ,          ,
+ITC
+
+.application_id = 222                                           ,    133683,         2,   66841.5
+AND ktl.org_id = 1142)                                          ,          ,          ,
+SGST_Rate,                                                      ,          ,          ,
+(SELECT                                                         ,          ,          ,
+ITC
+
+ktl.rounded_tax_amt_fun_curr                                    ,    133683,         2,   66841.5
+FROM apps.jai_tax_lines ktl,                                    ,          ,          ,
+apps.j                                                          ,          ,          ,
+ITC
+
+ai_tax_rates jtr,                                               ,    133683,         2,   66841.5
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl                                                         ,          ,          ,
+ITC
+
+.ENTITY_CODE = 'TRANSACTIONS'                                   ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%SGST%                              ,          ,          ,
+ITC
+
+'                                                               ,    133683,         2,   66841.5
+AND jtt.tax_type_code NOT LIKE '%Cess%'                         ,          ,          ,
+AND jtt.tax_type_id =                                           ,          ,          ,
+ITC
+
+jtr.tax_type_id                                                 ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.tr                                                      ,          ,          ,
+ITC
+
+x_line_id =                                                     ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.cu                                       ,          ,          ,
+ITC
+
+stomer_trx_id                                                   ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142                                           ,          ,          ,
+ITC
+
+)                                                               ,    133683,         2,   66841.5
+SGST_AMOUNT,                                                    ,          ,          ,
+(SELECT glcc.concatenated_segments                              ,          ,          ,
+FROM apps.jai_                                                  ,          ,          ,
+ITC
+
+tax_accounts ja,                                                ,    133683,         2,   66841.5
+gl_code_combinations_kfv glcc,                                  ,          ,          ,
+apps.jai_tax_lin                                                ,          ,          ,
+ITC
+
+es ktl,                                                         ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE                                                           ,          ,          ,
+ITC
+
+ 1 = 1                                                          ,    133683,         2,   66841.5
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AND ja.location_id =                                            ,          ,          ,
+ITC
+
+ ktl.location_id                                                ,    133683,         2,   66841.5
+AND ja.organization_id = ktl.organization_id                    ,          ,          ,
+AN                                                              ,          ,          ,
+ITC
+
+D glcc.code_combination_id =                                    ,    133683,         2,   66841.5
+ja.LIABILITY_CCID                                               ,          ,          ,
+AND ja.tax_accoun                                               ,          ,          ,
+ITC
+
+t_entity_id = jtt.tax_type_id                                   ,    133683,         2,   66841.5
+AND ja.TAX_ACCOUNT_ENTITY_CODE = '                              ,          ,          ,
+ITC
+
+TAX_TYPE'                                                       ,    133683,         2,   66841.5
+AND ja.ledger_id = 61                                           ,          ,          ,
+AND jtt.tax_type_code LIKE '%SGS                                ,          ,          ,
+ITC
+
+T%'                                                             ,    133683,         2,   66841.5
+AND jtt.tax_type_code NOT LIKE '%Cess%'                         ,          ,          ,
+AND jtt.tax_type_id                                             ,          ,          ,
+ITC
+
+= jtr.tax_type_id                                               ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.                                                        ,          ,          ,
+ITC
+
+trx_line_id =                                                   ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.                                         ,          ,          ,
+ITC
+
+customer_trx_id                                                 ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 11                                             ,          ,          ,
+ITC
+
+42                                                              ,    133683,         2,   66841.5
+AND ROWNUM = 1)                                                 ,          ,          ,
+SGST_LIABILITY,                                                 ,          ,          ,
+(SELECT jtr.TAX_RATE_CODE                                       ,          ,          ,
+FRO                                                             ,          ,          ,
+ITC
+
+M apps.jai_tax_lines ktl,                                       ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_t                                                  ,          ,          ,
+ITC
+
+ypes jtt                                                        ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AN                                                              ,          ,          ,
+ITC
+
+D jtt.tax_type_code LIKE '%IGST%'                               ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_                                  ,          ,          ,
+ITC
+
+type_id                                                         ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx_line_i                                              ,          ,          ,
+ITC
+
+d =                                                             ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.customer_t                               ,          ,          ,
+ITC
+
+rx_id                                                           ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142)                                          ,          ,          ,
+IGST_R                                                          ,          ,          ,
+ITC
+
+ate,                                                            ,    133683,         2,   66841.5
+(SELECT ktl.rounded_tax_amt_fun_curr                            ,          ,          ,
+FROM apps.jai_tax_line                                          ,          ,          ,
+ITC
+
+s ktl,                                                          ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE                                                           ,          ,          ,
+ITC
+
+1 = 1                                                           ,    133683,         2,   66841.5
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AND jtt.tax_type_code                                           ,          ,          ,
+ITC
+
+ LIKE '%IGST%'                                                  ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+AND jtr.tax                                                     ,          ,          ,
+ITC
+
+_rate_id = ktl.tax_rate_id                                      ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_                                                 ,          ,          ,
+ITC
+
+trx_line_id                                                     ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+AND ktl.appli                                                   ,          ,          ,
+ITC
+
+cation_id = 222                                                 ,    133683,         2,   66841.5
+AND ktl.org_id = 1142)                                          ,          ,          ,
+IGST_AMOUNT,                                                    ,          ,          ,
+(SELECT glcc                                                    ,          ,          ,
+ITC
+
+.concatenated_segments                                          ,    133683,         2,   66841.5
+FROM apps.jai_tax_accounts ja,                                  ,          ,          ,
+gl_code_co                                                      ,          ,          ,
+ITC
+
+mbinations_kfv glcc,                                            ,    133683,         2,   66841.5
+apps.jai_tax_lines ktl,                                         ,          ,          ,
+apps.jai_tax_rates                                              ,          ,          ,
+ITC
+
+jtr,                                                            ,    133683,         2,   66841.5
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE                                             ,          ,          ,
+ITC
+
+= 'TRANSACTIONS'                                                ,    133683,         2,   66841.5
+AND ja.location_id = ktl.location_id                            ,          ,          ,
+AND ja.org                                                      ,          ,          ,
+ITC
+
+anization_id = ktl.organization_id                              ,    133683,         2,   66841.5
+AND glcc.code_combination_id                                    ,          ,          ,
+ITC
+
+=                                                               ,    133683,         2,   66841.5
+ja.LIABILITY_CCID                                               ,          ,          ,
+AND ja.tax_account_entity_id = jtt.tax_type_                    ,          ,          ,
+ITC
+
+id                                                              ,    133683,         2,   66841.5
+AND ja.TAX_ACCOUNT_ENTITY_CODE = 'TAX_TYPE'                     ,          ,          ,
+AND ja.ledger_id                                                ,          ,          ,
+ITC
+
+= 61                                                            ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%IGST%'                             ,          ,          ,
+AND jtt.tax_type_id = j                                         ,          ,          ,
+ITC
+
+tr.tax_type_id                                                  ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx                                                     ,          ,          ,
+ITC
+
+_line_id =                                                      ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.cus                                      ,          ,          ,
+ITC
+
+tomer_trx_id                                                    ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142                                           ,          ,          ,
+ITC
+
+AND ROWNUM = 1)                                                 ,    133683,         2,   66841.5
+IGST_LIABILITY,                                                 ,          ,          ,
+(SELECT jtr.TAX_RATE_CODE                                       ,          ,          ,
+FROM a                                                          ,          ,          ,
+ITC
+
+pps.jai_tax_lines ktl,                                          ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_type                                               ,          ,          ,
+ITC
+
+s jtt                                                           ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AND j                                                           ,          ,          ,
+ITC
+
+tt.tax_type_code LIKE '%Cess%'                                  ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_typ                               ,          ,          ,
+ITC
+
+e_id                                                            ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx_line_id =                                           ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.customer_trx_                            ,          ,          ,
+ITC
+
+id                                                              ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142)                                          ,          ,          ,
+CESS_Rate                                                       ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+(SELECT ktl.rounded_tax_amt_fun_curr                            ,          ,          ,
+FROM apps.jai_tax_lines k                                       ,          ,          ,
+ITC
+
+tl,                                                             ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     1 =                                                   ,          ,          ,
+ITC
+
+ 1                                                              ,    133683,         2,   66841.5
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+AND jtt.tax_type_code LI                                        ,          ,          ,
+ITC
+
+KE '%Cess%'                                                     ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+AND jtr.tax_ra                                                  ,          ,          ,
+ITC
+
+te_id = ktl.tax_rate_id                                         ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_trx                                              ,          ,          ,
+ITC
+
+_line_id                                                        ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+AND ktl.applicat                                                ,          ,          ,
+ITC
+
+ion_id = 222                                                    ,    133683,         2,   66841.5
+AND ktl.org_id = 1142)                                          ,          ,          ,
+CESS_AMOUNT,                                                    ,          ,          ,
+(SELECT glcc.co                                                 ,          ,          ,
+ITC
+
+ncatenated_segments                                             ,    133683,         2,   66841.5
+FROM apps.jai_tax_accounts ja,                                  ,          ,          ,
+gl_code_combi                                                   ,          ,          ,
+ITC
+
+nations_kfv glcc,                                               ,    133683,         2,   66841.5
+apps.jai_tax_lines ktl,                                         ,          ,          ,
+apps.jai_tax_rates jtr                                          ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = '                                         ,          ,          ,
+ITC
+
+TRANSACTIONS'                                                   ,    133683,         2,   66841.5
+AND ja.location_id = ktl.location_id                            ,          ,          ,
+AND ja.organi                                                   ,          ,          ,
+ITC
+
+zation_id = ktl.organization_id                                 ,    133683,         2,   66841.5
+AND glcc.code_combination_id =                                  ,          ,          ,
+j                                                               ,          ,          ,
+ITC
+
+a.LIABILITY_CCID                                                ,    133683,         2,   66841.5
+AND ja.tax_account_entity_id = jtt.tax_type_id                  ,          ,          ,
+ITC
+
+AND ja.TAX_ACCOUNT_ENTITY_CODE = 'TAX_TYPE'                     ,    133683,         2,   66841.5
+AND ja.ledger_id = 6                                            ,          ,          ,
+ITC
+
+1                                                               ,    133683,         2,   66841.5
+AND jtt.tax_type_code LIKE '%Cess%'                             ,          ,          ,
+AND jtt.tax_type_id = jtr.                                      ,          ,          ,
+ITC
+
+tax_type_id                                                     ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx_li                                                  ,          ,          ,
+ITC
+
+ne_id =                                                         ,    133683,         2,   66841.5
+rline.customer_trx_line_id                                      ,          ,          ,
+AND ktl.trx_id = rhead.custom                                   ,          ,          ,
+ITC
+
+er_trx_id                                                       ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142                                           ,          ,          ,
+AND                                                             ,          ,          ,
+ITC
+
+ ROWNUM = 1)                                                    ,    133683,         2,   66841.5
+CESS_LIABILITY,                                                 ,          ,          ,
+rhead.interface_header_attribute1 O                             ,          ,          ,
+ITC
+
+riginal_Inv_Number,                                             ,    133683,         2,   66841.5
+(SELECT trx_date                                                ,          ,          ,
+FROM ra_customer_Trx_all                                        ,          ,          ,
+WH                                                              ,          ,          ,
+ITC
+
+ERE     trx_number =                                            ,    133683,         2,   66841.5
+rhead.interface_header_attribute1                               ,          ,          ,
+AND org_i                                                       ,          ,          ,
+ITC
+
+d = 1142                                                        ,    133683,         2,   66841.5
+AND ROWNUM = 1)                                                 ,          ,          ,
+Original_Inv_date,                                              ,          ,          ,
+(SELECT a.trx_number                                            ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+FROM ra_customer_Trx_all a                                      ,          ,          ,
+WHERE a.customer_trx_id =                                       ,          ,          ,
+rhead.prev                                                      ,          ,          ,
+ITC
+
+ious_customer_trx_id)                                           ,    133683,         2,   66841.5
+Original_Inv_No_Auto_CM,                                        ,          ,          ,
+(SELECT TO_CHAR (                                               ,          ,          ,
+ITC
+
+a.trx_date, 'DD-MON-YY')                                        ,    133683,         2,   66841.5
+FROM ra_customer_Trx_all a                                      ,          ,          ,
+WHERE a.cust                                                    ,          ,          ,
+ITC
+
+omer_trx_id =                                                   ,    133683,         2,   66841.5
+rhead.previous_customer_trx_id)                                 ,          ,          ,
+Original_Inv_date_                                              ,          ,          ,
+ITC
+
+Auto_CM,                                                        ,    133683,         2,   66841.5
+rhead.REASON_CODE,                                              ,          ,          ,
+COMMENTS,                                                       ,          ,          ,
+INTERNAL_NOTES,                                                 ,          ,          ,
+SPECIAL_IN                                                      ,          ,          ,
+ITC
+
+STRUCTIONS,                                                     ,    133683,         2,   66841.5
+rline.interface_line_attribute3 delivery_id,                    ,          ,          ,
+(SELECT                                                         ,          ,          ,
+ITC
+
+ user_name || '-' || description                                ,    133683,         2,   66841.5
+FROM fnd_user f                                                 ,          ,          ,
+WHERE f.user_id                                                 ,          ,          ,
+ITC
+
+ = rhead.created_by)                                            ,    133683,         2,   66841.5
+User_Name_Description,                                          ,          ,          ,
+(SELECT ewb.EWBILL_N                                            ,          ,          ,
+ITC
+
+O                                                               ,    133683,         2,   66841.5
+FROM itc.koel_ewbill ewb                                        ,          ,          ,
+WHERE ewb.TRX_NUMBER = rhead.trx_numb                           ,          ,          ,
+ITC
+
+er)                                                             ,    133683,         2,   66841.5
+Eway_bill_number,                                               ,          ,          ,
+(SELECT ewb.EWAYBILL_DATE                                       ,          ,          ,
+FROM itc.koel_ew                                                ,          ,          ,
+ITC
+
+bill ewb                                                        ,    133683,         2,   66841.5
+WHERE ewb.TRX_NUMBER = rhead.trx_number)                        ,          ,          ,
+Eway_bill_DATE                                                  ,          ,          ,
+ITC
+
+,                                                               ,    133683,         2,   66841.5
+(SELECT IRN_NO_STRING                                           ,          ,          ,
+FROM itc.koel_ewbill ewb                                        ,          ,          ,
+WHERE ewb.TRX_N                                                 ,          ,          ,
+ITC
+
+UMBER = rhead.trx_number)                                       ,    133683,         2,   66841.5
+IRN_NO_STRING,                                                  ,          ,          ,
+(SELECT ktl.rounded_                                            ,          ,          ,
+ITC
+
+tax_amt_fun_curr                                                ,    133683,         2,   66841.5
+FROM apps.jai_tax_lines ktl,                                    ,          ,          ,
+apps.jai_tax_rates                                              ,          ,          ,
+ITC
+
+ jtr,                                                           ,    133683,         2,   66841.5
+apps.jai_tax_types jtt                                          ,          ,          ,
+WHERE     jtt.tax_type_code LIKE '%                             ,          ,          ,
+ITC
+
+TCS%'                                                           ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+AND jtr.tax_rate_id                                             ,          ,          ,
+ITC
+
+= ktl.tax_rate_id                                               ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_trx_line_                                        ,          ,          ,
+ITC
+
+id                                                              ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+AND ktl.application_id                                          ,          ,          ,
+ITC
+
+ = 222                                                          ,    133683,         2,   66841.5
+AND ktl.org_id = 1142)                                          ,          ,          ,
+TCS,                                                            ,          ,          ,
+(SELECT ktl.rounded_tax_amt_f                                   ,          ,          ,
+ITC
+
+un_curr                                                         ,    133683,         2,   66841.5
+FROM apps.jai_tax_lines ktl,                                    ,          ,          ,
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+app                                                             ,          ,          ,
+ITC
+
+s.jai_tax_types jtt                                             ,    133683,         2,   66841.5
+WHERE     jtt.tax_type_code LIKE '%Freight%'                    ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+AND jtr.tax_rate_id = ktl                                       ,          ,          ,
+ITC
+
+.tax_rate_id                                                    ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_trx_line_id                                      ,          ,          ,
+AN                                                              ,          ,          ,
+ITC
+
+D ktl.trx_id = rhead.customer_trx_id                            ,    133683,         2,   66841.5
+AND ktl.application_id = 22                                     ,          ,          ,
+ITC
+
+2                                                               ,    133683,         2,   66841.5
+AND ktl.org_id = 1142)                                          ,          ,          ,
+Freight,                                                        ,          ,          ,
+(SELECT glcc.concatenated_segm                                  ,          ,          ,
+ITC
+
+ents                                                            ,    133683,         2,   66841.5
+FROM apps.jai_tax_accounts ja,                                  ,          ,          ,
+gl_code_combinations_kfv glc                                    ,          ,          ,
+ITC
+
+c,                                                              ,    133683,         2,   66841.5
+apps.jai_tax_lines ktl,                                         ,          ,          ,
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_                                                   ,          ,          ,
+ITC
+
+types jtt                                                       ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANSACTIONS'                            ,          ,          ,
+A                                                               ,          ,          ,
+ITC
+
+ND ja.location_id = ktl.location_id                             ,    133683,         2,   66841.5
+AND ja.organization_id = ktl                                    ,          ,          ,
+ITC
+
+.organization_id                                                ,    133683,         2,   66841.5
+AND glcc.code_combination_id =                                  ,          ,          ,
+ja.LIABILITY_CCI                                                ,          ,          ,
+ITC
+
+D                                                               ,    133683,         2,   66841.5
+AND ja.tax_account_entity_id = jtt.tax_type_id                  ,          ,          ,
+AND ja.TAX_ACCO                                                 ,          ,          ,
+ITC
+
+UNT_ENTITY_CODE = 'TAX_TYPE'                                    ,    133683,         2,   66841.5
+AND ja.ledger_id = 61                                           ,          ,          ,
+AND jtt.tax_t                                                   ,          ,          ,
+ITC
+
+ype_code LIKE '%Freight%'                                       ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type_id                           ,          ,          ,
+ITC
+
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rlin                                                            ,          ,          ,
+ITC
+
+e.customer_trx_line_id                                          ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_id                          ,          ,          ,
+AN                                                              ,          ,          ,
+ITC
+
+D ktl.application_id = 222                                      ,    133683,         2,   66841.5
+AND ktl.org_id = 1142                                           ,          ,          ,
+AND ROWNUM = 1)                                                 ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+Freight_LIABILITY,                                              ,          ,          ,
+(SELECT ktl.rounded_tax_amt_fun_curr                            ,          ,          ,
+FROM ap                                                         ,          ,          ,
+ITC
+
+ps.jai_tax_lines ktl,                                           ,    133683,         2,   66841.5
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.jai_tax_types                                              ,          ,          ,
+ITC
+
+ jtt                                                            ,    133683,         2,   66841.5
+WHERE     jtt.tax_type_id IN                                    ,          ,          ,
+(10019, 10023, 10024, 10025)                                    ,          ,          ,
+A                                                               ,          ,          ,
+ITC
+
+ND jtt.tax_type_id = jtr.tax_type_id                            ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.t                                     ,          ,          ,
+ITC
+
+ax_rate_id                                                      ,    133683,         2,   66841.5
+AND ktl.trx_line_id =                                           ,          ,          ,
+rline.customer_trx_line_id                                      ,          ,          ,
+AND                                                             ,          ,          ,
+ITC
+
+ktl.trx_id = rhead.customer_trx_id                              ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+ITC
+
+AND ktl.org_id = 1142)                                          ,    133683,         2,   66841.5
+Packing_Forwading,                                              ,          ,          ,
+(SELECT glcc.concatena                                          ,          ,          ,
+ITC
+
+ted_segments                                                    ,    133683,         2,   66841.5
+FROM apps.jai_tax_accounts ja,                                  ,          ,          ,
+gl_code_combinations                                            ,          ,          ,
+ITC
+
+_kfv glcc,                                                      ,    133683,         2,   66841.5
+apps.jai_tax_lines ktl,                                         ,          ,          ,
+apps.jai_tax_rates jtr,                                         ,          ,          ,
+apps.                                                           ,          ,          ,
+ITC
+
+jai_tax_types jtt                                               ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND ktl.ENTITY_CODE = 'TRANSAC                                  ,          ,          ,
+ITC
+
+TIONS'                                                          ,    133683,         2,   66841.5
+AND ja.location_id = ktl.location_id                            ,          ,          ,
+AND ja.organization_                                            ,          ,          ,
+ITC
+
+id = ktl.organization_id                                        ,    133683,         2,   66841.5
+AND glcc.code_combination_id =                                  ,          ,          ,
+ja.LIABI                                                        ,          ,          ,
+ITC
+
+LITY_CCID                                                       ,    133683,         2,   66841.5
+AND ja.tax_account_entity_id = jtt.tax_type_id                  ,          ,          ,
+AND ja.                                                         ,          ,          ,
+ITC
+
+TAX_ACCOUNT_ENTITY_CODE = 'TAX_TYPE'                            ,    133683,         2,   66841.5
+AND ja.ledger_id = 61                                           ,          ,          ,
+AND j                                                           ,          ,          ,
+ITC
+
+tt.tax_type_code LIKE '%Pkg%'                                   ,    133683,         2,   66841.5
+AND jtt.tax_type_id = jtr.tax_type                              ,          ,          ,
+ITC
+
+_id                                                             ,    133683,         2,   66841.5
+AND jtr.tax_rate_id = ktl.tax_rate_id                           ,          ,          ,
+AND ktl.trx_line_id =                                           ,          ,          ,
+ITC
+
+rline.customer_trx_line_id                                      ,    133683,         2,   66841.5
+AND ktl.trx_id = rhead.customer_trx_i                           ,          ,          ,
+ITC
+
+d                                                               ,    133683,         2,   66841.5
+AND ktl.application_id = 222                                    ,          ,          ,
+AND ktl.org_id = 1142                                           ,          ,          ,
+AND ROWNUM                                                      ,          ,          ,
+ITC
+
+= 1)                                                            ,    133683,         2,   66841.5
+Packing_Forwading_LIABILITY,                                    ,          ,          ,
+(SELECT MAX (ol.meaning)                                        ,          ,          ,
+                                                                ,          ,          ,
+ITC
+
+                             FROM ra_customer_trx_lines_all rctl,    133683,         2,   66841.5
+ITC
+
+1,                                                              ,    133683,         2,   66841.5
+                                       wsh_delivery_details w   ,          ,          ,
+ITC
+
+dd,                                                             ,    133683,         2,   66841.5
+                                       wsh_delivery_assignme    ,          ,          ,
+ITC
+
+nts wda,                                                        ,    133683,         2,   66841.5
+                                       oe_order_headers         ,          ,          ,
+ITC
+
+_all oeh,                                                       ,    133683,         2,   66841.5
+                                       fnd_lookup_valu          ,          ,          ,
+ITC
+
+es_vl ol                                                        ,    133683,         2,   66841.5
+                                 WHERE     1 = 1                ,          ,          ,
+                                                                ,          ,          ,
+ITC
+
+                                 AND ol.view_application_id = 66,    133683,         2,   66841.5
+ITC
+
+0                                                               ,    133683,         2,   66841.5
+                                       AND UPPER (ol.lookup_ty  ,          ,          ,
+ITC
+
+pe) =                                                           ,    133683,         2,   66841.5
+                                              'FREIGHT_TER      ,          ,          ,
+ITC
+
+MS'                                                             ,    133683,         2,   66841.5
+                                       AND ol.enabled_flag =    ,          ,          ,
+ITC
+
+ 'Y'                                                            ,    133683,         2,   66841.5
+                                       AND ol.lookup_code =     ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+                                              oeh.freight_terms ,          ,          ,
+ITC
+
+_code                                                           ,    133683,         2,   66841.5
+                                       AND oeh.freight_ter      ,          ,          ,
+ITC
+
+ms_code IS NOT NULL                                             ,    133683,         2,   66841.5
+                                       AND o                    ,          ,          ,
+ITC
+
+eh.header_id = wdd.source_header_id                             ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+           AND wda.delivery_id =                                ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+               rctl1.interface_line_attribute3                  ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+                      AND wda.delivery_detail_id =              ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+                                 wdd.delivery_detail_id         ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+                               AND wdd.source_line_id =         ,    133683,         2,   66841.5
+                                                                ,          ,          ,
+ITC
+
+                                      rctl1.interface_line_attri,    133683,         2,   66841.5
+ITC
+
+bute6                                                           ,    133683,         2,   66841.5
+                                       AND rctl1.line_type      ,          ,          ,
+ITC
+
+ = 'LINE'                                                       ,    133683,         2,   66841.5
+                                       AND rctl1.custo          ,          ,          ,
+ITC
+
+mer_trx_id =                                                    ,    133683,         2,   66841.5
+                                              rline             ,          ,          ,
+ITC
+
+.customer_trx_id)                                               ,    133683,         2,   66841.5
+                                  AS FREIGHT_T                  ,          ,          ,
+ITC
+
+ERMS_AS_PER_INV                                                 ,    133683,         2,   66841.5
+FROM ra_customer_Trx_all rhead,                                 ,          ,          ,
+ra_batch_sources                                                ,          ,          ,
+ITC
+
+_all rbatch,                                                    ,    133683,         2,   66841.5
+ra_customer_Trx_lines_all rline,                                ,          ,          ,
+ra_cust_trx_types_                                              ,          ,          ,
+ITC
+
+all rtype                                                       ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+AND rtype.cust_Trx_type_id = rhead.cus                          ,          ,          ,
+ITC
+
+t_trx_type_id                                                   ,    133683,         2,   66841.5
+AND rtype.org_id = rhead.org_id                                 ,          ,          ,
+AND rline.customer                                              ,          ,          ,
+ITC
+
+_trx_id = rhead.customer_trx_id                                 ,    133683,         2,   66841.5
+AND rline.line_type = 'LINE'                                    ,          ,          ,
+AND                                                             ,          ,          ,
+ITC
+
+ rhead.org_id = rbatch.org_id                                   ,    133683,         2,   66841.5
+AND rbatch.BATCH_SOURCE_TYPE IN ('                              ,          ,          ,
+ITC
+
+INV', 'FOREIGN')                                                ,    133683,         2,   66841.5
+AND rhead.batch_source_id NOT IN (31398, 31397)                 ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+AND rbatch.batch_source_id = rhead.batch_source_id              ,          ,          ,
+AND rhead.or                                                    ,          ,          ,
+ITC
+
+g_id = 1142                                                     ,    133683,         2,   66841.5
+AND trx_date BETWEEN :P81_FROM_INV_DATE                         ,          ,          ,
+AND :P81_TO_                                                    ,          ,          ,
+ITC
+
+INV_DATE) GSTN)                                                 ,    133683,         2,   66841.5
+WHERE     1 = 1                                                 ,          ,          ,
+-- AND ROWNUM <=10000                                           ,          ,          ,
+AND (STATE                                                      ,          ,          ,
+ITC
+
+_FROM_WHERE_INVOICE_MADE IN                                     ,    133683,         2,   66841.5
+(NVL (:P81_FIRST_PARTY_STATE, STATE_                            ,          ,          ,
+ITC
+
+FROM_WHERE_INVOICE_MADE)))                                      ,    133683,         2,   66841.5
+GROUP BY ORIGINAL_INV_NO_AUTO_CM,                               ,          ,          ,
+ORI                                                             ,          ,          ,
+ITC
+
+GINAL_INV_DATE_AUTO_CM,                                         ,    133683,         2,   66841.5
+REASON_CODE,                                                    ,          ,          ,
+BILL_TO_CUST_NAME,                                              ,          ,          ,
+SHIP_TO_                                                        ,          ,          ,
+ITC
+
+CUST_NO,                                                        ,    133683,         2,   66841.5
+SHIP_TO_CUST_NAME,                                              ,          ,          ,
+UOM_CODE,                                                       ,          ,          ,
+BILL_TO_STATE,                                                  ,          ,          ,
+SHIP_TO_STA                                                     ,          ,          ,
+ITC
+
+TE,                                                             ,    133683,         2,   66841.5
+BILL_TO_SITE_NUMBER,                                            ,          ,          ,
+BILL_TO_SITE_LOCATION,                                          ,          ,          ,
+CGST_RATE,                                                      ,          ,          ,
+CGST_                                                           ,          ,          ,
+ITC
+
+LIABILITY,                                                      ,    133683,         2,   66841.5
+SGST_RATE,                                                      ,          ,          ,
+SGST_LIABILITY,                                                 ,          ,          ,
+IGST_RATE,                                                      ,          ,          ,
+IGST_LIABILITY,                                                 ,          ,          ,
+ITC
+
+                                                                ,    133683,         2,   66841.5
+SAC_CODE,                                                       ,          ,          ,
+GSTN_FROM_WHERE_INVOICE_MADE,                                   ,          ,          ,
+STATE_FROM_WHERE_INVOIC                                         ,          ,          ,
+ITC
+
+E_MADE,                                                         ,    133683,         2,   66841.5
+CUST_BILL_TO_STATE_AS_PER_GSTN,                                 ,          ,          ,
+CUST_SHIP_TO_STATE_AS_PE                                        ,          ,          ,
+ITC
+
+R_GSTN,                                                         ,    133683,         2,   66841.5
+CUSTOMER_TRX_ID,                                                ,          ,          ,
+CUSTOMER_TRX_LINE_ID,                                           ,          ,          ,
+INVOICE_SOURCE,                                                 ,          ,          ,
+B                                                               ,          ,          ,
+ITC
+
+ATCH_SOURCE_NAME,                                               ,    133683,         2,   66841.5
+TRANSACTION_TYPE,                                               ,          ,          ,
+CUSTOMER_BILL_TO_GSTN_NO,                                       ,          ,          ,
+CU                                                              ,          ,          ,
+ITC
+
+ST_BILL_TO_PARTY_SITE_NUMBER,                                   ,    133683,         2,   66841.5
+CUSTOMER_SHIP_TO_GSTN_NO,                                       ,          ,          ,
+CUST_SHI                                                        ,          ,          ,
+ITC
+
+P_TO_PARTY_SITE_NUMBER,                                         ,    133683,         2,   66841.5
+TYPE_OF_CUSTOMER,                                               ,          ,          ,
+SBU,                                                            ,          ,          ,
+REV_ACCT,                                                       ,          ,          ,
+ORGANIZ                                                         ,          ,          ,
+ITC
+
+ATION_CODE,                                                     ,    133683,         2,   66841.5
+LOCATION_CODE,                                                  ,          ,          ,
+SOURCE,                                                         ,          ,          ,
+CLASS,                                                          ,          ,          ,
+NAME,                                                           ,          ,          ,
+TRANSACTION_NUMB                                                ,          ,          ,
+ITC
+
+ER,                                                             ,    133683,         2,   66841.5
+TRANSACTION_DATE,                                               ,          ,          ,
+GL_DATE,                                                        ,          ,          ,
+ITEM,                                                           ,          ,          ,
+ITEM_DESCRIPTION,                                               ,          ,          ,
+HSN,                                                            ,          ,          ,
+HSN_                                                            ,          ,          ,
+ITC
+
+DESCRIPTION,                                                    ,    133683,         2,   66841.5
+CURRENCY_CODE,                                                  ,          ,          ,
+BILL_TO_CUST_NO,                                                ,          ,          ,
+LOCATION_ID,                                                    ,          ,          ,
+FREIGH                                                          ,          ,          ,
+ITC
+
+T_LIABILITY,                                                    ,    133683,         2,   66841.5
+EWAY_BILL_NUMBER,                                               ,          ,          ,
+EWAY_BILL_DATE,                                                 ,          ,          ,
+IRN_NO_STRING,                                                  ,          ,          ,
+PA                                                              ,          ,          ,
+ITC
+
+CKING_FORWADING_LIABILITY,                                      ,    133683,         2,   66841.5
+COMMENTS,                                                       ,          ,          ,
+DELIVERY_ID,                                                    ,          ,          ,
+USER_NAME_DESC                                                  ,          ,          ,
+ITC
+
+RIPTION,                                                        ,    133683,         2,   66841.5
+CESS_RATE,                                                      ,          ,          ,
+CESS_LIABILITY,                                                 ,          ,          ,
+ORIGINAL_INV_NUMBER,                                            ,          ,          ,
+ORIGINA                                                         ,          ,          ,
+ITC
+
+L_INV_DATE,                                                     ,    133683,         2,   66841.5
+INTERNAL_NOTES,                                                 ,          ,          ,
+SPECIAL_INSTRUCTIONS,                                           ,          ,          ,
+FREIGHT_TERMS_                                                  ,          ,          ,
+ITC
+
+AS_PER_INV                                                      ,    133683,         2,   66841.5
+ITC
+
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_TAX_HOLD_REL_PRC(:errbuf,:rc,:A0,,    122386,        33,3708.66667
+APPS
+
+:A1); END;                                                      ,    122386,        33,3708.66667
+APPS
+

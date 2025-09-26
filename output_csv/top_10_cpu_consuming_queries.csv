@@ -1,0 +1,10 @@
+a1b2c3d4e5f6 SCHEMA1 850.5 sql_text,SELECT o.order_id, c.customer_name FROM orders o JOIN customers c ON o.customer_id = c.id WHERE o.order_date > SYSDATE - 30
+b2c3d4e5f6g7 SCHEMA2 720.3 sql_text,UPDATE products SET last_updated = SYSDATE WHERE category = 'ELECTRONICS' AND status = 'ACTIVE'
+c3d4e5f6g7h8 SCHEMA1 680.8 sql_text,INSERT INTO audit_log (table_name, operation, user_id, timestamp) SELECT 'ORDERS', 'INSERT', user_id, SYSDATE FROM dual
+d4e5f6g7h8i9 SCHEMA3 590.2 sql_text,DELETE FROM temp_sessions WHERE created_date < SYSDATE - 1 AND status = 'EXPIRED'
+e5f6g7h8i9j0 SCHEMA2 510.7 sql_text,SELECT COUNT(*) FROM transactions WHERE transaction_date BETWEEN SYSDATE - 7 AND SYSDATE
+f6g7h8i9j0k1 SCHEMA1 480.4 sql_text,UPDATE customer_balance SET balance = balance + :amount WHERE customer_id = :cust_id
+g7h8i9j0k1l2 SCHEMA3 420.9 sql_text,SELECT * FROM large_table WHERE indexed_column = :value AND date_column > :start_date
+h8i9j0k1l2m3 SCHEMA2 380.6 sql_text,INSERT INTO performance_log VALUES (seq_perf_log.nextval, :metric, :value, SYSDATE)
+i9j0k1l2m3n4 SCHEMA1 340.1 sql_text,DELETE FROM archive_data WHERE archive_date < ADD_MONTHS(SYSDATE, -12)
+j0k1l2m3n4o5 SCHEMA3 310.8 sql_text,SELECT SUM(amount) FROM financial_transactions WHERE status = 'COMPLETED' GROUP BY account_id

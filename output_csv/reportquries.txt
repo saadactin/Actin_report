@@ -1,0 +1,430 @@
+SET PAGESIZE 0 FEEDBACK OFF VERIFY OFF HEADING ON ECHO OFF TRIMSPOOL ON LINESIZE 200 COLSEP ','
+SET TERMOUT OFF
+-- ======================================================
+-- 1. Database Info
+-- ======================================================
+spool dbinfo.csv
+ 
+SELECT to_char(startup_time,'DD-MON-YYYY HH24:MI:SS') "DB Startup Time"
+FROM sys.v_$instance;
+spool off;
+
+spool DBstartuptime.csv
+SELECT SYSDATE-logon_time "Days", (SYSDATE-logon_time)*24 "Hours"
+from sys.v_$session where sid=1;
+spool off;
+
+spool dbversion.csv
+SELECT * from v$version;
+spool off;
+
+spool dbname_id.csv
+SELECT DBID, NAME FROM V$DATABASE;
+spool off;
+
+spool global_name.csv
+SELECT * FROM GLOBAL_NAME;
+spool off;
+
+spool instance_name.csv 
+SELECT INSTANCE_NAME FROM V$INSTANCE;
+spool off;
+
+
+spool dbservices.csv
+SELECT name, network_name FROM dba_services ORDER BY name;
+spool off;
+
+spool createtime.csv
+SELECT created, RESETLOGS_TIME, Log_mode FROM V$DATABASE;
+spool off;
+
+spool charset.csv
+Select * from nls_database_parameters;
+spool off;
+
+spool dbprofile.csv
+Select username, profile, default_tablespace, temporary_tablespace from dba_users;
+spool off;
+
+spool dbsize.csv
+select a.data_size+b.temp_size+c.redo_size "Total_Size (GB)"
+from ( select sum(bytes/1024/1024/1024) data_size
+from dba_data_files ) a, ( select nvl(sum(bytes/1024/1024/1024),0) temp_size
+from dba_temp_files ) b, ( select sum(bytes/1024/1024/1024) redo_size
+from sys.v_$log ) c;
+Total Size of Database with free space:
+Select round(sum(used.bytes) / 1024 / 1024/1024 ) || ' GB' "Database Size",round(free.p / 1024 / 1024/1024) || '
+GB' "Free space"
+from (select bytes from v$datafile
+union all
+select bytes from v$tempfile
+union all
+select bytes from v$log) used, (select sum(bytes) as p from dba_free_space) free group by free.p;
+
+spool dbstructure.csv
+select name from sys.v_$controlfile;
+select group#,member from sys.v_$logfile;
+Select F.file_id Id, F.file_name name, F.bytes/(1024*1024) Mbyte,
+decode(F.status,'AVAILABLE','OK',F.status) status, F.tablespace_name Tspace
+from sys.dba_data_files F
+order by tablespace_name;
+
+
+spool tablespace.csv
+SELECT /* + RULE */ df.tablespace_name "Tablespace", df.bytes / (1024 * 1024) "Size (MB)",
+SUM(fs.bytes) / (1024 * 1024) "Free (MB)", Nvl(Round(SUM(fs.bytes) * 100 / df.bytes),1) "%
+Free", Round((df.bytes - SUM(fs.bytes)) * 100 / df.bytes) "% Used"
+FROM dba_free_space fs, (SELECT tablespace_name,SUM(bytes) bytes
+FROM dba_data_files
+GROUP BY tablespace_name) df
+WHERE fs.tablespace_name (+) = df.tablespace_name
+GROUP BY df.tablespace_name,df.bytes
+UNION ALL
+SELECT /* + RULE */ df.tablespace_name tspace,
+fs.bytes / (1024 * 1024), SUM(df.bytes_free) / (1024 * 1024), Nvl(Round((SUM(fs.bytes) - df.bytes_used) *
+100 / fs.bytes), 1), Round((SUM(fs.bytes) - df.bytes_free) * 100 / fs.bytes)
+FROM dba_temp_files fs, (SELECT tablespace_name,bytes_free,bytes_used
+FROM v$temp_space_header
+GROUP BY tablespace_name,bytes_free,bytes_used) df
+WHERE fs.tablespace_name (+) = df.tablespace_name
+GROUP BY df.tablespace_name,fs.bytes,df.bytes_free,df.bytes_used
+ORDER BY 4 DESC;
+
+-- ======================================================
+-- 14. Tablespaces with Free < 10%
+-- ======================================================
+spool tablespace_lowfree.csv
+Select a.tablespace_name,sum(a.tots/1048576) Tot_Size,
+       sum(a.sumb/1024) Tot_Free,
+       sum(a.sumb)*100/sum(a.tots) Pct_Free,
+       ceil((((sum(a.tots) * 15) - (sum(a.sumb)*100))/85 )/1048576) Min_Add
+from (select tablespace_name,0 tots,sum(bytes) sumb
+        from dba_free_space a group by tablespace_name
+      union
+      select tablespace_name,sum(bytes) tots,0 from dba_data_files group by tablespace_name) a
+group by a.tablespace_name
+having sum(a.sumb)*100/sum(a.tots) < 10
+order by pct_free;
+spool off;
+
+-- ======================================================
+-- 15. Tablespace Fragmentation
+-- ======================================================
+spool tablespace_fragmentation.csv
+Select a.tablespace_name,sum(a.tots/1048576) Tot_Size,
+       sum(a.sumb/1048576) Tot_Free, sum(a.sumb)*100/sum(a.tots) Pct_Free,
+       sum(a.largest/1024) Max_Free,sum(a.chunks) Chunks_Free
+from ( select tablespace_name,0 tots,sum(bytes) sumb,
+              max(bytes) largest,count(*) chunks
+         from dba_free_space a group by tablespace_name
+       union
+       select tablespace_name,sum(bytes) tots,0,0,0 from dba_data_files group by tablespace_name) a
+group by a.tablespace_name
+order by pct_free;
+spool off;
+
+-- ======================================================
+-- 15b. Non-SYS Objects in SYSTEM tablespace
+-- ======================================================
+spool non_sys_system_tables.csv
+SELECT owner, table_name, tablespace_name
+FROM dba_tables
+WHERE tablespace_name = 'SYSTEM'
+AND owner NOT IN ('SYSTEM','SYS','OUTLN');
+spool off;
+
+-- ======================================================
+-- 16. Default and Temporary Tablespaces
+-- ======================================================
+spool db_default_tablespaces.csv
+SELECT * FROM DATABASE_PROPERTIES where PROPERTY_NAME like '%DEFAULT%';
+spool off;
+
+spool user_temp_tablespace.csv
+select username,temporary_tablespace,default_tablespace
+from dba_users where username='HRMS';
+spool off;
+
+-- ======================================================
+-- 17. Datafile Space Usage
+-- ======================================================
+spool datafile_space.csv
+SELECT SUBSTR (df.NAME, 1, 40) file_name,
+       dfs.tablespace_name,
+       df.bytes / 1024 / 1024 allocated_mb,
+       ((df.bytes / 1024 / 1024) - NVL (SUM (dfs.bytes) / 1024 / 1024, 0)) used_mb,
+       NVL (SUM (dfs.bytes) / 1024 / 1024, 0) free_space_mb
+FROM v$datafile df, dba_free_space dfs
+WHERE df.file# = dfs.file_id(+)
+GROUP BY dfs.file_id, df.NAME, df.file#, df.bytes,dfs.tablespace_name
+ORDER BY file_name;
+spool off;
+
+-- ======================================================
+-- 18. Datafile Archive Details
+-- ======================================================
+spool datafile_archive.csv
+SELECT NAME, a.status, DECODE (b.status, 'Active', 'Backup', 'Normal') arc,
+       enabled, bytes, change#, TIME ARCHIVE
+FROM sys.v_$datafile a, sys.v_$backup b
+WHERE a.file# = b.file#;
+spool off;
+
+-- ======================================================
+-- 19. Datafiles with Highest I/O
+-- ======================================================
+spool datafile_high_io.csv
+Select * from (select name, phyrds, phywrts, readtim, writetim
+from v$filestat a, v$datafile b
+where a.file#=b.file#
+order by readtim desc) where rownum <6;
+spool off;
+
+-- ======================================================
+-- 20. Datafile I/O %
+-- ======================================================
+spool datafile_io_pct.csv
+WITH totreadwrite AS (SELECT SUM (phyrds) phys_reads, SUM (phywrts) phys_wrts FROM v$filestat)
+SELECT NAME, phyrds, phyrds * 100 / trw.phys_reads read_pct,
+       phywrts, phywrts * 100 / trw.phys_wrts write_pct
+FROM totreadwrite trw, v$datafile df, v$filestat fs
+WHERE df.file# = fs.file#
+ORDER BY phyrds DESC;
+spool off;
+
+-- ======================================================
+-- 21. Temp Segments
+-- ======================================================
+spool temp_segment.csv
+SELECT tablespace_name, SUM(bytes_used/1024/1024) USED,
+       SUM(bytes_free/1024/1024) FREE
+FROM V$temp_space_header
+GROUP BY tablespace_name;
+spool off;
+
+-- ======================================================
+-- 22. UNDO Information
+-- ======================================================
+spool undo_info.csv
+select to_char(begin_time,'hh24:mi:ss') begin_time,
+       to_char(end_time,'hh24:mi:ss') end_time,
+       maxquerylen, ssolderrcnt, nospaceerrcnt, undoblks, txncount
+from v$undostat
+order by undoblks;
+spool off;
+
+-- ======================================================
+-- 23. Active Rollback Segments
+-- ======================================================
+spool active_rollback.csv
+SELECT r.NAME, l.sid, p.spid, NVL (p.username, 'no transaction') "Transaction",
+       p.terminal "Terminal"
+FROM v$lock l, v$process p, v$rollname r
+WHERE l.sid = p.pid(+)
+AND TRUNC (l.id1(+) / 65536) = r.usn
+AND l.TYPE(+) = 'TX'
+AND l.lmode(+) = 6
+ORDER BY R.NAME;
+spool off;
+
+-- ======================================================
+-- 24. Who is using UNDO and TEMP
+-- ======================================================
+spool undo_temp_usage.csv
+SELECT TO_CHAR(s.sid)||','||TO_CHAR(s.serial#) sid_serial,
+       NVL(s.username, 'None') orauser,
+       s.program, r.name undoseg,
+       t.used_ublk * TO_NUMBER(x.value)/1024||'K' "Undo"
+FROM sys.v_$rollname r, sys.v_$session s, sys.v_$transaction t, sys.v_$parameter x
+WHERE s.taddr = t.addr
+AND r.usn = t.xidusn(+)
+AND x.name = 'db_block_size';
+spool off;
+
+-- ======================================================
+-- 25. Redo Generation by Calendar
+-- ======================================================
+spool redo_generation.csv
+select to_char(first_time,'mm.DD.rrrr') day,
+       count(*) logs_generated
+from v$log_history
+group by to_char(first_time,'mm.DD.rrrr')
+order by day;
+spool off;
+
+-- ======================================================
+-- 26. Current Redo Log Fill %
+-- ======================================================
+spool redo_fill.csv
+SELECT le.leseq "Current log sequence No",
+       100*cp.cpodr_bno/le.lesiz "Percent Full",
+       cp.cpodr_bno "Current Block No",
+       le.lesiz "Size of Log in Blocks"
+FROM x$kcccp cp, x$kccle le
+WHERE le.leseq =CP.cpodr_seq
+AND bitand(le.leflg,24) = 8;
+spool off;
+
+-- ======================================================
+-- 27. Long Jobs
+-- ======================================================
+spool long_jobs.csv
+Select username,to_char(start_time, 'hh24:mi:ss dd/mm/yy') started,
+       time_remaining remaining, message
+from v$session_longops
+where time_remaining = 0 order by time_remaining desc;
+spool off;
+
+-- ======================================================
+-- 28. Long Query Progress
+-- ======================================================
+spool long_query_progress.csv
+SELECT a.sid, a.serial#, b.username , opname OPERATION, target OBJECT,
+       TRUNC(elapsed_seconds, 5) "ET (s)",
+       TO_CHAR(start_time, 'HH24:MI:SS') start_time,
+       ROUND((sofar/totalwork)*100, 2) "COMPLETE (%)"
+FROM v$session_longops a, v$session b
+WHERE a.sid = b.sid AND b.username not IN ('SYS','SYSTEM')
+AND totalwork > 0
+ORDER BY elapsed_seconds;
+spool off;
+
+-- ======================================================
+-- 29. RMAN Backup Status
+-- ======================================================
+spool rman_backup.csv
+SELECT SID, SERIAL#, CONTEXT, SOFAR, TOTALWORK,
+       ROUND(SOFAR/TOTALWORK*100,2) "%_COMPLETE"
+FROM V$SESSION_LONGOPS
+WHERE OPNAME LIKE 'RMAN%' AND OPNAME NOT LIKE '%aggregate%'
+AND TOTALWORK != 0 AND SOFAR != TOTALWORK;
+spool off;
+
+-- ======================================================
+-- 30. Top SQL by Resources
+-- ======================================================
+spool top_sql_resources.csv
+SELECT * FROM (
+    SELECT Substr(a.sql_text,1,50) sql_text,
+           Trunc(a.disk_reads/Decode(a.executions,0,1,a.executions)) reads_per_execution,
+           a.buffer_gets, a.disk_reads, a.executions, a.sorts, a.address
+    FROM v$sqlarea a
+    ORDER BY 2 DESC
+) WHERE rownum <= 50;
+spool off;
+
+-- ======================================================
+-- 31. SGA Info
+-- ======================================================
+spool sga_info.csv
+SELECT SUM(VALUE)/1024/1024 "Size in MB" from SYS.v_$sga;
+spool off;
+
+-- ======================================================
+-- 32. PGA Info
+-- ======================================================
+spool pga_info.csv
+Select st.sid "SID", sn.name "TYPE", ceil(st.value / 1024 / 1024/1024) "GB"
+from v$sesstat st, v$statname sn
+where st.statistic# = sn.statistic#
+and sid in (select sid from v$session where username like UPPER('HRMS'))
+and upper(sn.name) like '%PGA%'
+order by st.sid, st.value desc;
+spool off;
+
+-- ======================================================
+-- 33. IO Usage by SQL
+-- ======================================================
+spool io_usage_sql.csv
+select b.sql_text "Statement ", a.Disk_reads "Disk Reads",
+       a.executions "Executions",
+       a.disk_reads/decode(a.executions,0,1,a.executions) "Ratio",
+       c.username
+from v$sqlarea a, v$sqltext_with_newlines b,dba_users c
+where a.parsing_user_id = c.user_id
+and a.address=b.address
+and a.disk_reads>100000
+order by a.disk_reads desc,b.piece;
+spool off;
+
+-- ======================================================
+-- 34. Disk IO Contention
+-- ======================================================
+spool disk_io_contention.csv
+select NAME, PHYRDS "Physical Reads",
+       round((PHYRDS / PD.PHYS_READS)*100,2) "Read %",
+       PHYWRTS "Physical Writes",
+       round(PHYWRTS * 100 / PD.PHYS_WRTS,2) "Write %",
+       fs.PHYBLKRD+FS.PHYBLKWRT "Total Block I/Os"
+from ( select sum(PHYRDS) PHYS_READS, sum(PHYWRTS) PHYS_WRTS from v$filestat ) pd,
+     v$datafile df, v$filestat fs
+where df.FILE# = fs.FILE#
+order by fs.PHYBLKRD+fs.PHYBLKWRT desc;
+spool off;
+
+-- ======================================================
+-- 35. Database Object Info
+-- ======================================================
+spool db_objects.csv
+Select owner,object_type,count(*)
+from dba_objects
+Where owner not IN ('SYS','SYSTEM','XDB','WMSYS','OUTLN')
+Group by owner,object_type
+order by owner;
+spool off;
+
+-- ======================================================
+-- 36. Largest Objects
+-- ======================================================
+spool largest_objects.csv
+SELECT * FROM (
+    select SEGMENT_NAME, SEGMENT_TYPE, BYTES/1024/1024/1024 GB,
+           TABLESPACE_NAME
+    from dba_segments
+    order by 3 desc
+) WHERE ROWNUM <= 5;
+spool off;
+
+-- ======================================================
+-- 37. Invalid Objects
+-- ======================================================
+spool invalid_objects.csv
+Select owner, object_type, count(*)
+from dba_objects
+where status='INVALID'
+group by owner, object_type;
+spool off;
+
+-- ======================================================
+-- 38. Invalid Object Compile Scripts
+-- ======================================================
+spool invalid_object_compile.csv
+select 'Alter ' || decode(object_type,'PACKAGE BODY','PACKAGE',object_type)
+       || ' ' || object_name || ' compile '
+       || decode(object_type,'PACKAGE BODY',' body;',';')
+from user_objects
+where object_type in ('FUNCTION','PACKAGE','PACKAGE BODY','PROCEDURE','TRIGGER','VIEW')
+and status = 'INVALID'
+order by object_type , object_name;
+spool off;
+
+-- ======================================================
+-- 39. Object Counts
+-- ======================================================
+spool object_counts.csv
+Select count(1) tables from user_tables where table_name not like '%$%';
+Select count(1) mviews from user_mviews;
+Select count(1) indexes from user_indexes where index_type in ('FUNCTION-BASED NORMAL','NORMAL');
+spool off;
+
+-- ======================================================
+-- 40. Objects Created in Last Week
+-- ======================================================
+spool new_objects.csv
+Select count(1) from user_objects where CREATED >= sysdate - 7;
+spool off;
+
+spool stale_mviews.csv
+Select mview_name from user_mviews where LAST_REFRESH_DATE < sysdate - 7;
+spool off;

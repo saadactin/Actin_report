@@ -1,0 +1,5 @@
+SYS_LOB0023337767C00004$$                                                                                                       ,LOBSEGMENT        ,710.646729,APPS_TS_MEDIA
+ASO_ORDER_FEEDBACK_T                                                                                                            ,TABLE             ,275.416626,APPS_TS_QUEUES
+XLA_DISTRIBUTION_LINKS                                                                                                          ,TABLE PARTITION   ,253.938354,APPS_TS_TX_DATA
+SYS_LOB0023346866C00008$$                                                                                                       ,LOBSEGMENT        ,222.229736,APPS_TS_TX_DATA
+XLA_AE_LINES                                                                                                                    ,TABLE PARTITION   ,219.516968,APPS_TS_TX_DATA

@@ -1,0 +1,16 @@
+DEFAULT_TBS_TYPE
+SMALLFILE
+Default tablespace type
+
+DEFAULT_EDITION
+V_20250412_1120
+Name of the database default edition
+
+DEFAULT_PERMANENT_TABLESPACE
+USERS
+Name of default permanent tablespace
+
+DEFAULT_TEMP_TABLESPACE
+TEMP
+Name of default temporary tablespace
+

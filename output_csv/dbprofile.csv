@@ -1,0 +1,1347 @@
+SYS
+DEFAULT                                                                                                                         ,SYSTEM                        ,TEMP
+
+AUDSYS
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SYSTEM
+DEFAULT                                                                                                                         ,SYSTEM                        ,TEMP
+
+SYSBACKUP
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SYSDG
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SYSKM
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SYSRAC
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+OUTLN
+DEFAULT                                                                                                                         ,SYSTEM                        ,TEMP
+
+DBSFWUSER
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+XS$NULL
+DEFAULT                                                                                                                         ,SYSTEM                        ,TEMP
+
+GSMADMIN_INTERNAL
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+GSMUSER
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+DIP
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+REMOTE_SCHEDULER_AGENT
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+ORACLE_OCM
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SYS$UMF
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+DBSNMP
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+APPQOSSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+GSMCATUSER
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+GGSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+XDB
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+ANONYMOUS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+WMSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+MDDATA
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+OJVMSYS
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+CTXSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+ORDSYS
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+ORDDATA
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+ORDPLUGINS
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+SI_INFORMTN_SCHEMA
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+MDSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+OLAPSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+DVSYS
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+LBACSYS
+DEFAULT                                                                                                                         ,SYSTEM                        ,TEMP
+
+DVF
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+COST
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PDBUSER
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+MGDSYS
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+
+OPS$PSANDEEP
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+OPS$ASHWINI
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+SCOTT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+APPLSYSPUB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+APPLSYS
+EBS_APPS                                                                                                                        ,APPS_TS_TX_DATA               ,TEMP
+
+APPS
+EBS_APPS                                                                                                                        ,APPS_TS_TX_DATA               ,TEMP
+
+BOM6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AS6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AS3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MFG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+INV
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BOM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MRP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BOM3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+HR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OPS$SYSTEM
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+CN2
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+CN3
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+CN4
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+CN5
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+CN6
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+OSM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OTA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PSANDEEP
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+WWW1ORA
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+MIG
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+AK
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+QA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BOM5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AS5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRP2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AS2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BOM4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CHV2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENG4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WIP4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AS4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PA4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CS4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EC4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JG4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CE2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+SSP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+HXT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RLA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+VEH
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ICX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AZ
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJM2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC2
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CHV3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJM3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC3
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CHV4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJM4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC4
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CHV5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CZ5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJM5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC5
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CHV6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FDSCAN
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+PJM6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FLM6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSC6
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JA
+DEFAULT                                                                                                                         ,ME4SPC                        ,TEMP
+
+RAVI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FDTEST
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+KOELSAS
+DEFAULT                                                                                                                         ,SHARES_DATABASE               ,TEMP
+
+KFIL
+DEFAULT                                                                                                                         ,SHARES_DATABASE               ,TEMP
+
+MMJ
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+KOELPAY
+DEFAULT                                                                                                                         ,KOELDATA                      ,TEMP
+
+ANNUALPAY
+DEFAULT                                                                                                                         ,ANNUALDATA                    ,TEMP
+
+ADVANCES
+DEFAULT                                                                                                                         ,ANNUALDATA                    ,TEMP
+
+NAGARATT
+DEFAULT                                                                                                                         ,ATT_NAGARDATA                 ,TEMP
+
+NAGARPAY
+DEFAULT                                                                                                                         ,NAGARDATA                     ,TEMP
+
+NASIKPAY
+DEFAULT                                                                                                                         ,NASIKENGDATA                  ,TEMP
+
+STAFFPAY
+DEFAULT                                                                                                                         ,STAFFDATA                     ,TEMP
+
+VALVEPAY
+DEFAULT                                                                                                                         ,NASIKVLDATA                   ,TEMP
+
+VVP
+DEFAULT                                                                                                                         ,ATTENDANCE_DATA               ,TEMP
+
+SUNSOC
+DEFAULT                                                                                                                         ,SHARES_DATABASE               ,TEMP
+
+FINADM
+DEFAULT                                                                                                                         ,SHARES_DATABASE               ,TEMP
+
+EAM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FDSYSADMIN
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+FDAPPADMIN
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+VRS8424
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RGK
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+MSB
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+NRG
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+XLA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BEN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+HXC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RLM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+VEA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+POM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FRM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ABM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BSC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EAA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EVM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FEM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FTE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IGI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ITG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IPD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ENI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IMC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XTR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GME
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GML
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PMI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JTF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ME
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AMV
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XDP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WSH
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IES
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FPT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AST
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CCT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBY
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBU
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FII
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+HRI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ISC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OPI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+POA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ONT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+QP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PSB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MSD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WPS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IPA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OZF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OZP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OZS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEU
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ECX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IGW
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PSP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+POS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IGF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IGS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+WSM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MWA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FV
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IGC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PSA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PV
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AHM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BIV
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AMF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IMT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IEC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JTS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JTM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AHL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+VALVEATT
+DEFAULT                                                                                                                         ,NASIKVLDATA                   ,TEMP
+
+ITC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AVN15211
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OAI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+QOT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PENSION
+DEFAULT                                                                                                                         ,NASIKVLDATA                   ,TEMP
+
+BNE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+QRM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PON
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+OKL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AMW
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CSM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DOM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EGO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DDD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PJI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XNB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ZFA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ZSA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CLN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EDR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PRP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MOBILEADMIN
+DEFAULT                                                                                                                         ,SYNCSERVER                    ,TEMP
+
+EUL4_US
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+MMK15212
+DEFAULT                                                                                                                         ,FDS_DATA_SPACE                ,TEMP
+
+AD_MONITOR
+AD_PATCH_MONITOR_PROFILE                                                                                                        ,APPS_TS_TX_DATA               ,TEMP
+
+RMAN_KIRAN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CRMSURVEY
+DEFAULT                                                                                                                         ,MISCSPC                       ,TEMP
+
+EXPVALVE
+DEFAULT                                                                                                                         ,NAGARDATA                     ,TEMP
+
+KAGALPAY
+DEFAULT                                                                                                                         ,KOELDATA                      ,TEMP
+
+FPA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AJINNI
+DEFAULT                                                                                                                         ,AJINNI                        ,TEMP
+
+XLE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MST
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FUN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GCS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XDO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ZX
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+LNS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ZPB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+JMF
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ITA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+FTP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PFT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+GMO
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DNA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IPM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ASN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IBW
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EM_MONITOR
+EM_OAM_MONITOR_PROFILE                                                                                                          ,APPS_TS_TX_DATA               ,TEMP
+
+PERFSTAT
+DEFAULT                                                                                                                         ,APPS_TS_TOOLS                 ,TEMP
+
+KS_US
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+AJ40
+DEFAULT                                                                                                                         ,AJ40                          ,TEMP
+
+ARCHIVE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MERGE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+TRCANLZR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+NAGARETN
+DEFAULT                                                                                                                         ,NAGARETNDATA                  ,TEMP
+
+NASIKETN
+DEFAULT                                                                                                                         ,NASIKETNDATA                  ,TEMP
+
+OWBRT_SYS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KITLPAY
+DEFAULT                                                                                                                         ,KITLDATA                      ,TEMP
+
+IZU
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+COSTING
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BARCODE
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+EUL_US
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MYKOEL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RRS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DPP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+MTH
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+QPR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DDR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+INL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+YMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+RESQ
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_GLAA
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_GLPC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_GLSOD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+IMCMON
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOELHR
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DEV_MDS
+DEFAULT                                                                                                                         ,DEV_MDS                       ,DEV_IAS_TEMP
+
+DEV_BIPLATFORM
+DEFAULT                                                                                                                         ,DEV_BIPLATFORM                ,DEV_IAS_TEMP
+
+ESISYS
+DEFAULT                                                                                                                         ,USER_DATA                     ,TEMP
+
+KOELEMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_OBL
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_SCMOPS
+DEFAULT                                                                                                                         ,KOEL_SCMOPS                   ,TEMP
+
+DISC1_DISCOVERER
+DEFAULT                                                                                                                         ,DISC1_DISCO_PTM5_META         ,DISC1_IAS_TEMP
+
+DISC1_DISCOVERER_PS
+DEFAULT                                                                                                                         ,DISC1_DISCO_PSTORE            ,DISC1_IAS_TEMP
+
+KOEL_EXPWASIB
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XXEMS
+DEFAULT                                                                                                                         ,KOEL_EMS                      ,TEMP
+
+KOEL_MFGOPS
+DEFAULT                                                                                                                         ,KOEL_MFGOPS                   ,TEMP
+
+APPS_NE
+EBS_APPS                                                                                                                        ,APPS_TS_TX_DATA               ,TEMP
+
+GHG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CMI
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+CUSTOM
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+XXKMIG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+SQLTXPLAIN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+SQLTXADMIN
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+BI_READ
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+LGM_DISC
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_SPSMS
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+LGM_READ
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KOEL_KP1
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+APEX_PROD
+DEFAULT                                                                                                                         ,APEX_9201678832718740         ,TEMP
+
+LGM_COST
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+KNRSP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+SIEBPRD
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+PRODBIP_STB
+DEFAULT                                                                                                                         ,PRODBIP_STB                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_IAU_APPEND
+DEFAULT                                                                                                                         ,PRODBIP_IAU                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_IAU_VIEWER
+DEFAULT                                                                                                                         ,PRODBIP_IAU                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_MDS
+DEFAULT                                                                                                                         ,PRODBIP_MDS                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_WLS
+DEFAULT                                                                                                                         ,PRODBIP_WLS                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_WLS_RUNTIME
+DEFAULT                                                                                                                         ,PRODBIP_WLS                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_IAU
+DEFAULT                                                                                                                         ,PRODBIP_IAU                   ,PRODBIP_IAS_TEMP
+
+PRODBIP_OPSS
+DEFAULT                                                                                                                         ,PRODBIP_IAS_OPSS              ,PRODBIP_IAS_TEMP
+
+PRODBIP_BIPLATFORM
+DEFAULT                                                                                                                         ,PRODBIP_BIPLATFORM            ,PRODBIP_IAS_TEMP
+
+APEX_REST_PUBLIC_USER
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+APEX_210200
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+FLOWS_FILES
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+APEX_PUBLIC_USER
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+APEX_LISTENER
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+ORDS_PUBLIC_USER
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+ORDS_METADATA
+DEFAULT                                                                                                                         ,SYSAUX                        ,TEMP
+
+INSIA_INT
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+C##DBLCMUSER
+C##DBLCMPROFILE                                                                                                                 ,SYSAUX                        ,TEMP
+
+APEX_230200
+DEFAULT                                                                                                                         ,APEX                          ,TEMP
+
+LGMKZ
+DEFAULT                                                                                                                         ,LGMKZ                         ,TEMP
+
+ODIERP
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+LGMKZ_STG
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+ODI_TEST
+DEFAULT                                                                                                                         ,APPS_TS_TX_DATA               ,TEMP
+
+DISC_USER
+DEFAULT                                                                                                                         ,USERS                         ,TEMP
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Database Checklists</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #17a2b8;
+            padding-bottom: 20px;
+        }
+        .score-section {
+            background-color: #d1ecf1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #17a2b8;
+        }
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .checklist-item {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        .checklist-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: #17a2b8;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .checklist-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            color: #333;
+        }
+        .checklist-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .checklist-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-warn {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .nav-button {
+            display: inline-block;
+            background-color: #17a2b8;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #138496;
+        }
+        .nav-button.secondary {
+            background-color: #6c757d;
+        }
+        .nav-button.secondary:hover {
+            background-color: #5a6268;
+        }
+        .summary-stats {
+            background-color: #e2e3e5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #17a2b8;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Top 10 Database Checklists</h1>
+        </div>
+        
+        <div class="score-section">
+            <h2>Checklist Score</h2>
+            <div class="score">{{ v_score }} points</div>
+        </div>
+        
+        <div class="navigation">
+            <a href="/" class="nav-button secondary">← Back to Summary</a>
+            <a href="/health/" class="nav-button secondary">Health Check</a>
+            <a href="/wait_event_summary/" class="nav-button secondary">Wait Events</a>
+        </div>
+        
+        {% if checklist_summary %}
+        <div class="summary-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">{{ checklist_summary.total|default:0 }}</div>
+                    <div class="stat-label">Total Checks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ checklist_summary.passed|default:0 }}</div>
+                    <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ checklist_summary.warnings|default:0 }}</div>
+                    <div class="stat-label">Warnings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ checklist_summary.failed|default:0 }}</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if top_checklists %}
+        <div class="checklist-grid">
+            {% for checklist in top_checklists %}
+            <div class="checklist-item">
+                <div class="checklist-number">{{ forloop.counter }}</div>
+                <div class="checklist-title">{{ checklist.title }}</div>
+                <div class="checklist-description">{{ checklist.description }}</div>
+                <div class="checklist-status status-{{ checklist.status|lower }}">
+                    {% if checklist.status == 'PASS' %}✓ PASSED
+                    {% elif checklist.status == 'WARN' %}⚠ WARNING
+                    {% else %}✗ FAILED{% endif %}
+                </div>
+                {% if checklist.value %}
+                <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                    <strong>Value:</strong> {{ checklist.value }}
+                </div>
+                {% endif %}
+                {% if checklist.recommendation %}
+                <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                    <strong>Recommendation:</strong> {{ checklist.recommendation }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% if not top_checklists %}
+        <div style="text-align: center; padding: 40px;">
+            <h3>No checklist data available</h3>
+            <p>Top 10 checklist results will appear here once CSV files are processed.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

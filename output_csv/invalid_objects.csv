@@ -1,0 +1,43 @@
+DISC1_DISCOVERER_PS                                                                                                             ,PACKAGE BODY           ,         1
+COST                                                                                                                            ,FUNCTION               ,         5
+ITC                                                                                                                             ,FUNCTION               ,         1
+ARCHIVE                                                                                                                         ,SYNONYM                ,        29
+MERGE                                                                                                                           ,SYNONYM                ,        29
+APPS                                                                                                                            ,MATERIALIZED VIEW      ,         1
+APPS                                                                                                                            ,PROCEDURE              ,       131
+DEV_BIPLATFORM                                                                                                                  ,PROCEDURE              ,         4
+COST                                                                                                                            ,PROCEDURE              ,        14
+MERGE                                                                                                                           ,VIEW                   ,        75
+SYSTEM                                                                                                                          ,PROCEDURE              ,         1
+WWW1ORA                                                                                                                         ,VIEW                   ,         8
+KNRSP                                                                                                                           ,PACKAGE BODY           ,         1
+PERFSTAT                                                                                                                        ,FUNCTION               ,         1
+PERFSTAT                                                                                                                        ,PACKAGE BODY           ,         1
+APPS                                                                                                                            ,VIEW                   ,        47
+APPS                                                                                                                            ,PACKAGE                ,         9
+FDTEST                                                                                                                          ,FUNCTION               ,         1
+FDTEST                                                                                                                          ,VIEW                   ,         5
+KOELPAY                                                                                                                         ,PACKAGE                ,         1
+ITC                                                                                                                             ,SYNONYM                ,        17
+KOEL_EXPWASIB                                                                                                                   ,PROCEDURE              ,         1
+XXEMS                                                                                                                           ,PACKAGE BODY           ,         1
+XXEMS                                                                                                                           ,FUNCTION               ,         1
+KNRSP                                                                                                                           ,PROCEDURE              ,         2
+APPLSYS                                                                                                                         ,TRIGGER                ,         2
+APPS                                                                                                                            ,TRIGGER                ,        10
+INV                                                                                                                             ,PROCEDURE              ,         1
+ITC                                                                                                                             ,PACKAGE                ,         1
+MOBILEADMIN                                                                                                                     ,VIEW                   ,         8
+COSTING                                                                                                                         ,PACKAGE BODY           ,         5
+SYSTEM                                                                                                                          ,MATERIALIZED VIEW      ,         1
+AR                                                                                                                              ,FUNCTION               ,         1
+ITC                                                                                                                             ,PROCEDURE              ,        38
+ITC                                                                                                                             ,PACKAGE BODY           ,         9
+ARCHIVE                                                                                                                         ,VIEW                   ,        66
+COSTING                                                                                                                         ,PROCEDURE              ,         8
+KOEL                                                                                                                            ,PROCEDURE              ,         1
+TRCANLZR                                                                                                                        ,PACKAGE BODY           ,         3
+SCOTT                                                                                                                           ,JAVA CLASS             ,        87
+ITC                                                                                                                             ,VIEW                   ,         3
+APPS                                                                                                                            ,PACKAGE BODY           ,       146
+APPS                                                                                                                            ,FUNCTION               ,        13

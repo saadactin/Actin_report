@@ -1,0 +1,312 @@
+GSMADMIN_INTERNAL
+SHARD_TS                                                                                                                        ,SYSTEM
+
+OJVMSYS
+OJDS$BINDINGS$                                                                                                                  ,SYSTEM
+
+OJVMSYS
+OJDS$INODE$                                                                                                                     ,SYSTEM
+
+OJVMSYS
+OJDS$ATTRIBUTES$                                                                                                                ,SYSTEM
+
+OJVMSYS
+OJDS$REFADDR$                                                                                                                   ,SYSTEM
+
+OJVMSYS
+OJDS$PERMISSIONS$                                                                                                               ,SYSTEM
+
+OJVMSYS
+OJDS$SHARED$OBJ$                                                                                                                ,SYSTEM
+
+ORDSYS
+ORD_USAGE_RECS                                                                                                                  ,SYSTEM
+
+ORDSYS
+SI_IMAGE_FORMATS_TAB                                                                                                            ,SYSTEM
+
+ORDSYS
+SI_FEATURES_TAB                                                                                                                 ,SYSTEM
+
+ORDSYS
+SI_VALUES_TAB                                                                                                                   ,SYSTEM
+
+ORDDATA
+ORDDCM_INTERNAL_TAGS                                                                                                            ,SYSTEM
+
+ORDDATA
+ORDDCM_DOC_TYPES                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_INSTALL_DOCS                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_DOCS                                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_DOC_REFS                                                                                                                 ,SYSTEM
+
+ORDDATA
+ORDDCM_VR_DT_MAP                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_STD_ATTRS                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_PRV_ATTRS                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_DICT_ATTRS                                                                                                               ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_DAREFS                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_MAPPING_DOCS                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_MAPPED_PATHS                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_RULE_TYPES                                                                                                          ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_ACTION_TYPES                                                                                                        ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_RULES                                                                                                               ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_ATTRS                                                                                                               ,SYSTEM
+
+ORDDATA
+ORDDCM_PREFS_LOOKUP                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_PREFS_DEF_VALUES_TAB                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_PREFS_VALID_VALUES_TAB                                                                                                   ,SYSTEM
+
+ORDDATA
+ORDDCM_RT_PREF_PARAMS                                                                                                           ,SYSTEM
+
+ORDDATA
+ORDDCM_UID_DEFS                                                                                                                 ,SYSTEM
+
+ORDDATA
+ORDDCM_STORED_TAGS                                                                                                              ,SYSTEM
+
+ORDDATA
+ORDDCM_DATA_MODEL                                                                                                               ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED                                                                                                                  ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_OPRD                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_SET                                                                                                              ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_MACRO_PAR                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_MACRO_DEP                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_PAR                                                                                                              ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_ACTION                                                                                                                ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_LOCATORPATHS                                                                                                          ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_VLD_MSG                                                                                                               ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_ATTR_CONFIG                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_ATTR_CONFIG_WRK                                                                                                       ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_VERSION_CONFIG                                                                                                  ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_VERSION_CONFIG_WRK                                                                                                    ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_DICOM_CONFIG                                                                                                    ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_DICOM_CONFIG_WRK                                                                                                      ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_PRVW_CONFIG                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_PRVW_CONFIG_WRK                                                                                                       ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_WADO_CONFIG                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_WADO_CONFIG_WRK                                                                                                       ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_XML_CONFIG                                                                                                      ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_XML_CONFIG_WRK                                                                                                        ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_SPECIAL_TAG                                                                                                     ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_SPECIAL_TAG_WRK                                                                                                       ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_ADMIN_DOCS                                                                                                      ,SYSTEM
+
+ORDDATA
+ORDDCM_PR_ADMIN_DOCS_WRK                                                                                                        ,SYSTEM
+
+ORDDATA
+ORDDCM_PROTOCOL_METADATA                                                                                                        ,SYSTEM
+
+ORDDATA
+ORDDCM_DOCS_WRK                                                                                                                 ,SYSTEM
+
+ORDDATA
+ORDDCM_DOC_REFS_WRK                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_STD_ATTRS_WRK                                                                                                            ,SYSTEM
+
+ORDDATA
+ORDDCM_PRV_ATTRS_WRK                                                                                                            ,SYSTEM
+
+ORDDATA
+ORDDCM_DICT_ATTRS_WRK                                                                                                           ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_DAREFS_WRK                                                                                                            ,SYSTEM
+
+ORDDATA
+ORDDCM_MAPPING_DOCS_WRK                                                                                                         ,SYSTEM
+
+ORDDATA
+ORDDCM_MAPPED_PATHS_WRK                                                                                                         ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_RULES_WRK                                                                                                           ,SYSTEM
+
+ORDDATA
+ORDDCM_ANON_ATTRS_WRK                                                                                                           ,SYSTEM
+
+ORDDATA
+ORDDCM_RT_PREF_PARAMS_WRK                                                                                                       ,SYSTEM
+
+ORDDATA
+ORDDCM_UID_DEFS_WRK                                                                                                             ,SYSTEM
+
+ORDDATA
+ORDDCM_STORED_TAGS_WRK                                                                                                          ,SYSTEM
+
+ORDDATA
+ORDDCM_DATA_MODEL_WRK                                                                                                           ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_WRK                                                                                                              ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_OPRD_WRK                                                                                                         ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_SET_WRK                                                                                                          ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_MACRO_PAR_WRK                                                                                                         ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_MACRO_DEP_WRK                                                                                                         ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_PRED_PAR_WRK                                                                                                          ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_LOCATORPATHS_WRK                                                                                                      ,SYSTEM
+
+ORDDATA
+ORDDCM_CT_ACTION_WRK                                                                                                            ,SYSTEM
+
+LBACSYS
+OLS$POL                                                                                                                         ,SYSTEM
+
+LBACSYS
+OLS$POLS                                                                                                                        ,SYSTEM
+
+LBACSYS
+OLS$POLT                                                                                                                        ,SYSTEM
+
+LBACSYS
+OLS$PROFILE                                                                                                                     ,SYSTEM
+
+LBACSYS
+OLS$USER                                                                                                                        ,SYSTEM
+
+LBACSYS
+OLS$PROG                                                                                                                        ,SYSTEM
+
+LBACSYS
+OLS$LAB                                                                                                                         ,SYSTEM
+
+LBACSYS
+OLS$POLICY_ADMIN                                                                                                                ,SYSTEM
+
+LBACSYS
+OLS$INSTALLATIONS                                                                                                               ,SYSTEM
+
+LBACSYS
+OLS$PROPS                                                                                                                       ,SYSTEM
+
+LBACSYS
+OLS$SESSINFO                                                                                                                    ,SYSTEM
+
+LBACSYS
+OLS$LEVELS                                                                                                                      ,SYSTEM
+
+LBACSYS
+OLS$COMPARTMENTS                                                                                                                ,SYSTEM
+
+LBACSYS
+OLS$GROUPS                                                                                                                      ,SYSTEM
+
+LBACSYS
+OLS$USER_LEVELS                                                                                                                 ,SYSTEM
+
+LBACSYS
+OLS$USER_COMPARTMENTS                                                                                                           ,SYSTEM
+
+LBACSYS
+OLS$USER_GROUPS                                                                                                                 ,SYSTEM
+
+LBACSYS
+OLS$PROFILES                                                                                                                    ,SYSTEM
+
+LBACSYS
+OLS$DIP_DEBUG                                                                                                                   ,SYSTEM
+
+LBACSYS
+OLS$DIP_EVENTS                                                                                                                  ,SYSTEM
+
+LBACSYS
+OLS$AUDIT                                                                                                                       ,SYSTEM
+
+LBACSYS
+OLS$AUDIT_ACTIONS                                                                                                               ,SYSTEM
+

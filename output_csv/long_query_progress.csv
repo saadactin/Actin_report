@@ -1,0 +1,90 @@
+      2680,     24554,APPS
+Table Scan
+JA.JAI_ITEM_TEMPL_HDR
+         7,08:42:41,         100
+
+      1952,      2150,APPS
+Table Scan
+SYS.OBJ$
+         7,09:34:04,         100
+
+      2680,     24554,APPS
+Table Scan
+JA.JAI_ITEM_TEMPL_HDR
+         7,08:42:10,         100
+
+      1968,     13485,APPS
+Table Scan
+ONT.OE_ORDER_HEADERS_ALL
+         8,11:28:57,         100
+
+      1567,     14526,APPS
+Table Scan
+AP.AP_CHECKS_ALL
+         8,11:21:17,         100
+
+       791,      9903,APPS
+Table Scan
+ONT.OE_ORDER_HEADERS_ALL
+         9,08:47:15,         100
+
+      1942,     48415,APPS
+Table Scan
+INV.MTL_TRANSACTIONS_INTERFACE
+        10,08:41:08,         100
+
+      2680,     24554,APPS
+Table Scan
+JA.JAI_REPORTING_ASSOCIATIONS
+        11,08:41:06,         100
+
+      1941,     47582,APPS
+Index Fast Full Scan
+APPLSYS.WF_NOTIFICATIONS
+        11,08:41:08,         100
+
+      2680,     24554,APPS
+Table Scan
+JA.JAI_REPORTING_ASSOCIATIONS
+        12,08:41:58,         100
+
+      1968,     13485,APPS
+Index Fast Full Scan
+AR.HZ_PARTIES
+        12,11:29:06,         100
+
+       411,     25729,APPS
+Table Scan
+ONT.OE_ORDER_HEADERS_ALL
+        15,08:43:13,         100
+
+       792,     11378,APPS
+Table Scan
+ONT.OE_ORDER_HEADERS_ALL
+        19,08:41:54,         100
+
+       450,      7744,ITC
+Table Scan
+MYKOEL.KOEL_AP_LIABILITY_BI
+        23,11:23:49,         100
+
+       450,      7744,ITC
+Table Scan
+MYKOEL.KOEL_AP_LIABILITY_BI
+        23,11:20:13,         100
+
+       791,      9903,APPS
+Index Fast Full Scan
+AR.HZ_PARTIES
+        29,08:47:25,         100
+
+       411,     25729,APPS
+Table Scan
+ONT.OE_ORDER_HEADERS_ALL
+        34,08:46:35,         100
+
+      2680,     24554,APPS
+Table Scan
+JA.JAI_ITEM_TEMPL_HDR
+        39,08:41:17,         100
+

@@ -1,0 +1,3 @@
+enq: TX - row lock contention
+db file sequential read
+latch: cache buffers chains

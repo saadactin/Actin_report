@@ -1,0 +1,50 @@
+SELECT COLUMN_POSITION, UPPER( COLUMN_NAME ) AS CO,            1534590,    1232541,   6138362,         4,         0,00000000669D5650
+BEGIN KOEL_RMSP_BILLABLE_INVOICE_REQ(:errbuf,:rc,:,            1504029,   10634617,   1504029,         1,         0,00000000BF53F248
+select * from mykoel.KOEL_AP_LIABILITY_BI where 1=,            1214817,    1224666,   1214817,         1,         0,000000006E1F0DA0
+select * from mykoel.KOEL_AP_LIABILITY_BI where 1=,            1214595,    1224116,   1214595,         1,         0,00000000E672AB08
+select * from mykoel.KOEL_AP_LIABILITY_BI where 1=,            1150980,    1160310,   1150980,         1,         0,000000007A94A6E8
+SELECT R.XLSX_ROW, C.XLSX_COL#, C.XLSX_COL, C.XLSX,            1110114,      80975,   6660689,         6,         6,00000000669B8280
+SELECT NULL FROM TABLE( WWV_FLOW_DATA_PARSER.PARSE,            1023073,    1237882,   6138438,         6,         0,000000008B7AB7E0
+select * from mykoel.KOEL_AP_LIABILITY_BI where 1=,             621093,    1251623,   1242187,         2,         0,00000000D6A13BF8
+BEGIN ITC.KOEL_FOC_RMA_TRK_PKG.KOEL_FOC_RMA_INSERT,             475013,   58633772,    950026,         2,         0,00000000B27D7B58
+BEGIN xla_accounting_pkg.unit_processor_batch(:err,             352716,   69040401,    705433,         2,         0,00000000B284BE98
+select /*+qb_name(apex$1051_3)*/* from(select /*+ ,             272859,    1278392,    545719,         2,         0,000000008BDB27B0
+INSERT INTO ITC.KOEL_FOC_RMA_TRACKING_DETAILS ( FO,             248038,   17075072,    248038,         1,         1,00000000AF5B0630
+BEGIN COSTING.KOEL_INSERT_COGS_RECO_DAILY_PKG.PROC,             173134,   16313211,    173134,         1,         0,00000000A3A2D990
+begin   wwv_flow.accept(p_reload_on_submit=>:1 , p,             167680,    3288942,   6707228,        40,         0,00000000CFCFB300
+ SELECT * FROM ( SELECT V . vendor_id , VS . vendo,             153339,     214691,    153339,         1,         1,00000000AD0F9D68
+ SELECT * FROM ( SELECT V . vendor_id , VS . vendo,             149412,     216088,    149412,         1,         1,00000000D3AB4508
+select df.tablespace_name "Tablespace", totaluseds,             111882,    3786769,    223764,         2,         0,00000000D3D54680
+BEGIN ITC.KOEL_FOC_RMA_TRK_PKG.KOEL_RMA_INSERT_PRG,              88877,  847668274,    177755,         2,         0,00000000C363F1C0
+SELECT STATE_FROM_WHERE_INVOICE_MADE, CUST_BILL_TO,              66841, 2045137984,    133683,         2,    201759,00000000AEFFAA00
+SELECT DISTINCT OOD.ORGANIZATION_CODE ORGANIZATION,              57784,    2116440,     57784,         1,         0,00000000B27B08A0
+SELECT /*+ leading(evt) use_nl(ent) index(evt,XLA_,              53052,     109404,     53052,         1,         0,00000000AFB4C528
+SELECT TEMPLATE_HDR_ID,ENTITY_ID,ENTITY_TYPE_CODE,,              34008,      76621,     34008,         1,         1,000000008A9457C8
+begin RCV_TRANSACTION_PROCESSOR . RVTTHIns ( :inte,              33670,     572766,     67340,         2,         0,00000000AC5E9338
+INSERT INTO RCV_TRANSACTIONS (TRANSACTION_ID, LAST,              33591,     502227,     67182,         2,         0,00000000AC674718
+SELECT ORG_ID ,TO_ORGANIZATION_ID ,SHIP_TO_LOCATIO,              32989,      83494,     65978,         2,         0,00000000D0725F20
+ SELECT distinct b . organization_id p_organizatio,              27702,      32460,     27702,         1,         1,00000000D6A76508
+UPDATE ITC.KOEL_FOC_RMA_TRACKING_DETAILS D SET ATT,              25310,   12243106,     25310,         1,     48595,00000000AF5B2060
+DELETE FROM RCV_TRANSACTIONS_INTERFACE  WHERE TRAN,              16319,      65904,     32639,         2,         0,00000000C2236B00
+SELECT TRANSACTION_COSTED_DATE,TRANSACTION_DATE,PR,              15087,     121221,     30175,         2,     40684,00000000BFB4C868
+begin fnd_oam_collection.refresh_activity; end;   ,              11641,    2128006,    221188,        19,         0,00000000AFFA6200
+SELECT COUNT(*) FROM WF_NOTIFICATIONS WHERE MAIL_S,              11639,    2125753,    221158,        19,         0,00000000BC51E718
+begin begin APEX_230200.wwv_flow_generate_ddl.get_,              10739,     340426,     10739,         1,         0,00000000897AA160
+SELECT /*+ opt_param('_optimizer_cost_based_transf,              10485,      20284,     10485,         1,       360,0000000099EB7BE8
+begin wwv_flow_working_copy_dev.create_working_cop,               9183,     449023,      9183,         1,         0,000000006DAAF820
+BEGIN APPS.KOEL_ORDER_HOLD_PKG.KOEL_FOC_TCS_HOLD_P,               8218,   22001220,    320536,        39,         0,00000000BF747CD8
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_ISO_HOLD_PRC(:errbu,               7982,  214743061,    311303,        39,         0,00000000CC643778
+BEGIN KOEL_ORDER_HOLD_PKG.MAIN(:errbuf,:rc,:A0,:A1,               7580,  558054522,      7580,         0,         0,000000009B1DBC20
+select /*+qb_name(apex$1051_3)*/* from(select a.*,,               6698,    1091133,     13396,         2,         0,000000006E17B2A8
+select /*+qb_name(apex$4000_19)*/* from(select a.*,               5677,      22858,     11354,         2,         2,0000000088AB2480
+SELECT VENDOR_NAME PARTY_NAME, SEGMENT1 PARTY_NUMB,               5606,    1565036,     78491,        14,        14,000000007AA9A7E0
+begin declare     l_theme    wwv_flow_create_app_v,               5386,     133167,      5386,         1,         0,000000009B50EFF0
+SELECT OH.ORDER_NUMBER, OH.HEADER_ID, OL.LINE_ID F,               5340,   21972168,    320409,        60,        60,00000000BF607338
+BEGIN koel_wms_order_process_pkg.koel_wms_order_ou,               4353,    1064916,     60943,        14,         0,00000000BF74A728
+SELECT /*+index(ooh oe_order_headers_n8) index(ool,               4350,    1063641,     60901,        14,         0,00000000BF6AB590
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_ISO_HOLD_REL_PRC(:e,               4236,   83105622,    169472,        40,         0,00000000BF9DF3F0
+SELECT /*+index(ooh oe_order_headers_n8) index(ool,               4202,   78098464,    168094,        40,         0,00000000BF61D760
+update FND_CONCURRENT_REQUESTS R  set PHASE_CODE=',               4064,       4754,      4064,         1,         0,00000000C3FB0A70
+SELECT COUNT(*) FROM FND_LOG_UNIQUE_EXCEPTIONS WHE,               3715,     730075,     70592,        19,         0,00000000B335D0C0
+begin fnd_oam_collection.refresh_user_alerts_summa,               3715,    2921054,     70592,        19,         0,00000000AF6B6040
+BEGIN KOEL_ORDER_HOLD_PKG.KOEL_TAX_HOLD_REL_PRC(:e,               3708,  435244363,    122386,        33,         0,00000000C3850AA8

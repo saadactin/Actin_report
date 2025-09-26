@@ -1,0 +1,11 @@
+# Wait events data
+enq: TX - row lock contention
+db file sequential read
+latch: cache buffers chains
+db file scattered read
+CPU time
+log file sync
+direct path read
+buffer busy waits
+gc current block 2-way
+gc buffer busy acquire

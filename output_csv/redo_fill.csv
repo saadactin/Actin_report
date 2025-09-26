@@ -1,0 +1,6 @@
+FROM x$kcccp cp, x$kccle le
+                 *
+ERROR at line 5:
+ORA-00942: table or view does not exist
+
+
