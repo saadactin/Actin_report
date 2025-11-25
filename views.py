@@ -18,20 +18,24 @@ v_score = 0
 # --- Utility functions ---
 def clean_and_read_value(filepath):
     try:
+        if not os.path.exists(filepath):
+            return "NA"
         with open(filepath, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
             for row in reader:
                 if not row:
                     continue
                 cell = row[0].strip()
-                if cell.lower() not in {"name", "column_name", "value"}:
+                if cell and cell.lower() not in {"name", "column_name", "value", ""}:
                     return cell
-        return "N/A"
+        return "NA"
     except Exception as e:
-        return f"Error: {e}"
+        return "NA"
 
 def extract_ratio_value(filepath):
     try:
+        if not os.path.exists(filepath):
+            return None
         with open(filepath, 'r', encoding='utf-8') as f:
             lines = [line.strip() for line in f if line.strip()]
             for line in lines:
@@ -39,7 +43,7 @@ def extract_ratio_value(filepath):
                     try:
                         return float(line)
                     except ValueError:
-                        return None
+                        continue
         return None
     except:
         return None
@@ -234,22 +238,26 @@ def health_check(request):
     freemb = []
     point_colors = []
     DATA_FILE = os.path.join(CSV_DIR, "tablespace.csv")
-    with open(DATA_FILE, 'r', encoding='utf-8') as file:
-        for line in file:
-            line = line.strip()
-            if not line:
-                continue
-            parts = line.split()
-            if len(parts) < 3:
-                continue
-            try:
-                name = parts[0]
-                free_str = parts[2].replace(',', '')
-                free = float(free_str)
-                tablespaces.append(name)
-                freemb.append(free)
-            except (ValueError, IndexError):
-                continue
+    try:
+        if os.path.exists(DATA_FILE):
+            with open(DATA_FILE, 'r', encoding='utf-8') as file:
+                for line in file:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    parts = line.split()
+                    if len(parts) < 3:
+                        continue
+                    try:
+                        name = parts[0]
+                        free_str = parts[2].replace(',', '')
+                        free = float(free_str)
+                        tablespaces.append(name)
+                        freemb.append(free)
+                    except (ValueError, IndexError):
+                        continue
+    except Exception:
+        pass
     combined = list(zip(tablespaces, freemb))
     combined.sort(key=lambda x: x[1], reverse=True)
     threshold = 10000
@@ -272,14 +280,21 @@ def health_check(request):
     # Archival Generation chart data
     daily_data = {}
     CSV_file = os.path.join(CSV_DIR, "archivals_for_last_2days_per_hour.csv")
-    with open(CSV_file, 'r', encoding='utf-8') as f:
-        for line in f:
-            parts = line.strip().split()
-            if not parts or not parts[0].startswith('2025'):
-                continue
-            date = parts[0]
-            hourly_values = list(map(int, parts[1:25]))
-            daily_data[date] = hourly_values
+    try:
+        if os.path.exists(CSV_file):
+            with open(CSV_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split()
+                    if not parts or not parts[0].startswith('2025'):
+                        continue
+                    date = parts[0]
+                    try:
+                        hourly_values = list(map(int, parts[1:25]))
+                        daily_data[date] = hourly_values
+                    except (ValueError, IndexError):
+                        continue
+    except Exception:
+        pass
     archival_score = 0
     for date, values in daily_data.items():
         if len(values) < 24:
@@ -312,7 +327,7 @@ def health_check(request):
         "freemb": json.dumps(freemb_sorted),
         "point_colors": json.dumps(point_colors),
         "threshold": threshold,
-        "daily_data": daily_data,
+        "daily_data": json.dumps(daily_data),
         "generated_on": datetime.now(),
         "v_score": display_score,
         "score_emoji": score_emoji
@@ -339,14 +354,14 @@ def wait_event_summary(request):
 
     # Wait event summary (top 10)
     try:
-        with open(session_wait_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                parts = line.split()
-                if len(parts) >= 5:
-                    wait_event = " ".join(parts[4:]).strip()
+        if os.path.exists(session_wait_file):
+            with open(session_wait_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    # Simple format: one event per line
+                    wait_event = line
                     wait_event_counter[wait_event] += 1
         most_common_waits = wait_event_counter.most_common(10)
         wait_event_labels = [event for event, _ in most_common_waits]
@@ -461,19 +476,26 @@ def top_10_checklists(request):
     # Read and parse the CSV into a list of dicts to avoid TypeError
     frag_file = os.path.join(CSV_DIR, 'top_10_fragmented_tables.csv')
     fragmented_tables = []
-    with open(frag_file, 'r', encoding='utf-8') as f:
-        for line in f:
-            parts = line.strip().split()
-            if len(parts) == 6:
-                rec = {
-                    'OWNER': parts[0],
-                    'TABLE_NAME': parts[1],
-                    'BLOCKS': int(float(parts[2])),
-                    'NUM_OF_ROWS': int(float(parts[3])),
-                    'AVG_ROW_LEN': float(parts[4]),
-                    'APPROX_UNUSED_MB': float(parts[5])
-                }
-                fragmented_tables.append(rec)
+    try:
+        if os.path.exists(frag_file):
+            with open(frag_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split()
+                    if len(parts) == 6:
+                        try:
+                            rec = {
+                                'OWNER': parts[0],
+                                'TABLE_NAME': parts[1],
+                                'BLOCKS': int(float(parts[2])),
+                                'NUM_OF_ROWS': int(float(parts[3])),
+                                'AVG_ROW_LEN': float(parts[4]),
+                                'APPROX_UNUSED_MB': float(parts[5])
+                            }
+                            fragmented_tables.append(rec)
+                        except (ValueError, IndexError):
+                            continue
+    except Exception:
+        pass
     # Sort by APPROX_UNUSED_MB descending
     fragmented_tables.sort(key=lambda x: x['APPROX_UNUSED_MB'], reverse=True)
     table_names = [rec['TABLE_NAME'] for rec in fragmented_tables]
@@ -498,35 +520,46 @@ def top_10_checklists(request):
 
 
     # Top 10 CPU consuming queries - exactly as in trail.py
-    with open(os.path.join(CSV_DIR, "top_10_cpu_consuming_queries.csv"), "r", encoding="utf-8") as f:
-        lines = [line.strip() for line in f if line.strip()]
-
     records = []
-    for i in range(0, len(lines), 2):
-        meta_line = lines[i]
-        sql_line = lines[i + 1] if i + 1 < len(lines) else ""
+    cpu_file = os.path.join(CSV_DIR, "top_10_cpu_consuming_queries.csv")
+    try:
+        if os.path.exists(cpu_file):
+            with open(cpu_file, "r", encoding="utf-8") as f:
+                lines = [line.strip() for line in f if line.strip()]
 
-        parts = meta_line.split()
-        if len(parts) < 5:
-            continue
+            for i in range(0, len(lines), 2):
+                meta_line = lines[i]
+                sql_line = lines[i + 1] if i + 1 < len(lines) else ""
 
-        sql_id = parts[0]
-        owner = parts[1]
-        cpu_time = float(parts[2])
-        elapsed_time = float(parts[3])
-        try:
-            rows_processed = int(parts[4])
-        except ValueError:
-            rows_processed = 0
+                parts = meta_line.split()
+                if len(parts) < 3:
+                    continue
 
-        records.append({
-            "SQL_ID": sql_id,
-            "OWNER": owner,
-            "CPU_TIME": cpu_time,
-            "ELAPSED_TIME": elapsed_time,
-            "ROWS_PROCESSED": rows_processed,
-            "SQL_TEXT": sql_line
-        })
+                try:
+                    sql_id = parts[0]
+                    owner = parts[1]
+                    cpu_time = float(parts[2])
+                    elapsed_time = float(parts[3]) if len(parts) > 3 else cpu_time
+                    rows_processed = int(float(parts[4])) if len(parts) > 4 else 0
+                    
+                    # Extract SQL text if it's in the same line
+                    if "sql_text," in meta_line:
+                        sql_text_start = meta_line.find("sql_text,")
+                        if sql_text_start != -1:
+                            sql_line = meta_line[sql_text_start + 9:].strip()
+                    
+                    records.append({
+                        "SQL_ID": sql_id,
+                        "OWNER": owner,
+                        "CPU_TIME": cpu_time,
+                        "ELAPSED_TIME": elapsed_time,
+                        "ROWS_PROCESSED": rows_processed,
+                        "SQL_TEXT": sql_line if sql_line else "NA"
+                    })
+                except (ValueError, IndexError):
+                    continue
+    except Exception:
+        pass
 
     df = pd.DataFrame(records)
     df_sorted = df.sort_values(by="CPU_TIME", ascending=False)
@@ -552,37 +585,51 @@ def top_10_checklists(request):
     CSV_FILE = "top_10_io_consuming_queries.csv"
     CSV_PATH = os.path.join(CSV_DIR, CSV_FILE)
 
-    with open(CSV_PATH, "r", encoding="utf-8") as f:
-        lines = [line.strip() for line in f if line.strip()]
-
     records_io = []
-    for i in range(0, len(lines), 2):
-        meta_line = lines[i]
-        sql_line = lines[i + 1] if i + 1 < len(lines) else ""
+    try:
+        if os.path.exists(CSV_PATH):
+            with open(CSV_PATH, "r", encoding="utf-8") as f:
+                lines = [line.strip() for line in f if line.strip()]
 
-        parts = meta_line.split()
-        if len(parts) < 7:
-            continue
+            for i in range(0, len(lines), 2):
+                meta_line = lines[i]
+                sql_line = lines[i + 1] if i + 1 < len(lines) else ""
 
-        sql_id_io = parts[0]
-        owner_io = parts[1]
-        executions = float(parts[2])
-        disk_reads = float(parts[3])
-        buffer_gets = float(parts[4])
-        read_per_exec = float(parts[5])
-        gets_per_exec = float(parts[6])
-        sql_text = sql_line.strip()
+                parts = meta_line.split()
+                if len(parts) < 3:
+                    continue
 
-        records_io.append({
-            "SQL_ID": sql_id_io,
-            "OWNER": owner_io,
-            "EXECUTIONS": executions,
-            "DISK_READS": disk_reads,
-            "BUFFER_GETS": buffer_gets,
-            "READ_PER_EXEC": read_per_exec,
-            "GETS_PER_EXEC": gets_per_exec,
-            "SQL_TEXT": sql_text
-        })
+                try:
+                    sql_id_io = parts[0]
+                    owner_io = parts[1]
+                    executions = float(parts[2]) if len(parts) > 2 else 0
+                    disk_reads = float(parts[3]) if len(parts) > 3 else 0
+                    buffer_gets = float(parts[4]) if len(parts) > 4 else 0
+                    read_per_exec = float(parts[5]) if len(parts) > 5 else 0
+                    gets_per_exec = float(parts[6]) if len(parts) > 6 else 0
+                    
+                    # Extract SQL text if it's in the same line
+                    if "sql_text," in meta_line:
+                        sql_text_start = meta_line.find("sql_text,")
+                        if sql_text_start != -1:
+                            sql_line = meta_line[sql_text_start + 9:].strip()
+                    
+                    sql_text = sql_line.strip() if sql_line else "NA"
+
+                    records_io.append({
+                        "SQL_ID": sql_id_io,
+                        "OWNER": owner_io,
+                        "EXECUTIONS": executions,
+                        "DISK_READS": disk_reads,
+                        "BUFFER_GETS": buffer_gets,
+                        "READ_PER_EXEC": read_per_exec,
+                        "GETS_PER_EXEC": gets_per_exec,
+                        "SQL_TEXT": sql_text
+                    })
+                except (ValueError, IndexError):
+                    continue
+    except Exception:
+        pass
 
     df_io = pd.DataFrame(records_io)
     df_io_sorted = df_io.sort_values(by="DISK_READS", ascending=False).head(10)
@@ -607,42 +654,47 @@ def top_10_checklists(request):
         v_score += 5
 
     # DB Links - exactly as in trail.py
-    with open(os.path.join(CSV_DIR, "dblinks.csv"), "r", encoding="utf-8") as f:
-        lines = [line.strip() for line in f if line.strip()]
-
     cleaned_data = []
-    for i in range(0, len(lines), 3):
-        try:
-            if i + 2 >= len(lines):
-                break
+    dblinks_file = os.path.join(CSV_DIR, "dblinks.csv")
+    try:
+        if os.path.exists(dblinks_file):
+            with open(dblinks_file, "r", encoding="utf-8") as f:
+                lines = [line.strip() for line in f if line.strip()]
 
-            part1 = lines[i].split()
-            if len(part1) < 3:
-                continue
-            owner, db_link, username = part1[0], part1[1], part1[2]
+            for i in range(0, len(lines), 3):
+                try:
+                    if i + 2 >= len(lines):
+                        break
 
-            host = lines[i + 1].strip()
+                    part1 = lines[i].split()
+                    if len(part1) < 3:
+                        continue
+                    owner, db_link, username = part1[0], part1[1], part1[2]
 
-            part3 = lines[i + 2].split()
-            if len(part3) < 5:
-                continue
+                    host = lines[i + 1].strip() if i + 1 < len(lines) else "NA"
 
-            created, hidden, shared_interval, valid, intra_cdb = part3
+                    part3 = lines[i + 2].split() if i + 2 < len(lines) else []
+                    if len(part3) < 5:
+                        continue
 
-            cleaned_data.append({
-                "owner": owner,
-                "dblink": db_link,
-                "username": username,
-                "host": host,
-                "created": created,
-                "hidden": hidden,
-                "shared_interval": shared_interval,
-                "valid": valid,
-                "intra_cdb": intra_cdb
-            })
-            v_score += 1
-        except Exception:
-            continue
+                    created, hidden, shared_interval, valid, intra_cdb = part3[0], part3[1], part3[2], part3[3], part3[4]
+
+                    cleaned_data.append({
+                        "owner": owner,
+                        "dblink": db_link,
+                        "username": username,
+                        "host": host,
+                        "created": created,
+                        "hidden": hidden,
+                        "shared_interval": shared_interval,
+                        "valid": valid,
+                        "intra_cdb": intra_cdb
+                    })
+                    v_score += 1
+                except Exception:
+                    continue
+    except Exception:
+        pass
 
     request.session['checklist_score'] = v_score
     total_score = v_score
@@ -653,29 +705,27 @@ def top_10_checklists(request):
     else:
         display_score = round((total_score / 10000) * 100, 2)
     score_emoji = "\U0001F44E" if display_score < 50 else "\U0001F44D"
+    # Prepare CPU data for template
+    cpu_queries = []
+    if records:
+        df = pd.DataFrame(records)
+        df_sorted = df.sort_values(by="CPU_TIME", ascending=False).head(10)
+        cpu_queries = df_sorted.to_dict('records')
+    
+    # Prepare IO data for template
+    io_queries = []
+    if records_io:
+        df_io = pd.DataFrame(records_io)
+        df_io_sorted = df_io.sort_values(by="DISK_READS", ascending=False).head(10)
+        io_queries = df_io_sorted.to_dict('records')
+    
     return render(request, "report/top_10_checklists.html", {
-        "table_names": table_names,
-        "unused_space": unused_space,
-        "owners": owners,
-        "num_rows": num_rows,
-        "cpu_data": {
-            "sql_id": sql_id,
-            "cpu_times": cpu_times,
-            "owners": owners_cpu,
-            "elapsed_times": elapsed_times,
-            "rows": rows,
-            "sql_texts": sql_texts,
-        },
-        "io_data": {
-            "sql_id": sql_id_io,
-            "owners": owners_io,
-            "executions": executions,
-            "disk_reads": disk_reads,
-            "buffer_gets": buffer_gets,
-            "read_per_exec": read_per_exec,
-            "gets_per_exec": gets_per_exec,
-            "sql_texts": sql_texts_io,
-        },
+        "table_names": json.dumps(table_names if fragmented_tables else []),
+        "unused_space": json.dumps(unused_space if fragmented_tables else []),
+        "owners": json.dumps(owners if fragmented_tables else []),
+        "num_rows": json.dumps(num_rows if fragmented_tables else []),
+        "cpu_queries": json.dumps(cpu_queries),
+        "io_queries": json.dumps(io_queries),
         "dblinks": cleaned_data,
         "generated_on": datetime.now(),
         "v_score": display_score,

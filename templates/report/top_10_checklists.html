@@ -222,6 +222,30 @@
 </div>
 
 <div class="analysis-sections">
+    <!-- Top 10 Fragmented Tables -->
+    {% if table_names %}
+    <div class="analysis-card">
+        <h3>📊 Top 10 Fragmented Tables</h3>
+        <div style="overflow-x: auto;">
+            <table class="query-table">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Table Name</th>
+                        <th>Unused Space (MB)</th>
+                        <th>Number of Rows</th>
+                    </tr>
+                </thead>
+                <tbody id="fragmentedTablesBody">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #666; font-style: italic;">Loading fragmented table data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Top 10 CPU Consuming Queries -->
     <div class="analysis-card">
         <h3>🔥 Top 10 CPU Consuming Queries</h3>
@@ -325,7 +349,7 @@
     <!-- Database Links -->
     <div class="analysis-card">
         <h3>🔗 Database Links</h3>
-        {% if db_links %}
+        {% if dblinks %}
         <div style="overflow-x: auto;">
             <table class="dblinks-table">
                 <thead>
@@ -339,18 +363,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for link in db_links %}
+                    {% for link in dblinks %}
                     <tr>
-                        <td><strong>{{ link.owner }}</strong></td>
-                        <td>{{ link.dblink }}</td>
-                        <td>{{ link.username }}</td>
-                        <td>{{ link.host }}</td>
-                        <td>{{ link.created }}</td>
+                        <td><strong>{{ link.owner|default:"NA" }}</strong></td>
+                        <td>{{ link.dblink|default:"NA" }}</td>
+                        <td>{{ link.username|default:"NA" }}</td>
+                        <td>{{ link.host|default:"NA" }}</td>
+                        <td>{{ link.created|default:"NA" }}</td>
                         <td>
                             <span class="{% if link.valid == 'YES' %}status-active{% else %}status-inactive{% endif %}">
                                 {% if link.valid == 'YES' %}Active{% else %}Inactive{% endif %}
                             </span>
                         </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: #666; font-style: italic;">No database links found</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -390,86 +418,128 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-{% if cpu_queries %}
-// Performance Chart
-const perfCtx = document.getElementById('performanceChart').getContext('2d');
-const cpuData = {{ cpu_queries|safe }};
-new Chart(perfCtx, {
-    type: 'bar',
-    data: {
-        labels: cpuData.slice(0, 5).map(q => q.SQL_ID.substring(0, 10)),
-        datasets: [{
-            label: 'CPU Time (ms)',
-            data: cpuData.slice(0, 5).map(q => q.CPU_TIME),
-            backgroundColor: 'rgba(23, 162, 184, 0.8)',
-            borderColor: '#17a2b8',
-            borderWidth: 2,
-            borderRadius: 8
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'CPU Time (ms)'
-                }
-            }
+// Populate fragmented tables
+document.addEventListener('DOMContentLoaded', function() {
+    const tableNames = {{ table_names|safe }};
+    const unusedSpace = {{ unused_space|safe }};
+    const owners = {{ owners|safe }};
+    const numRows = {{ num_rows|safe }};
+    const tbody = document.getElementById('fragmentedTablesBody');
+    
+    if (tableNames && tableNames.length > 0) {
+        let html = '';
+        for (let i = 0; i < tableNames.length; i++) {
+            const owner = owners[i] || 'NA';
+            const tableName = tableNames[i] || 'NA';
+            const unused = unusedSpace[i] || 0;
+            const rows = numRows[i] || 0;
+            const priority = unused > 1000 ? 'high' : (unused > 100 ? 'medium' : 'low');
+            
+            html += `<tr>
+                <td>${owner}</td>
+                <td><strong>${tableName}</strong></td>
+                <td>
+                    <span class="metric-badge metric-${priority}">
+                        ${unused.toFixed(2)} MB
+                    </span>
+                </td>
+                <td>${rows.toLocaleString()}</td>
+            </tr>`;
         }
+        tbody.innerHTML = html;
+    } else {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #666; font-style: italic;">No fragmented table data available</td></tr>';
     }
 });
+
+{% if cpu_queries %}
+// Performance Chart
+const perfCtx = document.getElementById('performanceChart');
+if (perfCtx) {
+    const cpuData = {{ cpu_queries|safe }};
+    if (cpuData && cpuData.length > 0) {
+        new Chart(perfCtx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: cpuData.slice(0, 5).map(q => (q.SQL_ID || 'N/A').substring(0, 10)),
+                datasets: [{
+                    label: 'CPU Time (ms)',
+                    data: cpuData.slice(0, 5).map(q => q.CPU_TIME || 0),
+                    backgroundColor: 'rgba(23, 162, 184, 0.8)',
+                    borderColor: '#17a2b8',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'CPU Time (ms)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
 {% endif %}
 
 {% if io_queries %}
 // I/O Chart
-const ioCtx = document.getElementById('ioChart').getContext('2d');
-const ioData = {{ io_queries|safe }};
-new Chart(ioCtx, {
-    type: 'scatter',
-    data: {
-        datasets: [{
-            label: 'I/O Operations',
-            data: ioData.slice(0, 10).map(q => ({
-                x: q.DISK_READS,
-                y: q.BUFFER_GETS
-            })),
-            backgroundColor: 'rgba(111, 66, 193, 0.8)',
-            borderColor: '#6f42c1',
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: 'Disk Reads'
-                }
+const ioCtx = document.getElementById('ioChart');
+if (ioCtx) {
+    const ioData = {{ io_queries|safe }};
+    if (ioData && ioData.length > 0) {
+        new Chart(ioCtx.getContext('2d'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'I/O Operations',
+                    data: ioData.slice(0, 10).map(q => ({
+                        x: q.DISK_READS || 0,
+                        y: q.BUFFER_GETS || 0
+                    })),
+                    backgroundColor: 'rgba(111, 66, 193, 0.8)',
+                    borderColor: '#6f42c1',
+                    borderWidth: 2
+                }]
             },
-            y: {
-                title: {
-                    display: true,
-                    text: 'Buffer Gets'
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Disk Reads'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Buffer Gets'
+                        }
+                    }
                 }
             }
-        }
+        });
     }
-});
+}
 {% endif %}
 </script>
 {% endblock %}

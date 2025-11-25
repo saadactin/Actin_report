@@ -173,56 +173,21 @@
 </div>
 
 <div class="metrics-grid">
+    {% for item in summary_data %}
     <div class="metric-card">
-        <h3>🏢 {{ db_info.0.0 }}</h3>
-        <div class="metric-value">{{ db_info.0.1 }}</div>
-        <div class="metric-label">Database Name</div>
+        <h3>{{ item.label }}</h3>
+        <div class="metric-value">{{ item.value|default:"NA" }}</div>
+        <div class="metric-label">{{ item.label }}</div>
     </div>
-    
+    {% empty %}
     <div class="metric-card">
-        <h3>🔧 {{ db_info.1.0 }}</h3>
-        <div class="metric-value">{{ db_info.1.1 }}</div>
-        <div class="metric-label">Oracle Version</div>
+        <h3>No Data Available</h3>
+        <div class="metric-value">NA</div>
+        <div class="metric-label">Please check CSV files</div>
     </div>
-    
-    <div class="metric-card">
-        <h3>🖥️ {{ db_info.2.0 }}</h3>
-        <div class="metric-value">{{ db_info.2.1 }}</div>
-        <div class="metric-label">Number of Nodes</div>
-    </div>
-    
-    <div class="metric-card">
-        <h3>📊 {{ db_info.3.0 }}</h3>
-        <div class="metric-value">{{ db_info.3.1 }}</div>
-        <div class="metric-label">Database Status</div>
-    </div>
+    {% endfor %}
 </div>
 
-<div class="status-grid">
-    <div class="status-section">
-        <h3>✅ Passing Checks</h3>
-        {% for item in pass_items %}
-        <div class="status-item">
-            <span class="status-label">{{ item.0 }}</span>
-            <span class="status-value status-pass">{{ item.1 }}</span>
-        </div>
-        {% empty %}
-        <p style="color: #666; font-style: italic;">No passing items to display</p>
-        {% endfor %}
-    </div>
-    
-    <div class="status-section">
-        <h3>⚠️ Warning Items</h3>
-        {% for item in warn_items %}
-        <div class="status-item">
-            <span class="status-label">{{ item.0 }}</span>
-            <span class="status-value status-warn">{{ item.1 }}</span>
-        </div>
-        {% empty %}
-        <p style="color: #666; font-style: italic;">No warning items</p>
-        {% endfor %}
-    </div>
-</div>
 
 <div class="chart-container">
     <h3>📈 Tablespace Usage Distribution</h3>
@@ -277,8 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Get tablespace data from Django template variables
-    const tablespaces = {{ tablespaces|safe }};
-    const freemb = {{ freemb|safe }};
+    const tablespaces = [];
+    const freemb = [];
     
     // Generate colors based on the number of tablespaces
     const colors = generateColors(tablespaces.length);

@@ -1,9 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wait Event Analysis</title>
+{% extends 'base.html' %}
+
+{% block title %}Wait Event Analysis{% endblock %}
+
+{% block page_title %}⏱️ Wait Event Summary{% endblock %}
+
+{% block breadcrumb %}
+<span>></span>
+<span style="color: #1e3c72; font-weight: 600;">Wait Event Summary</span>
+{% endblock %}
+
+{% block content %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -23,205 +29,6 @@
             --transition: all 0.3s ease;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fb;
-            color: #333;
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Updated Sidebar Styles to match the first file */
-        .sidebar {
-            width: 280px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-        
-        .sidebar-header {
-            padding: 25px 20px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar-header h1 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .sidebar-header p {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-        
-        .nav-menu {
-            padding: 20px 0;
-        }
-        
-        .nav-item {
-            margin: 8px 15px;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #333;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .nav-link.active {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
-        }
-        
-        .nav-icon {
-            font-size: 20px;
-            margin-right: 15px;
-            width: 25px;
-            text-align: center;
-        }
-        
-        .nav-text {
-            font-size: 14px;
-            flex: 1;
-        }
-        
-        .nav-badge {
-            background: #ff4757;
-            color: white;
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 12px;
-            margin-left: auto;
-        }
-        
-        /* Status Indicators */
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        
-        .status-danger {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .main-content {
-            flex: 1;
-            margin-left: 280px;
-            transition: margin-left 0.3s ease;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            margin-bottom: 30px;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: rgba(255,255,255,0.1);
-            transform: rotate(30deg);
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-        }
-        
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .breadcrumb a:hover {
-            color: var(--secondary);
-        }
-        
-        .breadcrumb span {
-            margin: 0 10px;
-            color: #666;
-        }
         
         .score-card {
             background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
@@ -469,44 +276,9 @@
             border-top: 1px solid #e0e0e0;
         }
         
-        /* Mobile Responsive */
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 8px;
-            padding: 10px;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
         @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .sidebar-toggle {
-                display: block;
-            }
-            
             .dashboard {
                 grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
             }
             
             .score-card h2 {
@@ -519,99 +291,20 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Mobile Toggle Button -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()">
-        ☰
-    </button>
-    
-    <!-- Updated Sidebar -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>🛢️ Oracle Monitor</h1>
-            <p>Database Health Dashboard</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-item">
-                <a href="/" class="nav-link">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-text">Summary Report</span>
-                </a>
-            </div>
-            
-            <div class="nav-item">
-                <a href="/health/" class="nav-link">
-                    <span class="nav-icon">❤️</span>
-                    <span class="nav-text">Health Check</span>
-                    <span class="nav-badge">Live</span>
-                </a>
-            </div>
-            
-            <div class="nav-item">
-                <a href="/wait_event_summary/" class="nav-link active">
-                    <span class="nav-icon">⏱️</span>
-                    <span class="nav-text">Wait Events</span>
-                </a>
-            </div>
-            
-            <div class="nav-item">
-                <a href="/top-10/" class="nav-link">
-                    <span class="nav-icon">🏆</span>
-                    <span class="nav-text">Top 10 Analysis</span>
-                </a>
-            </div>
 
-            <!-- Divider -->
-            <div style="margin: 20px 15px; border-top: 1px solid rgba(0,0,0,0.1);"></div>
+<div class="score-card">
+    <h2>{{ score_emoji }} {{ v_score }}%</h2>
+    <p>Wait Event Performance Score</p>
+    <div class="score-details">
+        <div class="score-detail">Generated: {{ generated_on|date:"M d, Y" }}</div>
+        <div class="score-detail">Last Updated: {{ generated_on|date:"H:i" }}</div>
+    </div>
+    <div class="status-badge status-monitoring">
+        <i class="fas fa-sync-alt"></i> Real-time Monitoring Active
+    </div>
+</div>
 
-            <!-- Additional Info Section -->
-            <div style="padding: 20px; margin: 0 15px; background: rgba(30, 60, 114, 0.05); border-radius: 12px;">
-                <h4 style="color: #1e3c72; font-size: 14px; margin-bottom: 10px;">📈 Quick Stats</h4>
-                <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
-                    <strong>Database:</strong> Oracle DB
-                </div>
-                <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
-                    <strong>Version:</strong> 19c
-                </div>
-                <div style="font-size: 12px; color: #666;">
-                    <strong>Status:</strong> 
-                    <span class="status-indicator status-success">Online</span>
-                </div>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="container">
-            <div class="header">
-                <h1><i class="fas fa-stopwatch"></i> Wait Event Analysis</h1>
-                <p>Comprehensive analysis of database wait events and performance metrics</p>
-            </div>
-            
-            <div class="breadcrumb">
-                <a href="#">Dashboard</a>
-                <span>></span>
-                <a href="#">Performance</a>
-                <span>></span>
-                <span style="color: var(--primary); font-weight: 600;">Wait Events</span>
-            </div>
-            
-            <div class="score-card">
-                <h2>76%</h2>
-                <p>Wait Event Performance Score</p>
-                <div class="score-details">
-                    <div class="score-detail">Generated: Oct 15, 2023</div>
-                    <div class="score-detail">Last Updated: 5 min ago</div>
-                </div>
-                <div class="status-badge status-monitoring">
-                    <i class="fas fa-sync-alt"></i> Real-time Monitoring Active
-                </div>
-            </div>
-            
-            <div class="dashboard">
+<div class="dashboard">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><i class="fas fa-chart-pie card-icon"></i> Top Wait Events</h3>
@@ -621,7 +314,14 @@
                         </div>
                     </div>
                     <div class="chart-container">
+                        {% if wait_event_labels %}
                         <canvas id="waitEventChart"></canvas>
+                        {% else %}
+                        <div class="no-data">
+                            <i class="fas fa-info-circle"></i>
+                            <p>No wait event data available</p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -634,7 +334,14 @@
                         </div>
                     </div>
                     <div class="chart-container">
+                        {% if generate_wait_trend %}
                         <canvas id="waitTrendChart"></canvas>
+                        {% else %}
+                        <div class="no-data">
+                            <i class="fas fa-info-circle"></i>
+                            <p>No wait trend data available</p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -647,7 +354,14 @@
                         </div>
                     </div>
                     <div class="chart-container">
+                        {% if generate_blocking_graph %}
                         <canvas id="blockingChart"></canvas>
+                        {% else %}
+                        <div class="no-data">
+                            <i class="fas fa-info-circle"></i>
+                            <p>No blocking session data available</p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -668,10 +382,11 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-table card-icon"></i> Wait Events Details</h3>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-table card-icon"></i> Wait Events Details</h3>
                     <div class="card-actions">
                         <button class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
                         <button class="btn"><i class="fas fa-download"></i> Export</button>
@@ -689,71 +404,27 @@
                                 <th>Priority</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="waitEventsTableBody">
                             <tr>
-                                <td>db file sequential read</td>
-                                <td>12,450</td>
-                                <td>45,230</td>
-                                <td>3.63</td>
-                                <td>32.5%</td>
-                                <td class="priority-high">High</td>
-                            </tr>
-                            <tr>
-                                <td>log file sync</td>
-                                <td>8,920</td>
-                                <td>32,150</td>
-                                <td>3.60</td>
-                                <td>23.1%</td>
-                                <td class="priority-high">High</td>
-                            </tr>
-                            <tr>
-                                <td>CPU time</td>
-                                <td>N/A</td>
-                                <td>15,870</td>
-                                <td>N/A</td>
-                                <td>11.4%</td>
-                                <td class="priority-medium">Medium</td>
-                            </tr>
-                            <tr>
-                                <td>db file scattered read</td>
-                                <td>5,340</td>
-                                <td>12,560</td>
-                                <td>2.35</td>
-                                <td>9.0%</td>
-                                <td class="priority-medium">Medium</td>
-                            </tr>
-                            <tr>
-                                <td>latch free</td>
-                                <td>3,210</td>
-                                <td>8,450</td>
-                                <td>2.63</td>
-                                <td>6.1%</td>
-                                <td class="priority-medium">Medium</td>
-                            </tr>
-                            <tr>
-                                <td>buffer busy waits</td>
-                                <td>2,150</td>
-                                <td>5,320</td>
-                                <td>2.47</td>
-                                <td>3.8%</td>
-                                <td class="priority-low">Low</td>
+                                <td colspan="6" style="text-align: center; color: #666; font-style: italic;">Loading wait event data...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
-            <div class="network-section">
-                <h3><i class="fas fa-project-diagram"></i> Session Blocking Network</h3>
-                <div class="network-container" id="blockingNetwork"></div>
-                <p style="text-align: center; color: #666; font-style: italic;">Visualization of session blocking relationships</p>
-            </div>
-            
-            <div class="footer">
-                <p>Wait Event Analysis Dashboard &copy; 2023 | Generated on Oct 15, 2023 at 14:30</p>
-            </div>
-        </div>
-    </div>
+</div>
+
+{% if has_blocking_graph or has_locking_graph %}
+<div class="network-section">
+    <h3><i class="fas fa-project-diagram"></i> Session Blocking Network</h3>
+    <div class="network-container" id="blockingNetwork"></div>
+    <p style="text-align: center; color: #666; font-style: italic;">Visualization of session blocking relationships</p>
+</div>
+{% endif %}
+
+<div class="footer">
+    <p>Wait Event Analysis Dashboard &copy; 2023 | Generated on {{ generated_on|date:"M d, Y \a\t H:i" }}</p>
+</div>
 
     <script>
         // Wait for DOM to be fully loaded
@@ -763,43 +434,58 @@
             initWaitTrendChart();
             initBlockingChart();
             initNetworkGraph();
+            populateWaitEventsTable();
         });
         
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const toggleBtn = document.querySelector('.sidebar-toggle');
+        function populateWaitEventsTable() {
+            const waitEventLabels = {{ wait_event_labels|safe }};
+            const waitEventCounts = {{ wait_event_counts|safe }};
+            const tbody = document.getElementById('waitEventsTableBody');
             
-            if (window.innerWidth <= 768 && 
-                !sidebar.contains(event.target) && 
-                !toggleBtn.contains(event.target)) {
-                sidebar.classList.remove('open');
+            if (!waitEventLabels || waitEventLabels.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #666; font-style: italic;">No wait event data available</td></tr>';
+                return;
             }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth > 768) {
-                sidebar.classList.remove('open');
+            
+            let html = '';
+            for (let i = 0; i < waitEventLabels.length; i++) {
+                const label = waitEventLabels[i] || 'NA';
+                const count = waitEventCounts[i] || 0;
+                const priority = count > 100 ? 'high' : (count > 50 ? 'medium' : 'low');
+                const priorityText = count > 100 ? 'High' : (count > 50 ? 'Medium' : 'Low');
+                
+                html += `<tr>
+                    <td>${label}</td>
+                    <td>${count.toLocaleString()}</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td class="priority-${priority}">${priorityText}</td>
+                </tr>`;
             }
-        });
+            tbody.innerHTML = html;
+        }
+        
         
         function initWaitEventChart() {
-            const ctx = document.getElementById('waitEventChart').getContext('2d');
+            const ctx = document.getElementById('waitEventChart');
+            if (!ctx) return;
             
-            // Sample data for wait events
+            const waitEventLabels = {{ wait_event_labels|safe }};
+            const waitEventCounts = {{ wait_event_counts|safe }};
+            
+            if (!waitEventLabels || waitEventLabels.length === 0) return;
+            
+            // Calculate percentages
+            const total = waitEventCounts.reduce((a, b) => a + b, 0);
+            const percentages = waitEventCounts.map(count => total > 0 ? (count / total * 100).toFixed(1) : 0);
+            
             const data = {
-                labels: ['db file sequential read', 'log file sync', 'CPU time', 'db file scattered read', 'latch free', 'buffer busy waits'],
+                labels: waitEventLabels,
                 datasets: [{
-                    data: [32.5, 23.1, 11.4, 9.0, 6.1, 3.8],
+                    data: percentages,
                     backgroundColor: [
-                        '#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c'
+                        '#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#16a085', '#d35400', '#8e44ad', '#27ae60'
                     ],
                     borderWidth: 2,
                     borderColor: '#fff',
@@ -844,14 +530,19 @@
         }
         
         function initWaitTrendChart() {
-            const ctx = document.getElementById('waitTrendChart').getContext('2d');
+            const ctx = document.getElementById('waitTrendChart');
+            if (!ctx) return;
             
-            // Sample data for wait trends
+            const trendLabels = {{ trend_labels|safe }};
+            const trendCounts = {{ trend_counts|safe }};
+            
+            if (!trendLabels || trendLabels.length === 0) return;
+            
             const data = {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                labels: trendLabels,
                 datasets: [{
                     label: 'Wait Events Count',
-                    data: [120, 85, 65, 150, 220, 180],
+                    data: trendCounts,
                     borderColor: '#e74c3c',
                     backgroundColor: 'rgba(231, 76, 60, 0.1)',
                     tension: 0.4,
@@ -914,14 +605,19 @@
         }
         
         function initBlockingChart() {
-            const ctx = document.getElementById('blockingChart').getContext('2d');
+            const ctx = document.getElementById('blockingChart');
+            if (!ctx) return;
             
-            // Sample data for blocking sessions
+            const blockingLabels = {{ blocking_labels|safe }};
+            const blockingCounts = {{ blocking_counts|safe }};
+            
+            if (!blockingLabels || blockingLabels.length === 0) return;
+            
             const data = {
-                labels: ['Session 125', 'Session 89', 'Session 203', 'Session 56', 'Session 178'],
+                labels: blockingLabels.map(label => 'Session ' + label),
                 datasets: [{
                     label: 'Blocking Count',
-                    data: [15, 12, 8, 6, 4],
+                    data: blockingCounts,
                     backgroundColor: 'rgba(231, 76, 60, 0.8)',
                     borderColor: '#e74c3c',
                     borderWidth: 2,
@@ -972,26 +668,33 @@
         }
         
         function initNetworkGraph() {
-            // Sample data for network graph
-            const nodes = new vis.DataSet([
-                {id: 1, label: 'Session 125', color: '#e74c3c', font: {size: 16}},
-                {id: 2, label: 'Session 89', color: '#3498db', font: {size: 16}},
-                {id: 3, label: 'Session 203', color: '#2ecc71', font: {size: 16}},
-                {id: 4, label: 'Session 56', color: '#f39c12', font: {size: 16}},
-                {id: 5, label: 'Session 178', color: '#9b59b6', font: {size: 16}},
-                {id: 6, label: 'Session 42', color: '#1abc9c', font: {size: 16}}
-            ]);
+            const visBlknodes = {{ vis_blknodes|safe }};
+            const visBlkedges = {{ vis_blkedges|safe }};
+            const visLocknodes = {{ vis_locknodes|safe }};
+            const visLockedges = {{ vis_lockedges|safe }};
             
-            const edges = new vis.DataSet([
-                {from: 1, to: 2, arrows: 'to', color: {color: '#e74c3c'}},
-                {from: 1, to: 3, arrows: 'to', color: {color: '#e74c3c'}},
-                {from: 2, to: 4, arrows: 'to', color: {color: '#3498db'}},
-                {from: 3, to: 5, arrows: 'to', color: {color: '#2ecc71'}},
-                {from: 4, to: 6, arrows: 'to', color: {color: '#f39c12'}}
-            ]);
+            let nodes = [];
+            let edges = [];
+            
+            if (visBlknodes && visBlknodes.length > 0) {
+                nodes = visBlknodes;
+                edges = visBlkedges || [];
+            } else if (visLocknodes && visLocknodes.length > 0) {
+                nodes = visLocknodes;
+                edges = visLockedges || [];
+            }
+            
+            if (nodes.length === 0) {
+                document.getElementById('blockingNetwork').innerHTML = '<div class="no-data"><i class="fas fa-info-circle"></i><p>No blocking network data available</p></div>';
+                return;
+            }
             
             const container = document.getElementById('blockingNetwork');
-            const data = {nodes: nodes, edges: edges};
+            if (!container) return;
+            
+            const nodesDataSet = new vis.DataSet(nodes);
+            const edgesDataSet = new vis.DataSet(edges);
+            const data = {nodes: nodesDataSet, edges: edgesDataSet};
             const options = {
                 nodes: {
                     shape: 'dot',
@@ -1024,5 +727,4 @@
             new vis.Network(container, data, options);
         }
     </script>
-</body>
-</html>
+{% endblock %}

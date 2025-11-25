@@ -219,45 +219,125 @@
     </div>
 </div>
 
-{% if has_chart %}
 <div class="chart-section">
-    <h3>📊 System Performance Trends</h3>
-    <canvas id="healthChart" width="400" height="200"></canvas>
+    <h3>📊 Tablespace Usage</h3>
+    <div style="height: 400px; position: relative;">
+        <canvas id="tablespaceChart"></canvas>
+    </div>
+</div>
+
+<div class="chart-section" style="margin-top: 30px;">
+    <h3>📈 Archival Generation (Last 2 Days)</h3>
+    <div style="height: 300px; position: relative;">
+        <canvas id="archivalChart"></canvas>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-const healthCtx = document.getElementById('healthChart').getContext('2d');
-const healthChart = new Chart(healthCtx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Healthy', 'Warning', 'Critical'],
-        datasets: [{
-            data: [{{ pass_items|length }}, {{ warn_items|length }}, 0],
-            backgroundColor: [
-                '#28a745',
-                '#ffc107', 
-                '#dc3545'
-            ],
-            borderWidth: 0,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    padding: 20,
-                    usePointStyle: true,
+// Tablespace Chart
+const tablespaceCtx = document.getElementById('tablespaceChart').getContext('2d');
+const tablespaces = {{ tablespaces|safe }};
+const freemb = {{ freemb|safe }};
+const pointColors = {{ point_colors|safe }};
+
+if (tablespaces.length > 0) {
+    new Chart(tablespaceCtx, {
+        type: 'bar',
+        data: {
+            labels: tablespaces,
+            datasets: [{
+                label: 'Free Space (MB)',
+                data: freemb,
+                backgroundColor: pointColors,
+                borderColor: pointColors,
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Free Space (MB)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 0
+                    }
                 }
             }
         }
-    }
-});
+    });
+} else {
+    document.getElementById('tablespaceChart').parentElement.innerHTML = '<div class="no-data" style="padding: 40px; text-align: center; color: #666;">No tablespace data available</div>';
+}
+
+// Archival Chart
+const archivalCtx = document.getElementById('archivalChart').getContext('2d');
+const dailyData = {{ daily_data|safe }};
+
+if (Object.keys(dailyData).length > 0) {
+    const dates = Object.keys(dailyData);
+    const datasets = dates.map((date, index) => {
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe'];
+        return {
+            label: date,
+            data: dailyData[date],
+            borderColor: colors[index % colors.length],
+            backgroundColor: colors[index % colors.length] + '20',
+            tension: 0.4
+        };
+    });
+    
+    const hours = Array.from({length: 24}, (_, i) => String(i).padStart(2, '0') + ':00');
+    
+    new Chart(archivalCtx, {
+        type: 'line',
+        data: {
+            labels: hours,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Archivals per Hour'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Hour of Day'
+                    }
+                }
+            }
+        }
+    });
+} else {
+    document.getElementById('archivalChart').parentElement.innerHTML = '<div class="no-data" style="padding: 40px; text-align: center; color: #666;">No archival data available</div>';
+}
 </script>
-{% endif %}
 {% endblock %}
             margin-bottom: 30px;
             text-align: center;

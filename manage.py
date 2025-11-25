@@ -15,6 +15,14 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    # If the developer runs `manage.py runserver` without specifying
+    # an address/port, default to 192.168.18.55:8005 to be accessible on the local network
+    # This respects any explicit addr:port the user provides.
+    if len(sys.argv) >= 2 and sys.argv[1] == 'runserver':
+        # `runserver` may accept an optional second argument for addr:port.
+        # When it's absent (i.e., only 'runserver' present), inject our default.
+        if len(sys.argv) == 2:
+            sys.argv.append('192.168.18.55:8005')
     execute_from_command_line(sys.argv)
 
 

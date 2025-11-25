@@ -1,0 +1,18 @@
+# Setup Instructions (for fresh clone from GitHub)
+# ================================================
+
+# 1. Install Python dependencies
+pip install -r requirements.txt
+
+# 2. (Optional) Set up database migrations
+python app.py migrate
+
+# 3. Run the server - accessible on localhost:8007
+python app.py
+
+# Or to run on a specific IP and port:
+# python app.py runserver 0.0.0.0:8007
+
+# ================================================
+# Note: Make sure output_csv/ folder contains your CSV data files
+# The application will display "NA" if data is missing
