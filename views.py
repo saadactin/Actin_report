@@ -338,21 +338,28 @@ def wait_event_summary(request):
     CSV_DIR = os.path.join(settings.BASE_DIR, "output_csv")
     session_wait_file = os.path.join(CSV_DIR, "wait_events.csv")
     waiting_locks_file = os.path.join(CSV_DIR, "waiting_blocking_locks.csv")
+    blocking_sessions_file = os.path.join(CSV_DIR, "blocking_sessions.csv")
+    blocking_file = os.path.join(CSV_DIR, "blocking_sessions.csv")
+    
+    # Initialize all variables
     wait_event_counter = Counter()
-    # Check if the total number of wait events is less than 100
-    if sum(wait_event_counter.values()) < 100:
-        v_score += 5
     wait_event_trend = defaultdict(int)
     generate_wait_trend = False
-    blocking_sessions_file = os.path.join(CSV_DIR, "blocking_sessions.csv")
     blocking_counter = Counter()
     blocking_labels = []
     blocking_counts = []
     generate_blocking_graph = False
-    blocking_file = os.path.join(CSV_DIR, "blocking_sessions.csv")
     blkedges = set()
+    
+    # Initialize wait event detail variables
+    wait_event_labels = []
+    wait_event_counts = []
+    wait_event_times = []
+    wait_event_avg_times = []
+    wait_event_percentages = []
 
-    # Wait event summary (top 10)
+    # Wait event summary (top 10) - Enhanced to extract detailed information
+    wait_event_details = {}  # Store detailed info: {event_name: {count, total_time, avg_time}}
     try:
         if os.path.exists(session_wait_file):
             with open(session_wait_file, 'r', encoding='utf-8') as f:
@@ -363,12 +370,104 @@ def wait_event_summary(request):
                     # Simple format: one event per line
                     wait_event = line
                     wait_event_counter[wait_event] += 1
+                    # Initialize detailed info if not exists
+                    if wait_event not in wait_event_details:
+                        wait_event_details[wait_event] = {
+                            'count': 0,
+                            'total_time': 0,
+                            'avg_time': 0
+                        }
+                    wait_event_details[wait_event]['count'] += 1
+        
+        # Try to get more detailed info from blocking_sessions.csv
+        if os.path.exists(blocking_sessions_file):
+            try:
+                with open(blocking_sessions_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line or line.startswith('#'):
+                            continue
+                        parts = line.split()
+                        if len(parts) >= 7:
+                            try:
+                                # Format: session_id sid serial# status wait_type sid count
+                                wait_type = parts[4] if len(parts) > 4 else ""
+                                count = int(parts[6]) if len(parts) > 6 else 1
+                                # Map wait type to full event name
+                                wait_event_map = {
+                                    'enq': 'enq: TX - row lock contention',
+                                    'db': 'db file sequential read',
+                                    'latch': 'latch: cache buffers chains',
+                                    'buffer': 'buffer busy waits',
+                                    'log': 'log file sync'
+                                }
+                                # Try to find matching event
+                                event_name = None
+                                for key, value in wait_event_map.items():
+                                    if wait_type.lower().startswith(key):
+                                        event_name = value
+                                        break
+                                
+                                if not event_name:
+                                    # Try to match from existing events
+                                    for event in wait_event_counter.keys():
+                                        if wait_type.lower() in event.lower() or event.lower().startswith(wait_type.lower()):
+                                            event_name = event
+                                            break
+                                
+                                if event_name and event_name in wait_event_details:
+                                    # Estimate time based on count (assuming 1ms per wait)
+                                    estimated_time = count * 1.0
+                                    wait_event_details[event_name]['total_time'] += estimated_time
+                                    wait_event_details[event_name]['count'] = max(
+                                        wait_event_details[event_name]['count'],
+                                        count
+                                    )
+                            except (ValueError, IndexError):
+                                continue
+            except Exception:
+                pass
+        
+        # Calculate averages and prepare data
+        for event_name, details in wait_event_details.items():
+            if details['count'] > 0:
+                details['avg_time'] = details['total_time'] / details['count']
+        
+        # Get top 10 by count
         most_common_waits = wait_event_counter.most_common(10)
-        wait_event_labels = [event for event, _ in most_common_waits]
-        wait_event_counts = [count for _, count in most_common_waits]
+        wait_event_labels = []
+        wait_event_counts = []
+        wait_event_times = []
+        wait_event_avg_times = []
+        wait_event_percentages = []
+        
+        total_wait_time = sum(details['total_time'] for details in wait_event_details.values())
+        
+        for event, count in most_common_waits:
+            wait_event_labels.append(event)
+            wait_event_counts.append(count)
+            
+            if event in wait_event_details:
+                details = wait_event_details[event]
+                wait_event_times.append(round(details['total_time'], 2))
+                wait_event_avg_times.append(round(details['avg_time'], 2))
+                if total_wait_time > 0:
+                    percentage = round((details['total_time'] / total_wait_time) * 100, 2)
+                else:
+                    percentage = 0
+                wait_event_percentages.append(percentage)
+            else:
+                # Default values if no detailed info
+                wait_event_times.append(0)
+                wait_event_avg_times.append(0)
+                wait_event_percentages.append(0)
+                
     except Exception as e:
         wait_event_labels = []
         wait_event_counts = []
+        wait_event_times = []
+        wait_event_avg_times = []
+        wait_event_percentages = []
 
     # Wait event trend (simulate as in trail.py)
     trend_labels = []
@@ -448,6 +547,9 @@ def wait_event_summary(request):
     return render(request, "report/wait_event_summary.html", {
         "wait_event_labels": json.dumps(wait_event_labels),
         "wait_event_counts": json.dumps(wait_event_counts),
+        "wait_event_times": json.dumps(wait_event_times),
+        "wait_event_avg_times": json.dumps(wait_event_avg_times),
+        "wait_event_percentages": json.dumps(wait_event_percentages),
         "trend_labels": json.dumps(trend_labels),
         "trend_counts": json.dumps(trend_counts),
         "generate_wait_trend": generate_wait_trend,
@@ -527,11 +629,22 @@ def top_10_checklists(request):
             with open(cpu_file, "r", encoding="utf-8") as f:
                 lines = [line.strip() for line in f if line.strip()]
 
-            for i in range(0, len(lines), 2):
-                meta_line = lines[i]
-                sql_line = lines[i + 1] if i + 1 < len(lines) else ""
+            for line in lines:
+                if not line or line.startswith('#'):
+                    continue
+                
+                # Check if sql_text is in the same line
+                if "sql_text," in line:
+                    # Format: SQL_ID OWNER CPU_TIME sql_text,SQL_TEXT
+                    sql_text_start = line.find("sql_text,")
+                    meta_part = line[:sql_text_start].strip()
+                    sql_line = line[sql_text_start + 9:].strip()
+                    parts = meta_part.split()
+                else:
+                    # Format: SQL_ID OWNER CPU_TIME (no SQL text)
+                    parts = line.split()
+                    sql_line = ""
 
-                parts = meta_line.split()
                 if len(parts) < 3:
                     continue
 
@@ -541,12 +654,6 @@ def top_10_checklists(request):
                     cpu_time = float(parts[2])
                     elapsed_time = float(parts[3]) if len(parts) > 3 else cpu_time
                     rows_processed = int(float(parts[4])) if len(parts) > 4 else 0
-                    
-                    # Extract SQL text if it's in the same line
-                    if "sql_text," in meta_line:
-                        sql_text_start = meta_line.find("sql_text,")
-                        if sql_text_start != -1:
-                            sql_line = meta_line[sql_text_start + 9:].strip()
                     
                     records.append({
                         "SQL_ID": sql_id,
@@ -561,17 +668,34 @@ def top_10_checklists(request):
     except Exception:
         pass
 
-    df = pd.DataFrame(records)
-    df_sorted = df.sort_values(by="CPU_TIME", ascending=False)
-    sql_id = df_sorted["SQL_ID"].tolist()
-    cpu_times = df_sorted["CPU_TIME"].tolist()
-    owners_cpu = df_sorted["OWNER"].tolist()
-    elapsed_times = df_sorted["ELAPSED_TIME"].tolist()
-    rows = df_sorted["ROWS_PROCESSED"].tolist()
-    sql_texts = df_sorted["SQL_TEXT"].tolist()
+    # Create DataFrame and handle empty case
+    if records:
+        df = pd.DataFrame(records)
+        if not df.empty and "CPU_TIME" in df.columns:
+            df_sorted = df.sort_values(by="CPU_TIME", ascending=False)
+            sql_id = df_sorted["SQL_ID"].tolist()
+            cpu_times = df_sorted["CPU_TIME"].tolist()
+            owners_cpu = df_sorted["OWNER"].tolist()
+            elapsed_times = df_sorted["ELAPSED_TIME"].tolist()
+            rows = df_sorted["ROWS_PROCESSED"].tolist()
+            sql_texts = df_sorted["SQL_TEXT"].tolist()
 
-    for rec in df_sorted.to_dict('records'):
-        v_total_cpu_time += rec['CPU_TIME'] + rec['ELAPSED_TIME']
+            for rec in df_sorted.to_dict('records'):
+                v_total_cpu_time += rec.get('CPU_TIME', 0) + rec.get('ELAPSED_TIME', 0)
+        else:
+            sql_id = []
+            cpu_times = []
+            owners_cpu = []
+            elapsed_times = []
+            rows = []
+            sql_texts = []
+    else:
+        sql_id = []
+        cpu_times = []
+        owners_cpu = []
+        elapsed_times = []
+        rows = []
+        sql_texts = []
     if v_total_cpu_time < 100:
         v_score += 20
     elif v_total_cpu_time < 1000:
@@ -591,11 +715,22 @@ def top_10_checklists(request):
             with open(CSV_PATH, "r", encoding="utf-8") as f:
                 lines = [line.strip() for line in f if line.strip()]
 
-            for i in range(0, len(lines), 2):
-                meta_line = lines[i]
-                sql_line = lines[i + 1] if i + 1 < len(lines) else ""
+            for line in lines:
+                if not line or line.startswith('#'):
+                    continue
+                
+                # Check if sql_text is in the same line
+                if "sql_text," in line:
+                    # Format: SQL_ID OWNER EXECUTIONS DISK_READS ... sql_text,SQL_TEXT
+                    sql_text_start = line.find("sql_text,")
+                    meta_part = line[:sql_text_start].strip()
+                    sql_line = line[sql_text_start + 9:].strip()
+                    parts = meta_part.split()
+                else:
+                    # Format: SQL_ID OWNER EXECUTIONS DISK_READS ... (no SQL text)
+                    parts = line.split()
+                    sql_line = ""
 
-                parts = meta_line.split()
                 if len(parts) < 3:
                     continue
 
@@ -607,12 +742,6 @@ def top_10_checklists(request):
                     buffer_gets = float(parts[4]) if len(parts) > 4 else 0
                     read_per_exec = float(parts[5]) if len(parts) > 5 else 0
                     gets_per_exec = float(parts[6]) if len(parts) > 6 else 0
-                    
-                    # Extract SQL text if it's in the same line
-                    if "sql_text," in meta_line:
-                        sql_text_start = meta_line.find("sql_text,")
-                        if sql_text_start != -1:
-                            sql_line = meta_line[sql_text_start + 9:].strip()
                     
                     sql_text = sql_line.strip() if sql_line else "NA"
 
@@ -631,19 +760,40 @@ def top_10_checklists(request):
     except Exception:
         pass
 
-    df_io = pd.DataFrame(records_io)
-    df_io_sorted = df_io.sort_values(by="DISK_READS", ascending=False).head(10)
-    sql_id_io = df_io_sorted["SQL_ID"].tolist()
-    owners_io = df_io_sorted["OWNER"].tolist()
-    executions = df_io_sorted["EXECUTIONS"].tolist()
-    disk_reads = df_io_sorted["DISK_READS"].tolist()
-    buffer_gets = df_io_sorted["BUFFER_GETS"].tolist()
-    read_per_exec = df_io_sorted["READ_PER_EXEC"].tolist()
-    gets_per_exec = df_io_sorted["GETS_PER_EXEC"].tolist()
-    sql_texts_io = df_io_sorted["SQL_TEXT"].tolist()
+    # Create DataFrame and handle empty case
+    if records_io:
+        df_io = pd.DataFrame(records_io)
+        if not df_io.empty and "DISK_READS" in df_io.columns:
+            df_io_sorted = df_io.sort_values(by="DISK_READS", ascending=False).head(10)
+            sql_id_io = df_io_sorted["SQL_ID"].tolist()
+            owners_io = df_io_sorted["OWNER"].tolist()
+            executions = df_io_sorted["EXECUTIONS"].tolist()
+            disk_reads = df_io_sorted["DISK_READS"].tolist()
+            buffer_gets = df_io_sorted["BUFFER_GETS"].tolist()
+            read_per_exec = df_io_sorted["READ_PER_EXEC"].tolist()
+            gets_per_exec = df_io_sorted["GETS_PER_EXEC"].tolist()
+            sql_texts_io = df_io_sorted["SQL_TEXT"].tolist()
 
-    for rec in df_io_sorted.to_dict('records'):
-        v_total_disk_reads += rec['DISK_READS'] + rec['BUFFER_GETS']
+            for rec in df_io_sorted.to_dict('records'):
+                v_total_disk_reads += rec.get('DISK_READS', 0) + rec.get('BUFFER_GETS', 0)
+        else:
+            sql_id_io = []
+            owners_io = []
+            executions = []
+            disk_reads = []
+            buffer_gets = []
+            read_per_exec = []
+            gets_per_exec = []
+            sql_texts_io = []
+    else:
+        sql_id_io = []
+        owners_io = []
+        executions = []
+        disk_reads = []
+        buffer_gets = []
+        read_per_exec = []
+        gets_per_exec = []
+        sql_texts_io = []
     if v_total_disk_reads < 100000:
         v_score += 20
     elif v_total_disk_reads < 1000000:
@@ -724,8 +874,10 @@ def top_10_checklists(request):
         "unused_space": json.dumps(unused_space if fragmented_tables else []),
         "owners": json.dumps(owners if fragmented_tables else []),
         "num_rows": json.dumps(num_rows if fragmented_tables else []),
-        "cpu_queries": json.dumps(cpu_queries),
-        "io_queries": json.dumps(io_queries),
+        "cpu_queries": cpu_queries,  # Pass as Python list for template iteration
+        "cpu_queries_json": json.dumps(cpu_queries),  # JSON for JavaScript
+        "io_queries": io_queries,  # Pass as Python list for template iteration
+        "io_queries_json": json.dumps(io_queries),  # JSON for JavaScript
         "dblinks": cleaned_data,
         "generated_on": datetime.now(),
         "v_score": display_score,

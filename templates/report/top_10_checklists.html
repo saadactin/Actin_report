@@ -395,24 +395,28 @@
 <div class="charts-container">
     <div class="chart-card">
         <h4>📊 Query Performance Distribution</h4>
-        {% if cpu_queries %}
-        <canvas id="performanceChart" width="400" height="300"></canvas>
-        {% else %}
-        <div class="no-data" style="padding: 20px;">
-            No performance data available
+        <div id="performanceChartContainer" style="height: 300px; position: relative;">
+            {% if cpu_queries %}
+            <canvas id="performanceChart"></canvas>
+            {% else %}
+            <div class="no-data" style="padding: 40px; text-align: center; color: #666; font-style: italic;">
+                No performance data available
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
     
     <div class="chart-card">
         <h4>💽 I/O Usage Analysis</h4>
-        {% if io_queries %}
-        <canvas id="ioChart" width="400" height="300"></canvas>
-        {% else %}
-        <div class="no-data" style="padding: 20px;">
-            No I/O data available
+        <div id="ioChartContainer" style="height: 300px; position: relative;">
+            {% if io_queries %}
+            <canvas id="ioChart"></canvas>
+            {% else %}
+            <div class="no-data" style="padding: 40px; text-align: center; color: #666; font-style: italic;">
+                No I/O data available
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </div>
 
@@ -452,94 +456,177 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Performance Chart - Only show if real data exists
 {% if cpu_queries %}
-// Performance Chart
-const perfCtx = document.getElementById('performanceChart');
-if (perfCtx) {
-    const cpuData = {{ cpu_queries|safe }};
-    if (cpuData && cpuData.length > 0) {
-        new Chart(perfCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: cpuData.slice(0, 5).map(q => (q.SQL_ID || 'N/A').substring(0, 10)),
-                datasets: [{
-                    label: 'CPU Time (ms)',
-                    data: cpuData.slice(0, 5).map(q => q.CPU_TIME || 0),
-                    backgroundColor: 'rgba(23, 162, 184, 0.8)',
-                    borderColor: '#17a2b8',
-                    borderWidth: 2,
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+document.addEventListener('DOMContentLoaded', function() {
+    const perfCtx = document.getElementById('performanceChart');
+    if (perfCtx) {
+        const cpuData = {{ cpu_queries_json|safe }};
+        // Filter out entries with no real data (CPU_TIME = 0 or missing)
+        const validData = cpuData.filter(q => q && q.CPU_TIME && q.CPU_TIME > 0);
+        
+        if (validData && validData.length > 0) {
+            // Sort by CPU_TIME descending and take top 5
+            const sortedData = validData.sort((a, b) => (b.CPU_TIME || 0) - (a.CPU_TIME || 0)).slice(0, 5);
+            
+            new Chart(perfCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: sortedData.map(q => {
+                        const sqlId = q.SQL_ID || 'N/A';
+                        return sqlId.length > 12 ? sqlId.substring(0, 12) + '...' : sqlId;
+                    }),
+                    datasets: [{
+                        label: 'CPU Time (ms)',
+                        data: sortedData.map(q => q.CPU_TIME || 0),
+                        backgroundColor: 'rgba(23, 162, 184, 0.8)',
+                        borderColor: '#17a2b8',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'CPU Time (ms)'
-                        }
-                    }
-                }
-            }
-        });
-    }
-}
-{% endif %}
-
-{% if io_queries %}
-// I/O Chart
-const ioCtx = document.getElementById('ioChart');
-if (ioCtx) {
-    const ioData = {{ io_queries|safe }};
-    if (ioData && ioData.length > 0) {
-        new Chart(ioCtx.getContext('2d'), {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'I/O Operations',
-                    data: ioData.slice(0, 10).map(q => ({
-                        x: q.DISK_READS || 0,
-                        y: q.BUFFER_GETS || 0
-                    })),
-                    backgroundColor: 'rgba(111, 66, 193, 0.8)',
-                    borderColor: '#6f42c1',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Disk Reads'
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const index = context.dataIndex;
+                                    const query = sortedData[index];
+                                    return [
+                                        `CPU Time: ${(query.CPU_TIME || 0).toFixed(2)} ms`,
+                                        `Elapsed: ${(query.ELAPSED_TIME || 0).toFixed(2)} ms`,
+                                        `Owner: ${query.OWNER || 'N/A'}`
+                                    ];
+                                }
+                            }
                         }
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Buffer Gets'
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'CPU Time (ms)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString() + ' ms';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 0,
+                                font: {
+                                    size: 10
+                                }
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            // No valid data - show message
+            document.getElementById('performanceChartContainer').innerHTML = 
+                '<div class="no-data" style="padding: 40px; text-align: center; color: #666; font-style: italic;">No valid performance data available</div>';
+        }
     }
-}
+});
+{% endif %}
+
+// I/O Chart - Only show if real data exists
+{% if io_queries %}
+document.addEventListener('DOMContentLoaded', function() {
+    const ioCtx = document.getElementById('ioChart');
+    if (ioCtx) {
+        const ioData = {{ io_queries_json|safe }};
+        // Filter out entries with no real data (both DISK_READS and BUFFER_GETS = 0 or missing)
+        const validData = ioData.filter(q => q && ((q.DISK_READS && q.DISK_READS > 0) || (q.BUFFER_GETS && q.BUFFER_GETS > 0)));
+        
+        if (validData && validData.length > 0) {
+            // Sort by DISK_READS descending and take top 10
+            const sortedData = validData.sort((a, b) => (b.DISK_READS || 0) - (a.DISK_READS || 0)).slice(0, 10);
+            
+            new Chart(ioCtx.getContext('2d'), {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'I/O Operations',
+                        data: sortedData.map(q => ({
+                            x: q.DISK_READS || 0,
+                            y: q.BUFFER_GETS || 0
+                        })),
+                        backgroundColor: 'rgba(111, 66, 193, 0.8)',
+                        borderColor: '#6f42c1',
+                        borderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const index = context.dataIndex;
+                                    const query = sortedData[index];
+                                    return [
+                                        `SQL ID: ${query.SQL_ID || 'N/A'}`,
+                                        `Disk Reads: ${(query.DISK_READS || 0).toLocaleString()}`,
+                                        `Buffer Gets: ${(query.BUFFER_GETS || 0).toLocaleString()}`,
+                                        `Executions: ${(query.EXECUTIONS || 0).toLocaleString()}`,
+                                        `Owner: ${query.OWNER || 'N/A'}`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Disk Reads'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Buffer Gets'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            // No valid data - show message
+            document.getElementById('ioChartContainer').innerHTML = 
+                '<div class="no-data" style="padding: 40px; text-align: center; color: #666; font-style: italic;">No valid I/O data available</div>';
+        }
+    }
+});
 {% endif %}
 </script>
 {% endblock %}

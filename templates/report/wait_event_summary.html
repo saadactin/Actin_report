@@ -440,6 +440,9 @@
         function populateWaitEventsTable() {
             const waitEventLabels = {{ wait_event_labels|safe }};
             const waitEventCounts = {{ wait_event_counts|safe }};
+            const waitEventTimes = {{ wait_event_times|safe }};
+            const waitEventAvgTimes = {{ wait_event_avg_times|safe }};
+            const waitEventPercentages = {{ wait_event_percentages|safe }};
             const tbody = document.getElementById('waitEventsTableBody');
             
             if (!waitEventLabels || waitEventLabels.length === 0) {
@@ -451,15 +454,24 @@
             for (let i = 0; i < waitEventLabels.length; i++) {
                 const label = waitEventLabels[i] || 'NA';
                 const count = waitEventCounts[i] || 0;
+                const timeWaited = waitEventTimes && waitEventTimes[i] !== undefined && waitEventTimes[i] > 0 
+                    ? waitEventTimes[i].toLocaleString() + ' ms' 
+                    : 'NA';
+                const avgWait = waitEventAvgTimes && waitEventAvgTimes[i] !== undefined && waitEventAvgTimes[i] > 0
+                    ? waitEventAvgTimes[i].toFixed(2) + ' ms'
+                    : 'NA';
+                const percentage = waitEventPercentages && waitEventPercentages[i] !== undefined && waitEventPercentages[i] > 0
+                    ? waitEventPercentages[i].toFixed(2) + '%'
+                    : 'NA';
                 const priority = count > 100 ? 'high' : (count > 50 ? 'medium' : 'low');
                 const priorityText = count > 100 ? 'High' : (count > 50 ? 'Medium' : 'Low');
                 
                 html += `<tr>
                     <td>${label}</td>
                     <td>${count.toLocaleString()}</td>
-                    <td>NA</td>
-                    <td>NA</td>
-                    <td>NA</td>
+                    <td>${timeWaited}</td>
+                    <td>${avgWait}</td>
+                    <td>${percentage}</td>
                     <td class="priority-${priority}">${priorityText}</td>
                 </tr>`;
             }
